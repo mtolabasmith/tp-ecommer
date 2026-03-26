@@ -1,0 +1,305 @@
+export default function HomePage() {
+  return (
+    <main>
+      <header>
+        <nav>
+          <a href="#">Archive</a>
+          <ul>
+            <li>
+              <a href="#exhibits">The Collection</a>
+            </li>
+            <li>
+              <a href="#timeline">History</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+          </ul>
+          <a href="#cart">Cart (0)</a>
+        </nav>
+      </header>
+
+      <section id="hero">
+        <p>The permanent collection - Est. 1930</p>
+        <h1>Worn by Legends, Owned by You.</h1>
+        <p>
+          Every stitch holds a memory. Every number, a dynasty. We don&apos;t sell jerseys - we preserve the fabric of football history.
+        </p>
+        <a href="#exhibits">Enter the Museum</a>
+        <p>214 Historic Pieces</p>
+      </section>
+
+      <section id="about">
+        <p>Our Philosophy</p>
+        <h2>
+          A jersey is not clothing. It is a confession of loyalty, a certificate of belonging.
+        </h2>
+        <p>
+          We founded The Jersey Museum on the belief that football&apos;s greatest moments live not in trophies or statistics - they live in
+          cotton, polyester, and the number on a back. The weight of a &apos;99 treble. The ghost of a &apos;70 World Cup gold.
+        </p>
+        <p>
+          Each piece in our collection is sourced with obsessive care: authenticated, contextualized, and presented as the artifact it truly
+          is. We partner with historians, former players, and clubs to tell the stories that deserve to be remembered.
+        </p>
+        <p>
+          When you wear one of our jerseys, you don&apos;t just wear a club. You wear a moment in time.
+        </p>
+      </section>
+
+      <section id="featured">
+        <span>Exhibit of the Month</span>
+
+        <div>
+          <img src="img/ajax-1995.jpg" alt="Ajax 1994/95 Home Jersey" />
+        </div>
+
+        <div>
+          <p>EX 001</p>
+          <p>AFC Ajax - 1994/95</p>
+          <h2>The Invincibles of Amsterdam</h2>
+          <p>
+            The jersey of a generation. When Louis van Gaal&apos;s Ajax demolished AC Milan 1-0 to claim the Champions League crown at Vienna,
+            they were the youngest team to ever win it. This was the season of Kluivert&apos;s late winner. Of De Boer. Of Seedorf at 18. They
+            played football that hadn&apos;t been seen before - and hasn&apos;t been seen since.
+          </p>
+
+          <ul>
+            <li>
+              <strong>34</strong>
+              <span>Unbeaten Run</span>
+            </li>
+            <li>
+              <strong>3</strong>
+              <span>Titles Won</span>
+            </li>
+            <li>
+              <strong>18</strong>
+              <span>Avg Player Age</span>
+            </li>
+          </ul>
+
+          <p>$189</p>
+          <a href="#">Acquire This Piece</a>
+        </div>
+      </section>
+
+      <section id="exhibits">
+        <p>Permanent Collection</p>
+        <h2>The Exhibits</h2>
+        <p>214 artifacts - Ongoing</p>
+      </section>
+
+      <section>
+        <ul>
+          <li>
+            <article>
+              <header>
+                <span>EX 002</span>
+                <span>1970</span>
+              </header>
+              <img src="img/brazil-1970.jpg" alt="Brazil 1970 World Cup Jersey" />
+              <p>Brazil - 1970</p>
+              <h3>The Most Beautiful Team</h3>
+              <p>
+                Pele&apos;s last World Cup. Rivelino. Jairzinho. A 4-1 final that redefined what football could be - art, not sport.
+              </p>
+              <p>
+                $219 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <span>EX 003</span>
+                <span>1986</span>
+              </header>
+              <img src="img/argentina-1986.jpg" alt="Argentina 1986 World Cup Jersey" />
+              <p>Argentina - 1986</p>
+              <h3>The Hand &amp; The Goal</h3>
+              <p>
+                Mexico City, June 22nd. Two goals in four minutes. One with a fist, one with a god. Diego Armando Maradona at his most human
+                and divine.
+              </p>
+              <p>
+                $199 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <span>EX 004</span>
+                <span>1989</span>
+              </header>
+              <img src="img/acmilan-1989.jpg" alt="AC Milan 1988/89 Champions League Jersey" />
+              <p>AC Milan - 1988/89</p>
+              <h3>Sacchi&apos;s Red Machine</h3>
+              <p>
+                The most dominant club side of its era. Gullit, Van Basten, Rijkaard. They didn&apos;t just win the European Cup - they rewrote
+                how football was played.
+              </p>
+              <p>
+                $179 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <span>EX 005</span>
+                <span>1998</span>
+              </header>
+              <img src="img/france-1998.jpg" alt="France 1998 World Cup Jersey" />
+              <p>France - 1998</p>
+              <h3>A Nation United</h3>
+              <p>
+                July 12, 1998. Stade de France. Zidane headed twice. A generation of immigrants became French heroes. Football changed society
+                that night.
+              </p>
+              <p>
+                $189 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <span>EX 006</span>
+                <span>2009</span>
+              </header>
+              <img src="img/barcelona-2009.jpg" alt="FC Barcelona 2008/09 Treble Season Jersey" />
+              <p>FC Barcelona - 2008/09</p>
+              <h3>The Treble Season</h3>
+              <p>
+                Pep Guardiola&apos;s first year. 6 trophies in one calendar year. Messi&apos;s goal against Real Madrid. Iniesta everywhere. The most
+                complete football ever played.
+              </p>
+              <p>
+                $169 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <span>EX 007</span>
+                <span>2002</span>
+              </header>
+              <img src="img/realmadrid-2002.jpg" alt="Real Madrid 2001/02 Champions League Jersey" />
+              <p>Real Madrid - 2001/02</p>
+              <h3>Zidane&apos;s Volley</h3>
+              <p>
+                Glasgow, May 15th. Zidane met the ball on the half-volley. His left foot. The Hampden Park night sky. Some moments deserve to
+                live forever.
+              </p>
+              <p>
+                $179 <span>/ replica</span>
+              </p>
+              <a href="#">Acquire</a>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <section id="timeline">
+        <p>The Chronicle</p>
+        <h2>A Century in Cotton</h2>
+
+        <ol>
+          <li>
+            <time dateTime="1930">1930</time>
+            <h3>The First World Cup</h3>
+            <p>
+              Uruguay. The jersey as national identity is born. Wool, heavy, soaked in sweat and pride. Football finds its first uniform
+              mythology.
+            </p>
+          </li>
+          <li>
+            <time dateTime="1966">1966</time>
+            <h3>The England Myth</h3>
+            <p>
+              Wembley. The red away kit becomes iconic not because England wore it - but because of what they won in it. A jersey that carries
+              a once-in-history moment.
+            </p>
+          </li>
+          <li>
+            <time dateTime="1986">1986</time>
+            <h3>The God Plays Dress-Up</h3>
+            <p>
+              Maradona chooses Argentina&apos;s blue-and-white. In one afternoon in Mexico City, a shirt becomes a theological debate. Still
+              unsettled.
+            </p>
+          </li>
+          <li>
+            <time dateTime="1999">1999</time>
+            <h3>The Treble Night</h3>
+            <p>
+              Camp Nou, Champions League Final. Sheringham. Solskjar. Manchester United&apos;s red shirt under the Barcelona floodlights. The most
+              dramatic three minutes in football history.
+            </p>
+          </li>
+          <li>
+            <time dateTime="2010">2010</time>
+            <h3>Spain&apos;s Golden Decade</h3>
+            <p>
+              Three major tournaments. One philosophy. Iniesta&apos;s extra-time winner in Johannesburg. The red jersey becomes shorthand for
+              possession, for beauty, for dominance.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <blockquote>
+        <p>
+          &quot;Football is not about stadiums or trophies. It is about the shirt on your back and the story it carries into the world with
+          you.&quot;
+        </p>
+        <cite>Johan Cruyff, 1974</cite>
+      </blockquote>
+
+      <section id="newsletter">
+        <h2>New acquisitions, once a month.</h2>
+        <p>
+          Join 24,000 collectors and football historians who receive our monthly curation. No noise - only stories worth reading.
+        </p>
+        <form>
+          <label htmlFor="name">Full name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" />
+
+          <label htmlFor="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="Your email address" />
+
+          <button type="submit">Join the Museum</button>
+        </form>
+      </section>
+
+      <footer>
+        <p>The Jersey Museum</p>
+        <p>Copyright 2026 The Jersey Museum. All artifacts reserved.</p>
+        <ul>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+          <li>
+            <a href="#">Authentication</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </footer>
+    </main>
+  );
+}

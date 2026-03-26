@@ -1,429 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archive — A Museum of Football Heritage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Jersey Museum — Worn by Legends</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Barra de navegacion -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">Archive</a>
+  <!-- NAVIGATION -->
+  <header>
+    <nav>
+      <a href="#">The Jersey Museum</a>
+      <ul>
+        <li><a href="#exhibits">The Collection</a></li>
+        <li><a href="#timeline">History</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="#cart">Cart (0)</a>
+    </nav>
+  </header>
 
-      <ul class="nav-links">
-        <li><a href="#legends">Legends</a></li>
-        <li><a href="#finals">Finals</a></li>
-        <li><a href="#history">History</a></li>
-        <li><a href="#drops">Drops</a></li>
-        <li><a href="#numbers">Numbers</a></li>
+  <!-- HERO -->
+  <section id="hero">
+    <p>The permanent collection — Est. 1930</p>
+    <h1>Worn by Legends, Owned by You.</h1>
+    <p>Every stitch holds a memory. Every number, a dynasty. We don't sell jerseys — we preserve the fabric of football history.</p>
+    <a href="#exhibits">Enter the Museum</a>
+    <p>214 Historic Pieces</p>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section id="about">
+    <p>Our Philosophy</p>
+    <h2>A jersey is not clothing. It is a confession of loyalty, a certificate of belonging.</h2>
+    <p>We founded The Jersey Museum on the belief that football's greatest moments live not in trophies or statistics — they live in cotton, polyester, and the number on a back. The weight of a '99 treble. The ghost of a '70 World Cup gold.</p>
+    <p>Each piece in our collection is sourced with obsessive care: authenticated, contextualized, and presented as the artifact it truly is. We partner with historians, former players, and clubs to tell the stories that deserve to be remembered.</p>
+    <p>When you wear one of our jerseys, you don't just wear a club. You wear a moment in time.</p>
+  </section>
+
+  <!-- FEATURED EXHIBIT -->
+  <section id="featured">
+    <span>Exhibit of the Month</span>
+
+    <div>
+      <img src="img/ajax-1995.jpg" alt="Ajax 1994/95 Home Jersey" />
+    </div>
+
+    <div>
+      <p>EX 001</p>
+      <p>AFC Ajax — 1994/95</p>
+      <h2>The Invincibles of Amsterdam</h2>
+      <p>The jersey of a generation. When Louis van Gaal's Ajax demolished AC Milan 1–0 to claim the Champions League crown at Vienna, they were the youngest team to ever win it. This was the season of Kluivert's late winner. Of De Boer. Of Seedorf at 18. They played football that hadn't been seen before — and hasn't been seen since.</p>
+
+      <ul>
+        <li>
+          <strong>34</strong>
+          <span>Unbeaten Run</span>
+        </li>
+        <li>
+          <strong>3</strong>
+          <span>Titles Won</span>
+        </li>
+        <li>
+          <strong>18</strong>
+          <span>Avg Player Age</span>
+        </li>
       </ul>
 
-      <div class="nav-actions">
-        <button class="nav-icon-btn" aria-label="Search">
-          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6">
-            <circle cx="8.5" cy="8.5" r="6" />
-            <path d="M13 13l4 4" stroke-linecap="round" />
-          </svg>
-        </button>
-        <a href="#" class="nav-text-btn">Account</a>
-        <a href="#" class="nav-cart-btn">
-          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M3 5h14l-1.5 8.5H4.5L3 5z" stroke-linejoin="round" />
-            <circle cx="6.5" cy="16" r="1.2" fill="currentColor" stroke="none" />
-            <circle cx="13.5" cy="16" r="1.2" fill="currentColor" stroke="none" />
-          </svg>
-          <span class="nav-cart-count">0</span>
-        </a>
-      </div>
+      <p>$189</p>
+      <a href="#">Acquire This Piece</a>
     </div>
-  </nav>
+  </section>
 
-  <main>
+  <!-- COLLECTION HEADER -->
+  <section id="exhibits">
+    <p>Permanent Collection</p>
+    <h2>The Exhibits</h2>
+    <p>214 artifacts · Ongoing</p>
+  </section>
 
-    <!-- Seccion de heroes -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <span class="hero-label">Football Heritage Archive</span>
-          <h1 class="hero-heading">
-            The Shirts<br>
-            <em>History</em><br>
-            Wore.
-          </h1>
-          <p class="hero-sub">
-            A curated archive of iconic football jerseys. Each piece is a cultural artifact — a document of the matches, players, and moments that defined the beautiful game.
-          </p>
-          <div class="hero-ctas">
-            <a href="#legends" class="btn-primary">Enter the Archive</a>
-            <a href="#mandate" class="btn-ghost">Our Mandate</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-img-wrap">
-            <img src="./camisetas/leyendas/ronaldo/ronaldo-madrid-22_home.jpg" alt="Iconic football jersey on display">
-            <div class="hero-img-caption">
-              <span class="caption-label">Featured Exhibit</span>
-              <span class="caption-value">Cristiano Ronaldo · Real Madrid · Home</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-footer-strip">
-        <span>240+ Authenticated Pieces</span>
-        <span class="strip-divider">·</span>
-        <span>1960 – Present</span>
-        <span class="strip-divider">·</span>
-        <span>Heritage Certified</span>
-        <span class="strip-divider">·</span>
-        <span>Archive Since 2018</span>
-      </div>
-    </section>
+  <!-- EXHIBIT GRID -->
+  <section>
+    <ul>
 
-    <!-- S -->
-    <section class="concept" id="mandate">
-      <div class="concept-inner">
-        <div class="concept-rule"></div>
-        <span class="concept-eyebrow">The Mandate</span>
-        <p class="concept-text">
-          A football jersey is never just fabric. It absorbs sweat, carries numbers, absorbs the weight of history. We collect the ones that changed something — the shirts worn in finals, worn by legends, worn in the exact moment when a sport became culture. Every piece in this archive is documented, authenticated, and given the context it deserves.
-        </p>
-      </div>
-    </section>
+      <!-- Exhibit 1 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 002</span>
+            <span>1970</span>
+          </header>
+          <img src="img/brazil-1970.jpg" alt="Brazil 1970 World Cup Jersey" />
+          <p>Brazil — 1970</p>
+          <h3>The Most Beautiful Team</h3>
+          <p>Pelé's last World Cup. Rivelino. Jairzinho. A 4–1 final that redefined what football could be — art, not sport.</p>
+          <p>$219 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!-- Seccion de leyendas -->
-    <section class="chapter" id="legends">
-      <div class="chapter-header">
-        <div class="chapter-meta">
-          <span class="chapter-num">I</span>
-          <div class="chapter-title-group">
-            <h2 class="chapter-title">Legends</h2>
-            <p class="chapter-desc">The players whose names became inseparable from the shirts they wore. These jerseys carry the weight of careers that redefined what was possible.</p>
-          </div>
-        </div>
-        <a href="#" class="chapter-cta">Explore all Legends →</a>
-      </div>
-      <div class="legends-preview">
-        <div class="legend-preview-card legend-preview-card--tall">
-          <div class="lpc-image">
-            <img src="./camisetas/leyendas/messi/messi-barcelona-16~17-home-finalcopadelrey.jpg" alt="Messi Barcelona jersey" />
-            <span class="lpc-badge lpc-badge--rare">Rare</span>
-          </div>
-          <div class="lpc-info">
-            <span class="lpc-club">Barcelona · Argentina</span>
-            <h3 class="lpc-name">Lionel Messi</h3>
-            <span class="lpc-era">2004 – 2021 · Nike</span>
-            <span class="lpc-price">€ 620</span>
-          </div>
-        </div>
-        <div class="legend-preview-card">
-          <div class="lpc-image">
-            <img src="./camisetas/leyendas/maradona/maradona-napoli-84~85-home.jpg" alt="Maradona Napoli jersey" />
-            <span class="lpc-badge lpc-badge--rare">Rare</span>
-          </div>
-          <div class="lpc-info">
-            <span class="lpc-club">Napoli · Argentina</span>
-            <h3 class="lpc-name">Diego Maradona</h3>
-            <span class="lpc-era">1984 – 1991 · Umbro</span>
-            <span class="lpc-price">€ 1,850</span>
-          </div>
-        </div>
-        <div class="legend-preview-card">
-          <div class="lpc-image">
-            <img src="./camisetas/leyendas/ronaldinho/ronaldihno-barcelona-06~07-home.jpg" alt="Ronaldinho Barcelona jersey" />
-            <span class="lpc-badge lpc-badge--rare">Rare</span>
-          </div>
-          <div class="lpc-info">
-            <span class="lpc-club">Barcelona · Brazil</span>
-            <h3 class="lpc-name">Ronaldinho</h3>
-            <span class="lpc-era">2003 – 2008 · Nike</span>
-            <span class="lpc-price">€ 900</span>
-          </div>
-        </div>
-        <div class="legend-preview-card legend-preview-card--wide">
-          <div class="lpc-image">
-            <img src="./camisetas/leyendas/zidane/zidane-madrid-04~05-home.jpg" alt="Zidane Real Madrid jersey" />
-            <span class="lpc-badge">In Stock</span>
-          </div>
-          <div class="lpc-info">
-            <span class="lpc-club">Real Madrid · France</span>
-            <h3 class="lpc-name">Zinedine Zidane</h3>
-            <span class="lpc-era">2001 – 2006 · Adidas</span>
-            <span class="lpc-price">€ 750</span>
-          </div>
-        </div>
-      </div>
-      <div class="section-footer">
-        <a href="legends.html" class="btn-primary">View All Legends</a>
-      </div>
-    </section>
+      <!-- Exhibit 2 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 003</span>
+            <span>1986</span>
+          </header>
+          <img src="img/argentina-1986.jpg" alt="Argentina 1986 World Cup Jersey" />
+          <p>Argentina — 1986</p>
+          <h3>The Hand &amp; The Goal</h3>
+          <p>Mexico City, June 22nd. Two goals in four minutes. One with a fist, one with a god. Diego Armando Maradona at his most human and divine.</p>
+          <p>$199 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!--Seccion de finales eternas -->
-    <section class="chapter" id="finals">
-      <div class="chapter-header">
-        <div class="chapter-meta">
-          <span class="chapter-num">II</span>
-          <div class="chapter-title-group">
-            <h2 class="chapter-title">Eternal Finals</h2>
-            <p class="chapter-desc">The most decisive nights in football, preserved in fabric. These jerseys were on the pitch when the tension was highest and the margin was zero.</p>
-          </div>
-        </div>
-        <a href="#" class="chapter-cta">View all Finals →</a>
-      </div>
-      <div class="finals-preview">
-        <div class="final-card">
-          <div class="final-card-image">
-            <img src="./camisetas/camisetad-finales/messi-barcelona-10~11-home-finaldechampions.jpg" alt="Champions League 2011 jersey" />
-            <div class="final-card-overlay">
-              <span class="final-event">UEFA Champions League Final</span>
-              <span class="final-year">2011 · Wembley, London</span>
-            </div>
-          </div>
-          <div class="final-card-body">
-            <h3 class="final-card-title">Barcelona Home 2011</h3>
-            <p class="final-card-detail">Messi's masterclass. A historic treble sealed in Rome against Manchester United.</p>
-            <div class="final-card-footer">
-              <span class="final-price">€ 1,200</span>
-              <a href="#" class="btn-ghost btn-ghost--small">View Piece</a>
-            </div>
-          </div>
-        </div>
-        <div class="final-card">
-          <div class="final-card-image">
-            <img src="./camisetas/camisetad-finales/ronaldo-madrid-17~18-finaldechampions.jpg" alt="Champions League 2018 jersey" />
-            <div class="final-card-overlay">
-              <span class="final-event">UEFA Champions League Final</span>
-              <span class="final-year">2018 · Kyiv, Ukraine</span>
-            </div>
-          </div>
-          <div class="final-card-body">
-            <h3 class="final-card-title">Real Madrid Home 2018</h3>
-            <p class="final-card-detail">Cristiano's third consecutive crown. The dynasty continues.</p>
-            <div class="final-card-footer">
-              <span class="final-price">€ 940</span>
-              <a href="#" class="btn-ghost btn-ghost--small">View Piece</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section-footer">
-        <a href="finals.html" class="btn-primary">View All Finals</a>
-      </div>
-    </section>
+      <!-- Exhibit 3 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 004</span>
+            <span>1989</span>
+          </header>
+          <img src="img/acmilan-1989.jpg" alt="AC Milan 1988/89 Champions League Jersey" />
+          <p>AC Milan — 1988/89</p>
+          <h3>Sacchi's Red Machine</h3>
+          <p>The most dominant club side of its era. Gullit, Van Basten, Rijkaard. They didn't just win the European Cup — they rewrote how football was played.</p>
+          <p>$179 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!-- Numeros imortales -->
-    <section class="chapter chapter--dark" id="numbers">
-      <div class="chapter-header">
-        <div class="chapter-meta">
-          <span class="chapter-num">III</span>
-          <div class="chapter-title-group">
-            <h2 class="chapter-title">Immortal Numbers</h2>
-            <p class="chapter-desc">Certain numbers transcend the player who wore them. They become mythologies — symbols of a style, an era, a way of seeing the game.</p>
-          </div>
-        </div>
-        <a href="#" class="chapter-cta">Explore the Numbers →</a>
-      </div>
-      <div class="numbers-grid">
-        <div class="number-item">
-          <span class="number-digit">10</span>
-          <div class="number-body">
-            <h3 class="number-title">The Orchestrator</h3>
-            <p class="number-desc">Pelé. Maradona. Zidane. Messi. The number that carries the weight of genius — no shirt has been worn by more world-changers.</p>
-            <a href="#" class="number-link">12 pieces in collection →</a>
-          </div>
-        </div>
-        <div class="number-item">
-          <span class="number-digit">9</span>
-          <div class="number-body">
-            <h3 class="number-title">The Executioner</h3>
-            <p class="number-desc">Van Basten. Ronaldo Nazário. Benzema. The number that defined the era of the complete striker — raw, clinical, decisive.</p>
-            <a href="#" class="number-link">9 pieces in collection →</a>
-          </div>
-        </div>
-        <div class="number-item">
-          <span class="number-digit">7</span>
-          <div class="number-body">
-            <h3 class="number-title">The Wing</h3>
-            <p class="number-desc">Best. Cantona. Figo. Cristiano. A number that belongs to the fearless — the players who made the crowd hold its breath.</p>
-            <a href="#" class="number-link">11 pieces in collection →</a>
-          </div>
-        </div>
-        <div class="number-item">
-          <span class="number-digit">14</span>
-          <div class="number-body">
-            <h3 class="number-title">The Philosopher</h3>
-            <p class="number-desc">Cruyff wore it once, and it never recovered its neutrality. The #14 is now a philosophy — a system, an idea, a way of possessing space.</p>
-            <a href="#" class="number-link">4 pieces in collection →</a>
-          </div>
-        </div>
-      </div>
-      <div class="section-footer">
-        <a href="numbers.html" class="btn-primary">View All Numbers</a>
-      </div>
-    </section>
+      <!-- Exhibit 4 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 005</span>
+            <span>1998</span>
+          </header>
+          <img src="img/france-1998.jpg" alt="France 1998 World Cup Jersey" />
+          <p>France — 1998</p>
+          <h3>A Nation United</h3>
+          <p>July 12, 1998. Stade de France. Zidane headed twice. A generation of immigrants became French heroes. Football changed society that night.</p>
+          <p>$189 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!-- Camisetas que hicieron historia -->
-    <section class="chapter" id="history">
-      <div class="chapter-header">
-        <div class="chapter-meta">
-          <span class="chapter-num">IV</span>
-          <div class="chapter-title-group">
-            <h2 class="chapter-title">Jerseys That Made History</h2>
-            <p class="chapter-desc">Some jerseys are inseparable from the turning points of the sport. The shirt as witness to history — present when everything changed.</p>
-          </div>
-        </div>
-        <a href="#" class="chapter-cta">View full collection →</a>
-      </div>
-      <div class="history-grid">
-        <div class="history-card">
-          <div class="history-img">
-            <img src="./camisetas/leyendas/maradona/maradona-argentina-86-home.jpg" alt="1986 Argentina jersey" />
-          </div>
-          <div class="history-info">
-            <span class="history-year">1986</span>
-            <h3 class="history-name">Argentina · Mexico World Cup</h3>
-            <p class="history-note">The Hand of God. The Goal of the Century. One shirt, two miracles, one match.</p>
-            <span class="history-price">€ 2,200</span>
-          </div>
-        </div>
-        <div class="history-card">
-          <div class="history-img">
-            <img src="./camisetas/leyendas/pele/brazil-1958-58-home.jpg" alt="1958 Brazil jersey" />
-          </div>
-          <div class="history-info">
-            <span class="history-year">1958</span>
-            <h3 class="history-name">Brazil · First World Cup</h3>
-            <p class="history-note">Pelé's debut tournament. A teenager changed the sport forever.</p>
-            <span class="history-price">€ 1,800</span>
-          </div>
-        </div>
-        <div class="history-card">
-          <div class="history-img">
-            <img src="./camisetas/leyendas/zidane/zidane-francia-98-home.webp" alt="France 1998 jersey" />
-          </div>
-          <div class="history-info">
-            <span class="history-year">1998</span>
-            <h3 class="history-name">France · Home World Cup</h3>
-            <p class="history-note">Zidane's header at Stade de France. A nation's first crown.</p>
-            <span class="history-price">€ 870</span>
-          </div>
-        </div>
-        <div class="history-card">
-          <div class="history-img">
-            <img src="./camisetas/leyendas/messi/messi-argentina-2022-home.jpg" alt="Argentina 2022 jersey" />
-          </div>
-          <div class="history-info">
-            <span class="history-year">2022</span>
-            <h3 class="history-name">Argentina · Qatar World Cup</h3>
-            <p class="history-note">Messi's destiny fulfilled. Argentina's third star earned.</p>
-            <span class="history-price">€ 640</span>
-          </div>
-        </div>
-      </div>
-      <div class="section-footer">
-        <a href="history.html" class="btn-primary">View All History</a>
-      </div>
-    </section>
+      <!-- Exhibit 5 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 006</span>
+            <span>2009</span>
+          </header>
+          <img src="img/barcelona-2009.jpg" alt="FC Barcelona 2008/09 Treble Season Jersey" />
+          <p>FC Barcelona — 2008/09</p>
+          <h3>The Treble Season</h3>
+          <p>Pep Guardiola's first year. 6 trophies in one calendar year. Messi's goal against Real Madrid. Iniesta everywhere. The most complete football ever played.</p>
+          <p>$169 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!-- drops iconicos -->
-    <section class="chapter chapter--dark" id="drops">
-      <div class="chapter-header">
-        <div class="chapter-meta">
-          <span class="chapter-num">V</span>
-          <div class="chapter-title-group">
-            <h2 class="chapter-title">Iconic Drops</h2>
-            <p class="chapter-desc">A selection of the rarest and most culturally significant pieces to enter the archive. Authenticated originals, in limited availability.</p>
-          </div>
-        </div>
-        <a href="#" class="chapter-cta">View all drops →</a>
-      </div>
-      <div class="drops-layout">
-        <div class="drop-feature">
-          <div class="drop-feature-img">
-            <img src="./camisetas/drops-iconicos/realmadrid-16~17-away.jpg" alt="Real Madrid special edition" />
-            <span class="drop-feature-tag">Archive Drop · 001</span>
-          </div>
-          <div class="drop-feature-body">
-            <h3 class="drop-feature-title">Real Madrid 2016/17 Away</h3>
-            <p class="drop-feature-desc">A special edition from the season of two Champions Leagues. Limited release. Adidas' finest away kit construction.</p>
-            <div class="drop-feature-meta">
-              <span>Adidas · 2016</span>
-              <span>Condition: Excellent</span>
-            </div>
-            <div class="drop-feature-footer">
-              <span class="drop-feature-price">€ 540</span>
-              <a href="#" class="btn-primary">View Piece</a>
-            </div>
-          </div>
-        </div>
-        <div class="drop-feature drop-feature--reverse">
-          <div class="drop-feature-img">
-            <img src="./camisetas/drops-iconicos/borussia-23~24-anniversary.jpg" alt="Borussia Dortmund special" />
-            <span class="drop-feature-tag">Archive Drop · 002</span>
-          </div>
-          <div class="drop-feature-body">
-            <h3 class="drop-feature-title">Borussia Dortmund 2023/24 Anniversary</h3>
-            <p class="drop-feature-desc">A rare anniversary edition celebrating over 100 years of Borussia Dortmund. Puma's heritage collection.</p>
-            <div class="drop-feature-meta">
-              <span>Puma · 2023</span>
-              <span>Condition: Deadstock</span>
-            </div>
-            <div class="drop-feature-footer">
-              <span class="drop-feature-price">€ 380</span>
-              <a href="#" class="btn-primary">View Piece</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section-footer">
-        <a href="drops.html" class="btn-primary">View All Drops</a>
-      </div>
-    </section>
+      <!-- Exhibit 6 -->
+      <li>
+        <article>
+          <header>
+            <span>EX 007</span>
+            <span>2002</span>
+          </header>
+          <img src="img/realmadrid-2002.jpg" alt="Real Madrid 2001/02 Champions League Jersey" />
+          <p>Real Madrid — 2001/02</p>
+          <h3>Zidane's Volley</h3>
+          <p>Glasgow, May 15th. Zidane met the ball on the half-volley. His left foot. The Hampden Park night sky. Some moments deserve to live forever.</p>
+          <p>$179 <span>/ replica</span></p>
+          <a href="#">Acquire</a>
+        </article>
+      </li>
 
-    <!-- pie de pagina -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <span class="footer-logo">Archive</span>
-          <p class="footer-tagline">A Museum of Football Heritage.<br />Preserving the culture of the game.</p>
-        </div>
-        <div class="footer-nav-group">
-          <span class="footer-nav-label">Collection</span>
-          <ul>
-            <li><a href="#legends">Legends</a></li>
-            <li><a href="#finals">Eternal Finals</a></li>
-            <li><a href="#numbers">Immortal Numbers</a></li>
-            <li><a href="#history">Jerseys That Made History</a></li>
-            <li><a href="#drops">Iconic Drops</a></li>
-          </ul>
-        </div>
-        <div class="footer-nav-group">
-          <span class="footer-nav-label">Archive</span>
-          <ul>
-            <li><a href="#">Authentication</a></li>
-            <li><a href="#">Condition Guide</a></li>
-            <li><a href="#">Collecting Guide</a></li>
-            <li><a href="#">Editorial</a></li>
-          </ul>
-        </div>
-        <div class="footer-nav-group">
-          <span class="footer-nav-label">Contact</span>
-          <ul>
-            <li><a href="#">hello@footballarchive.museum</a></li>
-            <li><a href="#">About the Archive</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Acquisitions</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Archive. All rights reserved.</span>
-        <span>Football Heritage · Authenticated · Preserved</span>
-      </div>
-    </footer>
+    </ul>
+  </section>
 
-  </main>
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <p>The Chronicle</p>
+    <h2>A Century in Cotton</h2>
+
+    <ol>
+      <li>
+        <time datetime="1930">1930</time>
+        <h3>The First World Cup</h3>
+        <p>Uruguay. The jersey as national identity is born. Wool, heavy, soaked in sweat and pride. Football finds its first uniform mythology.</p>
+      </li>
+      <li>
+        <time datetime="1966">1966</time>
+        <h3>The England Myth</h3>
+        <p>Wembley. The red away kit becomes iconic not because England wore it — but because of what they won in it. A jersey that carries a once-in-history moment.</p>
+      </li>
+      <li>
+        <time datetime="1986">1986</time>
+        <h3>The God Plays Dress-Up</h3>
+        <p>Maradona chooses Argentina's blue-and-white. In one afternoon in Mexico City, a shirt becomes a theological debate. Still unsettled.</p>
+      </li>
+      <li>
+        <time datetime="1999">1999</time>
+        <h3>The Treble Night</h3>
+        <p>Camp Nou, Champions League Final. Sheringham. Solskjær. Manchester United's red shirt under the Barcelona floodlights. The most dramatic three minutes in football history.</p>
+      </li>
+      <li>
+        <time datetime="2010">2010</time>
+        <h3>Spain's Golden Decade</h3>
+        <p>Three major tournaments. One philosophy. Iniesta's extra-time winner in Johannesburg. The red jersey becomes shorthand for possession, for beauty, for dominance.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- QUOTE -->
+  <blockquote>
+    <p>"Football is not about stadiums or trophies. It is about the shirt on your back and the story it carries into the world with you."</p>
+    <cite>Johan Cruyff, 1974</cite>
+  </blockquote>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <h2>New acquisitions, once a month.</h2>
+    <p>Join 24,000 collectors and football historians who receive our monthly curation. No noise — only stories worth reading.</p>
+    <form>
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" />
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" />
+
+      <button type="submit">Join the Museum</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>The Jersey Museum</p>
+    <p>© 2026 The Jersey Museum. All artifacts reserved.</p>
+    <ul>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Authentication</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
 
 </body>
 </html>
