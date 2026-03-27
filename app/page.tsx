@@ -134,9 +134,9 @@ export default function HomePage() {
               <JerseySvg className="jersey-svg-lg" />
             </div>
             <div className="jersey-card-info">
-              <div className="jersey-card-player">Pelé</div>
-              <div className="jersey-card-detail">Brazil · No. 10 · 1970</div>
-              <div className="jersey-card-era">World Cup Mexico</div>
+              <div className="jersey-card-player">Messi</div>
+              <div className="jersey-card-detail">Argentina · No. 10 · 2022</div>
+              <div className="jersey-card-era">World Cup Qatar</div>
             </div>
           </a>
 
@@ -146,8 +146,8 @@ export default function HomePage() {
               <JerseySvg />
             </div>
             <div className="jersey-card-info">
-              <div className="jersey-card-player">Eric Cantona</div>
-              <div className="jersey-card-detail">Manchester United · No. 7 · 1996</div>
+              <div className="jersey-card-player">Cristiano</div>
+              <div className="jersey-card-detail">Manchester United · No. 7 · 2008</div>
               <div className="jersey-card-era">Premier League</div>
             </div>
           </a>

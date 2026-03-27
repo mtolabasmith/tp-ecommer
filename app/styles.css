@@ -18,10 +18,12 @@
   --gold-dim: #7d6628;
   --border:   #252219;
   --border-2: #2e2b23;
+  --nav-h: 68px;
+  --section-pad-y: clamp(2.5rem, 4.5vh, 4.75rem);
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -141,7 +143,8 @@ a {
 ============================================================ */
 
 .hero {
-  min-height: 100vh;
+  height: 100svh;
+  scroll-snap-align: start;
   display: flex;
   align-items: center;
   position: relative;
@@ -384,13 +387,13 @@ a {
 }
 
 .jersey-svg-sm {
-  width: 54px;
+  width: 52px;
   height: 64px;
 }
 
 .jersey-svg-lg {
-  width: 130px;
-  height: 152px;
+  width: 108px;
+  height: 126px;
 }
 
 /* ============================================================
@@ -398,9 +401,14 @@ a {
 ============================================================ */
 
 .intro {
-  padding: 7rem 4rem;
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
+  min-height: calc(100svh - var(--nav-h));
+  padding: var(--section-pad-y) 4rem;
   border-top: 1px solid var(--border);
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .intro-inner {
@@ -419,7 +427,7 @@ a {
 }
 
 .intro-divider {
-  width: 36px;
+  width: 35px;
   height: 1px;
   background: var(--gold);
   margin: 0 auto 2.5rem;
@@ -436,16 +444,22 @@ a {
 ============================================================ */
 
 .section {
-  padding: 8rem 4rem;
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
+  min-height: calc(100svh - var(--nav-h));
+  padding: var(--section-pad-y) 4rem;
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 4.5rem;
-  gap: 3rem;
+  margin-bottom: clamp(1.5rem, 3.2vh, 3rem);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
 }
 
 .section-label {
@@ -467,7 +481,7 @@ a {
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+  font-size: clamp(1.65rem, 2.9vw, 2.6rem);
   font-weight: 300;
   color: var(--text);
   line-height: 1.1;
@@ -484,10 +498,10 @@ a {
 }
 
 .section-desc {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-2);
-  line-height: 1.9;
-  margin-bottom: 1.5rem;
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
 }
 
 .section-link {
@@ -530,7 +544,7 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   transition: border-color 0.4s ease;
 }
 
@@ -559,18 +573,18 @@ a {
   color: rgba(200, 168, 75, 0.09);
   line-height: 1;
   user-select: none;
-  font-size: 6rem;
+  font-size: clamp(4.1rem, 6.2vw, 5.4rem);
   bottom: 0.5rem;
   right: 1rem;
 }
 
 .jersey-card-info {
-  padding: 1.3rem 0 0;
+  padding: 0.95rem 0 0;
 }
 
 .jersey-card-player {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--text);
   letter-spacing: 0.02em;
   margin-bottom: 0.3rem;
@@ -601,12 +615,12 @@ a {
 .legends-grid {
   display: grid;
   grid-template-columns: 1.45fr 1fr 1fr;
-  gap: 2.5rem;
+  gap: clamp(0.9rem, 1.8vw, 1.6rem);
   align-items: start;
 }
 
 .legends-grid .jersey-card:first-child .jersey-card-image {
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 4 / 3;
 }
 
 /* ============================================================
@@ -622,7 +636,7 @@ a {
   align-items: start;
 }
 
-.finals-feature .jersey-card-image { aspect-ratio: 2 / 3; }
+.finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
 
 .finals-sidebar {
   display: flex;
@@ -831,21 +845,26 @@ a {
 ============================================================ */
 
 .spotlight {
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
   background: var(--bg-2);
   border-top: 1px solid var(--border);
-  padding: 8rem 4rem;
+  min-height: calc(100svh - var(--nav-h));
+  padding: var(--section-pad-y) 4rem;
+  display: flex;
+  align-items: center;
 }
 
 .spotlight-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8rem;
+  gap: clamp(2.25rem, 5vw, 5rem);
   align-items: center;
 }
 
 .spotlight-jersey-box {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   background: var(--bg-3);
   border: 1px solid var(--border-2);
   display: flex;
@@ -973,7 +992,7 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   transition: border-color 0.4s ease;
 }
 
@@ -1025,9 +1044,14 @@ a {
 ============================================================ */
 
 .curated {
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
   background: var(--bg);
   border-top: 1px solid var(--border);
-  padding: 8rem 4rem;
+  min-height: calc(100svh - var(--nav-h));
+  padding: var(--section-pad-y) 4rem;
+  display: flex;
+  align-items: center;
 }
 
 .curated-grid {
@@ -1039,7 +1063,7 @@ a {
 
 .curated-grid .jersey-card:nth-child(1) .jersey-card-image,
 .curated-grid .jersey-card:nth-child(2) .jersey-card-image {
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 4 / 3;
 }
 
 /* ============================================================
@@ -1130,8 +1154,8 @@ a {
   .nav-links { gap: 1.75rem; }
   .hero { padding: 0 2.5rem; padding-top: 68px; }
   .hero-inner { gap: 3.5rem; }
-  .section, .spotlight, .curated { padding: 6rem 2.5rem; }
-  .intro { padding: 6rem 2.5rem; }
+  .section, .spotlight, .curated { padding: 3.75rem 2.5rem; }
+  .intro { padding: 3.75rem 2.5rem; }
   .footer { padding: 5rem 2.5rem 3rem; }
   .legends-grid { grid-template-columns: 1fr 1fr; }
   .legends-grid .jersey-card:first-child { grid-column: span 2; }
@@ -1144,14 +1168,15 @@ a {
 }
 
 @media (max-width: 768px) {
+  html { scroll-snap-type: none; }
   .navbar { padding: 0 1.5rem; }
   .nav-links { display: none; }
   .hero { padding: 0 1.5rem; padding-top: 68px; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
   .hero-headline { font-size: clamp(2.5rem, 10vw, 3.5rem); }
-  .section, .spotlight, .curated { padding: 5rem 1.5rem; }
-  .intro { padding: 5rem 1.5rem; }
+  .section, .spotlight, .curated { min-height: auto; padding: 3.25rem 1.5rem; }
+  .intro { min-height: auto; padding: 3.25rem 1.5rem; }
   .footer { padding: 4rem 1.5rem 2.5rem; }
   .section-header { flex-direction: column; gap: 2rem; }
   .section-right { max-width: 100%; }
