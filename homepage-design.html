@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Archive — Football Heritage Collection</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:       #0d0c0a;
+      --bg-2:     #121009;
+      --bg-3:     #191612;
+      --bg-4:     #201e19;
+      --text:     #ede7d9;
+      --text-2:   #9b9082;
+      --text-3:   #5e5750;
+      --gold:     #c8a84b;
+      --gold-dim: #7d6628;
+      --burg:     #7a2535;
+      --border:   #252219;
+      --border-2: #2e2b23;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* ============================================================
+       KEYFRAME ANIMATIONS
+    ============================================================ */
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.05; }
+      50%       { opacity: 0.12; }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scroll-line {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 68px;
+      background-color: rgba(13, 12, 10, 0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-brand span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-utils {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-utils a {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-utils a:hover {
+      color: var(--text);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 0 4rem;
+      padding-top: 68px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 72% 50%, rgba(200, 168, 75, 0.055) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(122, 37, 53, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-headline {
+      font-size: clamp(2.8rem, 5.5vw, 5.4rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-body {
+      font-size: 0.92rem;
+      color: var(--text-2);
+      max-width: 400px;
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.75rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+
+    .btn-ghost::after {
+      content: '→';
+      font-size: 1rem;
+      font-style: normal;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      gap: 1.1rem;
+    }
+
+    /* Hero Visual */
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-frame-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .hero-frame-wrap::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border-2);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-jersey-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-jersey-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(200, 168, 75, 0.08) 0%, transparent 68%);
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    .hero-ghost-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11rem;
+      font-weight: 300;
+      color: rgba(200, 168, 75, 0.07);
+      line-height: 1;
+      user-select: none;
+      bottom: 1rem;
+      right: 1.5rem;
+    }
+
+    .hero-jersey-meta {
+      margin-top: 1.75rem;
+      text-align: center;
+    }
+
+    .hero-jersey-meta-player {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-jersey-meta-detail {
+      font-size: 0.63rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-top: 0.3rem;
+    }
+
+    /* Scroll indicator */
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-scroll-text {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 52px;
+      background: var(--border-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      animation: scroll-line 2.2s ease-in-out infinite;
+    }
+
+    /* ============================================================
+       SVG JERSEY (reusable inline element)
+    ============================================================ */
+
+    .jersey-svg {
+      width: 90px;
+      height: 105px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .jersey-svg-sm {
+      width: 54px;
+      height: 64px;
+    }
+
+    .jersey-svg-lg {
+      width: 130px;
+      height: 152px;
+    }
+
+    /* ============================================================
+       INTRO
+    ============================================================ */
+
+    .intro {
+      padding: 7rem 4rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .intro-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .intro-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 2.5rem;
+    }
+
+    .intro-divider {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2.5rem;
+    }
+
+    .intro-body {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.95;
+    }
+
+    /* ============================================================
+       SECTION COMMON
+    ============================================================ */
+
+    .section {
+      padding: 8rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 4.5rem;
+      gap: 3rem;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+    }
+
+    .section-label-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      color: var(--text-3);
+      font-style: normal;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--text-2);
+    }
+
+    .section-right {
+      flex-shrink: 0;
+      max-width: 380px;
+    }
+
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap 0.3s ease, color 0.3s ease;
+    }
+
+    .section-link::after {
+      content: '→';
+      font-style: normal;
+    }
+
+    .section-link:hover {
+      gap: 1.25rem;
+    }
+
+    /* ============================================================
+       JERSEY CARD (vertical, default)
+    ============================================================ */
+
+    .jersey-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .jersey-card-image {
+      position: relative;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      transition: border-color 0.4s ease;
+    }
+
+    .jersey-card:hover .jersey-card-image {
+      border-color: var(--border-2);
+    }
+
+    .jersey-card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(200, 168, 75, 0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+
+    .jersey-card:hover .jersey-card-image::after {
+      opacity: 1;
+    }
+
+    .card-ghost-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      color: rgba(200, 168, 75, 0.09);
+      line-height: 1;
+      user-select: none;
+      font-size: 6rem;
+      bottom: 0.5rem;
+      right: 1rem;
+    }
+
+    .jersey-card-info {
+      padding: 1.3rem 0 0;
+    }
+
+    .jersey-card-player {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.3rem;
+    }
+
+    .jersey-card-detail {
+      font-size: 0.62rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .jersey-card-era {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.65;
+      margin-top: 0.4rem;
+    }
+
+    /* ============================================================
+       SECTION 01 — LEGENDS
+    ============================================================ */
+
+    .legends {
+      background: var(--bg);
+    }
+
+    .legends-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .legends-grid .jersey-card:first-child .jersey-card-image {
+      aspect-ratio: 2 / 3;
+    }
+
+    .legends-grid .jersey-card:first-child .card-ghost-num {
+      font-size: 9rem;
+    }
+
+    /* ============================================================
+       SECTION 02 — ETERNAL FINALS
+    ============================================================ */
+
+    .finals {
+      background: var(--bg-2);
+    }
+
+    .finals-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .finals-feature .jersey-card-image {
+      aspect-ratio: 2 / 3;
+    }
+
+    .finals-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-top: 0.5rem;
+    }
+
+    .finals-sidebar-card {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.3s ease;
+    }
+
+    .finals-sidebar-card:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .finals-sidebar-card:hover {
+      background: rgba(200, 168, 75, 0.015);
+    }
+
+    .finals-sidebar-image {
+      width: 90px;
+      flex-shrink: 0;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.35s ease;
+    }
+
+    .finals-sidebar-card:hover .finals-sidebar-image {
+      border-color: var(--border-2);
+    }
+
+    .finals-sidebar-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(200, 168, 75, 0.1);
+      right: 0.25rem;
+      bottom: 0;
+      line-height: 1;
+    }
+
+    .finals-sidebar-info {
+      flex: 1;
+      padding-top: 0.2rem;
+    }
+
+    .match-tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .sidebar-player {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-detail {
+      font-size: 0.62rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ============================================================
+       SECTION 03 — IMMORTAL NUMBERS
+    ============================================================ */
+
+    .numbers {
+      background: var(--bg);
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .number-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3.5rem 2rem 3rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+
+    .number-card:hover {
+      border-color: var(--gold-dim);
+      background: var(--bg-3);
+    }
+
+    .number-digit {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 8vw, 7.5rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 1.75rem;
+      transition: color 0.4s ease;
+    }
+
+    .number-card:hover .number-digit {
+      color: var(--gold);
+    }
+
+    .number-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .number-desc {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.85;
+      max-width: 220px;
+      margin-bottom: 1.5rem;
+    }
+
+    .number-names {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.55;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       SECTION 04 — JERSEYS THAT MADE HISTORY
+    ============================================================ */
+
+    .history {
+      background: var(--bg-2);
+    }
+
+    .history-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .history-timeline {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.3s ease;
+    }
+
+    .history-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .history-item:hover {
+      padding-left: 0.5rem;
+    }
+
+    .history-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      color: var(--text-3);
+      padding-top: 0.15rem;
+      transition: color 0.3s ease;
+    }
+
+    .history-item:hover .history-year {
+      color: var(--gold);
+    }
+
+    .history-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .history-desc {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.85;
+      margin-bottom: 0.85rem;
+    }
+
+    .history-tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      padding: 0.28rem 0.65rem;
+    }
+
+    /* ============================================================
+       SPOTLIGHT
+    ============================================================ */
+
+    .spotlight {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 8rem 4rem;
+    }
+
+    .spotlight-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+    }
+
+    .spotlight-jersey-box {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .spotlight-ghost-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15rem;
+      font-weight: 300;
+      color: rgba(200, 168, 75, 0.05);
+      line-height: 1;
+      user-select: none;
+      bottom: -1rem;
+      right: -1rem;
+    }
+
+    .spotlight-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 3rem 2rem 1.75rem;
+      background: linear-gradient(to top, rgba(13, 12, 10, 0.9) 0%, transparent 100%);
+    }
+
+    .spotlight-caption-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    .spotlight-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+    }
+
+    .spotlight-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .spotlight-headline {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .spotlight-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-2);
+      margin-bottom: 2.5rem;
+    }
+
+    .spotlight-body {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      line-height: 1.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .spotlight-stats {
+      display: flex;
+      gap: 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ============================================================
+       SECTION 05 — ICONIC DROPS
+    ============================================================ */
+
+    .drops {
+      background: var(--bg-3);
+    }
+
+    .drops-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+    }
+
+    .drop-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .drop-card-image {
+      position: relative;
+      background: var(--bg-4);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      transition: border-color 0.4s ease;
+    }
+
+    .drop-card:hover .drop-card-image {
+      border-color: var(--gold-dim);
+    }
+
+    .drop-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 0.28rem 0.65rem;
+      background: rgba(13, 12, 10, 0.85);
+      z-index: 2;
+    }
+
+    .drop-ghost-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5.5rem;
+      font-weight: 300;
+      color: rgba(200, 168, 75, 0.07);
+      bottom: 0;
+      right: 0.5rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .drop-card-info {
+      padding: 1.1rem 0 0;
+    }
+
+    .drop-player {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .drop-detail {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ============================================================
+       CURATED SELECTION
+    ============================================================ */
+
+    .curated {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 8rem 4rem;
+    }
+
+    .curated-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .curated-grid .jersey-card:nth-child(1) .jersey-card-image,
+    .curated-grid .jersey-card:nth-child(2) .jersey-card-image {
+      aspect-ratio: 2 / 3;
+    }
+
+    .curated-grid .jersey-card:nth-child(1) .card-ghost-num,
+    .curated-grid .jersey-card:nth-child(2) .card-ghost-num {
+      font-size: 8rem;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 5.5rem 4rem 3rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-brand-name span {
+      color: var(--gold);
+    }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.8;
+      max-width: 250px;
+    }
+
+    .footer-col-title {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-2);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-note {
+      font-size: 0.7rem;
+      color: var(--text-3);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+
+    @media (max-width: 1100px) {
+      .navbar { padding: 0 2.5rem; }
+      .nav-links { gap: 1.75rem; }
+
+      .hero { padding: 0 2.5rem; padding-top: 68px; }
+      .hero-inner { gap: 3.5rem; }
+
+      .section, .spotlight, .curated { padding: 6rem 2.5rem; }
+      .intro { padding: 6rem 2.5rem; }
+      .footer { padding: 5rem 2.5rem 3rem; }
+
+      .legends-grid { grid-template-columns: 1fr 1fr; }
+      .legends-grid .jersey-card:first-child { grid-column: span 2; }
+      .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 16 / 7; }
+
+      .finals-layout { gap: 3rem; }
+      .history-layout { gap: 4rem; }
+      .drops-grid { grid-template-columns: repeat(2, 1fr); }
+      .curated-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-utils a:not(:last-child) { display: none; }
+
+      .hero { padding: 0 1.5rem; padding-top: 68px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 0; }
+      .hero-visual { display: none; }
+      .hero-headline { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+
+      .section, .spotlight, .curated { padding: 5rem 1.5rem; }
+      .intro { padding: 5rem 1.5rem; }
+      .footer { padding: 4rem 1.5rem 2.5rem; }
+
+      .section-header { flex-direction: column; gap: 2rem; }
+      .section-right { max-width: 100%; }
+
+      .legends-grid { grid-template-columns: 1fr; }
+      .legends-grid .jersey-card:first-child { grid-column: unset; }
+      .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 3 / 4; }
+
+      .finals-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .finals-feature .jersey-card-image { aspect-ratio: 3 / 4; }
+
+      .numbers-grid { grid-template-columns: 1fr; }
+      .history-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .spotlight-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .drops-grid { grid-template-columns: 1fr 1fr; }
+      .curated-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">The <span>Archive</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#legends">Legends</a></li>
+      <li><a href="#finals">Eternal Finals</a></li>
+      <li><a href="#numbers">Immortal Numbers</a></li>
+      <li><a href="#history">Made History</a></li>
+      <li><a href="#drops">Iconic Drops</a></li>
+    </ul>
+
+    <div class="nav-utils">
+      <a href="#">Archive</a>
+      <a href="#">About</a>
+      <a href="#">Cart (0)</a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <div class="hero-eyebrow">Featured Piece — Season Edition</div>
+
+        <h1 class="hero-headline">
+          Jerseys That<br>
+          Carry the<br>
+          <em>Weight of Time</em>
+        </h1>
+
+        <p class="hero-body">
+          A curated archive of the most iconic football jerseys in history.
+          Each piece holds a story. Each stitch carries the weight of a moment
+          that changed how we see the game forever.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary">Enter the Archive</a>
+          <a href="#legends" class="btn-ghost">Explore Collection</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-frame-wrap">
+          <div class="hero-jersey-box">
+            <span class="hero-ghost-num">10</span>
+            <svg class="jersey-svg jersey-svg-lg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+                fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-jersey-meta">
+          <div class="hero-jersey-meta-player">Diego Maradona</div>
+          <div class="hero-jersey-meta-detail">Argentina · No. 10 · World Cup 1986</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       INTRO
+  ============================================================ -->
+  <section class="intro">
+    <div class="intro-inner">
+      <p class="intro-quote">
+        "A football jersey is not a garment.<br>
+        It is a document of what happened."
+      </p>
+      <div class="intro-divider"></div>
+      <p class="intro-body">
+        The Archive is a curated collection of football jerseys treated as historical objects.
+        Here, every piece belongs to a larger story — of players who defined eras,
+        of finals that will never be forgotten, of numbers that became mythology.
+        This is not a store. This is a heritage collection.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       01 — LEGENDS
+  ============================================================ -->
+  <section class="section legends" id="legends">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">01</span>
+          Legends
+        </div>
+        <h2 class="section-title">
+          The Icons<br><em>Who Defined the Game</em>
+        </h2>
+      </div>
+      <div class="section-right">
+        <p class="section-desc">
+          From Buenos Aires to Turin, from Amsterdam to Madrid.
+          These are the jerseys worn by those who transcended football
+          and became symbols of an entire era.
+        </p>
+        <a href="#" class="section-link">Explore Legends</a>
+      </div>
+    </div>
+
+    <div class="legends-grid">
+
+      <!-- Featured legend -->
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num">10</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Pelé</div>
+          <div class="jersey-card-detail">Brazil · No. 10 · 1970</div>
+          <div class="jersey-card-era">World Cup Mexico</div>
+        </div>
+      </a>
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num">7</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Eric Cantona</div>
+          <div class="jersey-card-detail">Manchester United · No. 7 · 1996</div>
+          <div class="jersey-card-era">Premier League</div>
+        </div>
+      </a>
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num">9</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Ronaldo R9</div>
+          <div class="jersey-card-detail">Brazil · No. 9 · 2002</div>
+          <div class="jersey-card-era">World Cup Korea / Japan</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       02 — ETERNAL FINALS
+  ============================================================ -->
+  <section class="section finals" id="finals">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">02</span>
+          Eternal Finals
+        </div>
+        <h2 class="section-title">
+          The Matches<br><em>Time Cannot Erase</em>
+        </h2>
+      </div>
+      <div class="section-right">
+        <p class="section-desc">
+          Some matches belong to history. The jerseys worn in those
+          defining ninety minutes carry an emotion no record or
+          photograph can fully capture.
+        </p>
+        <a href="#" class="section-link">Explore Finals</a>
+      </div>
+    </div>
+
+    <div class="finals-layout">
+
+      <!-- Featured final -->
+      <a href="#" class="jersey-card finals-feature">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num" style="font-size:9rem;">1</span>
+          <svg class="jersey-svg jersey-svg-lg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="match-tag" style="display:inline-block; margin-bottom:0.75rem;">Champions League Final · 1999</div>
+          <div class="jersey-card-player">Manchester United</div>
+          <div class="jersey-card-detail">Treble Season · Camp Nou · 26 May</div>
+        </div>
+      </a>
+
+      <!-- Sidebar finals -->
+      <div class="finals-sidebar">
+
+        <a href="#" class="finals-sidebar-card">
+          <div class="finals-sidebar-image">
+            <span class="finals-sidebar-num">5</span>
+            <svg class="jersey-svg jersey-svg-sm" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+                fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="finals-sidebar-info">
+            <div class="match-tag">World Cup Final · 2006</div>
+            <div class="sidebar-player">Italy</div>
+            <div class="sidebar-detail">Azzurri · Berlin · July 9</div>
+          </div>
+        </a>
+
+        <a href="#" class="finals-sidebar-card">
+          <div class="finals-sidebar-image">
+            <span class="finals-sidebar-num">3</span>
+            <svg class="jersey-svg jersey-svg-sm" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+                fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="finals-sidebar-info">
+            <div class="match-tag">Champions League Final · 2005</div>
+            <div class="sidebar-player">Liverpool</div>
+            <div class="sidebar-detail">Istanbul · The great comeback</div>
+          </div>
+        </a>
+
+        <a href="#" class="finals-sidebar-card">
+          <div class="finals-sidebar-image">
+            <span class="finals-sidebar-num">10</span>
+            <svg class="jersey-svg jersey-svg-sm" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+                fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="finals-sidebar-info">
+            <div class="match-tag">World Cup Final · 1970</div>
+            <div class="sidebar-player">Brazil</div>
+            <div class="sidebar-detail">Mexico City · The beautiful game</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       03 — IMMORTAL NUMBERS
+  ============================================================ -->
+  <section class="section numbers" id="numbers">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">03</span>
+          Immortal Numbers
+        </div>
+        <h2 class="section-title">
+          Numbers That<br><em>Became Mythology</em>
+        </h2>
+      </div>
+      <div class="section-right">
+        <p class="section-desc">
+          Some shirt numbers are no longer just numbers. They are symbols.
+          Passed from giant to giant, they carry the weight
+          of entire footballing lineages.
+        </p>
+        <a href="#" class="section-link">Explore Numbers</a>
+      </div>
+    </div>
+
+    <div class="numbers-grid">
+
+      <a href="#" class="number-card">
+        <div class="number-digit">10</div>
+        <div class="number-title">The Creator's Number</div>
+        <p class="number-desc">
+          The number that separated genius from the rest.
+          Worn by those who saw what others could not.
+        </p>
+        <div class="number-names">Pelé · Maradona · Zidane · Messi</div>
+      </a>
+
+      <a href="#" class="number-card">
+        <div class="number-digit">7</div>
+        <div class="number-title">The Number of Kings</div>
+        <p class="number-desc">
+          Flair. Danger. Inevitability.
+          The number that promised something extraordinary every time.
+        </p>
+        <div class="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
+      </a>
+
+      <a href="#" class="number-card">
+        <div class="number-digit">9</div>
+        <div class="number-title">The Striker's Inheritance</div>
+        <p class="number-desc">
+          Goals. Power. The pure and ancient art of finishing.
+          The number that belongs to those born to score.
+        </p>
+        <div class="number-names">R9 · Van Nistelrooy · Lewandowski</div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       04 — JERSEYS THAT MADE HISTORY
+  ============================================================ -->
+  <section class="section history" id="history">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">04</span>
+          Made History
+        </div>
+        <h2 class="section-title">
+          Jerseys Tied<br><em>to Turning Points</em>
+        </h2>
+      </div>
+    </div>
+
+    <div class="history-layout">
+
+      <div class="history-intro">
+        <p class="section-desc">
+          Some jerseys mark the exact moment when football changed forever.
+          These pieces are not simply worn — they are kept. They are evidence
+          of what the game once was, and what it made us feel.
+        </p>
+        <a href="#" class="section-link" style="margin-top:2rem; display:inline-flex;">View Full Archive</a>
+      </div>
+
+      <div class="history-timeline">
+
+        <a href="#" class="history-item">
+          <div class="history-year">1970</div>
+          <div>
+            <div class="history-title">Pelé's Final World Cup Shirt</div>
+            <p class="history-desc">The last jersey worn by the greatest in his final World Cup. Brazil won 4–1. The world watched the game reach its highest point.</p>
+            <span class="history-tag">World Cup · Mexico</span>
+          </div>
+        </a>
+
+        <a href="#" class="history-item">
+          <div class="history-year">1986</div>
+          <div>
+            <div class="history-title">The Hand of God</div>
+            <p class="history-desc">Maradona's Argentina shirt from the quarter-final against England. Two goals. One hand. One genius. One legend cemented forever.</p>
+            <span class="history-tag">World Cup · Mexico</span>
+          </div>
+        </a>
+
+        <a href="#" class="history-item">
+          <div class="history-year">1994</div>
+          <div>
+            <div class="history-title">Baggio's Last Penalty</div>
+            <p class="history-desc">The jersey worn when Roberto Baggio stepped forward in the final. The missed penalty. The bowed head. The eternal image of football's grief.</p>
+            <span class="history-tag">World Cup Final · USA</span>
+          </div>
+        </a>
+
+        <a href="#" class="history-item">
+          <div class="history-year">2005</div>
+          <div>
+            <div class="history-title">Istanbul — The Comeback</div>
+            <p class="history-desc">Liverpool's shirt from the Champions League final. 3–0 down at half time. One of the most extraordinary halves ever played followed.</p>
+            <span class="history-tag">Champions League · Istanbul</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SPOTLIGHT — FEATURED STORY
+  ============================================================ -->
+  <section class="spotlight">
+    <div class="spotlight-inner">
+
+      <div>
+        <div class="spotlight-jersey-box">
+          <span class="spotlight-ghost-num">10</span>
+          <svg class="jersey-svg jersey-svg-lg" style="width:140px;height:162px;" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.13)" stroke="rgba(200,168,75,0.32)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+          <div class="spotlight-caption">
+            <div class="spotlight-caption-text">Argentina · World Cup 1986 · No. 10 — Ref. ARG-86-10</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="spotlight-eyebrow">Featured Exhibit</div>
+        <h2 class="spotlight-headline">
+          The Most Iconic<br>Jersey in<br>Football History
+        </h2>
+        <p class="spotlight-subtitle">Argentina · Maradona · Mexico 1986</p>
+
+        <p class="spotlight-body">
+          No jersey carries the weight of this one. In the summer of 1986,
+          a man from Villa Fiorito almost single-handedly guided Argentina
+          to the World Cup title. The light-blue and white stripes of that
+          tournament shirt witnessed two of football's most defining moments
+          in the span of four minutes — both scored by the same man,
+          in the same match, in the same shirt.
+        </p>
+        <p class="spotlight-body">
+          The Hand of God. The Goal of the Century.
+          The number 10 on the back of that jersey is no longer just a number.
+          It is a myth.
+        </p>
+
+        <div class="spotlight-stats">
+          <div>
+            <div class="stat-value">1986</div>
+            <div class="stat-label">Year</div>
+          </div>
+          <div>
+            <div class="stat-value">No. 10</div>
+            <div class="stat-label">Shirt Number</div>
+          </div>
+          <div>
+            <div class="stat-value">2</div>
+            <div class="stat-label">Goals vs England</div>
+          </div>
+          <div>
+            <div class="stat-value">Mexico</div>
+            <div class="stat-label">Tournament</div>
+          </div>
+        </div>
+
+        <a href="#" class="btn-primary">View This Piece</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       05 — ICONIC DROPS
+  ============================================================ -->
+  <section class="section drops" id="drops">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">05</span>
+          Iconic Drops
+        </div>
+        <h2 class="section-title">
+          Rare Pieces<br><em>For the Collector</em>
+        </h2>
+      </div>
+      <div class="section-right">
+        <p class="section-desc">
+          Limited. Cultured. Coveted. These are the jerseys that serious
+          collectors pursue — pieces where rarity, cultural significance,
+          and collector's value converge in a single object.
+        </p>
+        <a href="#" class="section-link">View All Drops</a>
+      </div>
+    </div>
+
+    <div class="drops-grid">
+
+      <a href="#" class="drop-card">
+        <div class="drop-card-image">
+          <span class="drop-badge">Rare</span>
+          <span class="drop-ghost-num">10</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="drop-card-info">
+          <div class="drop-player">Zidane</div>
+          <div class="drop-detail">Real Madrid · 2001–02 · No. 10</div>
+        </div>
+      </a>
+
+      <a href="#" class="drop-card">
+        <div class="drop-card-image">
+          <span class="drop-badge">Archive</span>
+          <span class="drop-ghost-num">10</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="drop-card-info">
+          <div class="drop-player">Ronaldinho</div>
+          <div class="drop-detail">Barcelona · 2005–06 · No. 10</div>
+        </div>
+      </a>
+
+      <a href="#" class="drop-card">
+        <div class="drop-card-image">
+          <span class="drop-badge">Icon</span>
+          <span class="drop-ghost-num">3</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="drop-card-info">
+          <div class="drop-player">Maldini</div>
+          <div class="drop-detail">AC Milan · 2002–03 · No. 3</div>
+        </div>
+      </a>
+
+      <a href="#" class="drop-card">
+        <div class="drop-card-image">
+          <span class="drop-badge">Collector</span>
+          <span class="drop-ghost-num">10</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="drop-card-info">
+          <div class="drop-player">Bergkamp</div>
+          <div class="drop-detail">Netherlands · 1998 · No. 10</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CURATED SELECTION
+  ============================================================ -->
+  <section class="curated">
+
+    <div class="section-header">
+      <div>
+        <div class="section-label">
+          <span class="section-label-num">—</span>
+          Selection
+        </div>
+        <h2 class="section-title">
+          Curated<br><em>From the Archive</em>
+        </h2>
+      </div>
+      <div class="section-right">
+        <p class="section-desc">
+          A handful of pieces chosen from across the entire archive.
+          Different eras. Different stories. One common thread —
+          they all changed something.
+        </p>
+        <a href="#" class="section-link">Browse Full Archive</a>
+      </div>
+    </div>
+
+    <div class="curated-grid">
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num" style="font-size:8rem;">14</span>
+          <svg class="jersey-svg jersey-svg-lg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Johan Cruyff</div>
+          <div class="jersey-card-detail">Netherlands · No. 14 · 1974</div>
+        </div>
+      </a>
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num" style="font-size:8rem;">6</span>
+          <svg class="jersey-svg jersey-svg-lg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Franco Baresi</div>
+          <div class="jersey-card-detail">AC Milan · No. 6 · 1993</div>
+        </div>
+      </a>
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num">10</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Alessandro Del Piero</div>
+          <div class="jersey-card-detail">Juventus · No. 10 · 1996</div>
+        </div>
+      </a>
+
+      <a href="#" class="jersey-card">
+        <div class="jersey-card-image">
+          <span class="card-ghost-num">11</span>
+          <svg class="jersey-svg" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+              fill="rgba(200,168,75,0.10)" stroke="rgba(200,168,75,0.28)" stroke-width="0.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="jersey-card-info">
+          <div class="jersey-card-player">Ryan Giggs</div>
+          <div class="jersey-card-detail">Manchester United · No. 11 · 1999</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-top">
+
+      <div>
+        <div class="footer-brand-name">The <span>Archive</span></div>
+        <p class="footer-tagline">
+          A curated collection of football's most iconic jerseys.
+          History, preserved in cloth.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">The Archive</div>
+        <ul class="footer-links">
+          <li><a href="#">Legends</a></li>
+          <li><a href="#">Eternal Finals</a></li>
+          <li><a href="#">Immortal Numbers</a></li>
+          <li><a href="#">Made History</a></li>
+          <li><a href="#">Iconic Drops</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Information</div>
+        <ul class="footer-links">
+          <li><a href="#">About the Archive</a></li>
+          <li><a href="#">Authentication</a></li>
+          <li><a href="#">Collecting Guide</a></li>
+          <li><a href="#">Shipping &amp; Care</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">Inquiries</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Consignments</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 The Archive. All rights reserved.</div>
+      <div class="footer-note">Football heritage, preserved in cloth.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

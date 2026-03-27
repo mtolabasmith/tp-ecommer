@@ -1,305 +1,644 @@
+function JerseySvg({ className }: { className?: string }) {
+  return (
+    <svg
+      className={`jersey-svg${className ? ` ${className}` : ''}`}
+      viewBox="0 0 80 92"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 24 L14 4 Q22 0 28 10 Q32 2 40 2 Q48 2 52 10 Q58 0 66 4 L80 24 L63 37 L58 33 L58 90 L22 90 L22 33 L17 37 Z"
+        fill="rgba(200,168,75,0.10)"
+        stroke="rgba(200,168,75,0.28)"
+        strokeWidth={0.6}
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   return (
-    <main>
-      <header>
-        <nav>
+    <>
+      {/* ============================================================
+          NAVBAR
+      ============================================================ */}
+      <nav className="navbar">
+        <a href="#" className="nav-brand">
+          The <span>Archive</span>
+        </a>
+        <ul className="nav-links">
+          <li><a href="#legends">Legends</a></li>
+          <li><a href="#finals">Eternal Finals</a></li>
+          <li><a href="#numbers">Immortal Numbers</a></li>
+          <li><a href="#history">Made History</a></li>
+          <li><a href="#drops">Iconic Drops</a></li>
+        </ul>
+        <div className="nav-utils">
           <a href="#">Archive</a>
-          <ul>
-            <li>
-              <a href="#exhibits">The Collection</a>
-            </li>
-            <li>
-              <a href="#timeline">History</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-          </ul>
-          <a href="#cart">Cart (0)</a>
-        </nav>
-      </header>
+          <a href="#">About</a>
+          <a href="#">Cart (0)</a>
+        </div>
+      </nav>
 
-      <section id="hero">
-        <p>The permanent collection - Est. 1930</p>
-        <h1>Worn by Legends, Owned by You.</h1>
-        <p>
-          Every stitch holds a memory. Every number, a dynasty. We don&apos;t sell jerseys - we preserve the fabric of football history.
-        </p>
-        <a href="#exhibits">Enter the Museum</a>
-        <p>214 Historic Pieces</p>
-      </section>
+      {/* ============================================================
+          HERO
+      ============================================================ */}
+      <section className="hero">
+        <div className="hero-inner">
+          <div>
+            <div className="hero-eyebrow">Featured Piece — Season Edition</div>
+            <h1 className="hero-headline">
+              Jerseys That<br />
+              Carry the<br />
+              <em>Weight of Time</em>
+            </h1>
+            <p className="hero-body">
+              A curated archive of the most iconic football jerseys in history.
+              Each piece holds a story. Each stitch carries the weight of a moment
+              that changed how we see the game forever.
+            </p>
+            <div className="hero-ctas">
+              <a href="#" className="btn-primary">Enter the Archive</a>
+              <a href="#legends" className="btn-ghost">Explore Collection</a>
+            </div>
+          </div>
 
-      <section id="about">
-        <p>Our Philosophy</p>
-        <h2>
-          A jersey is not clothing. It is a confession of loyalty, a certificate of belonging.
-        </h2>
-        <p>
-          We founded The Jersey Museum on the belief that football&apos;s greatest moments live not in trophies or statistics - they live in
-          cotton, polyester, and the number on a back. The weight of a &apos;99 treble. The ghost of a &apos;70 World Cup gold.
-        </p>
-        <p>
-          Each piece in our collection is sourced with obsessive care: authenticated, contextualized, and presented as the artifact it truly
-          is. We partner with historians, former players, and clubs to tell the stories that deserve to be remembered.
-        </p>
-        <p>
-          When you wear one of our jerseys, you don&apos;t just wear a club. You wear a moment in time.
-        </p>
-      </section>
-
-      <section id="featured">
-        <span>Exhibit of the Month</span>
-
-        <div>
-          <img src="img/ajax-1995.jpg" alt="Ajax 1994/95 Home Jersey" />
+          <div className="hero-visual">
+            <div className="hero-frame-wrap">
+              <div className="hero-jersey-box">
+                <span className="hero-ghost-num">10</span>
+                <JerseySvg className="jersey-svg-lg" />
+              </div>
+            </div>
+            <div className="hero-jersey-meta">
+              <div className="hero-jersey-meta-player">Diego Maradona</div>
+              <div className="hero-jersey-meta-detail">Argentina · No. 10 · World Cup 1986</div>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <p>EX 001</p>
-          <p>AFC Ajax - 1994/95</p>
-          <h2>The Invincibles of Amsterdam</h2>
-          <p>
-            The jersey of a generation. When Louis van Gaal&apos;s Ajax demolished AC Milan 1-0 to claim the Champions League crown at Vienna,
-            they were the youngest team to ever win it. This was the season of Kluivert&apos;s late winner. Of De Boer. Of Seedorf at 18. They
-            played football that hadn&apos;t been seen before - and hasn&apos;t been seen since.
+        <div className="hero-scroll">
+          <span className="hero-scroll-text">Scroll</span>
+          <div className="hero-scroll-line"></div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          INTRO
+      ============================================================ */}
+      <section className="intro">
+        <div className="intro-inner">
+          <p className="intro-quote">
+            &ldquo;A football jersey is not a garment.<br />
+            It is a document of what happened.&rdquo;
           </p>
-
-          <ul>
-            <li>
-              <strong>34</strong>
-              <span>Unbeaten Run</span>
-            </li>
-            <li>
-              <strong>3</strong>
-              <span>Titles Won</span>
-            </li>
-            <li>
-              <strong>18</strong>
-              <span>Avg Player Age</span>
-            </li>
-          </ul>
-
-          <p>$189</p>
-          <a href="#">Acquire This Piece</a>
+          <div className="intro-divider"></div>
+          <p className="intro-body">
+            The Archive is a curated collection of football jerseys treated as historical objects.
+            Here, every piece belongs to a larger story — of players who defined eras,
+            of finals that will never be forgotten, of numbers that became mythology.
+            This is not a store. This is a heritage collection.
+          </p>
         </div>
       </section>
 
-      <section id="exhibits">
-        <p>Permanent Collection</p>
-        <h2>The Exhibits</h2>
-        <p>214 artifacts - Ongoing</p>
+      {/* ============================================================
+          01 — LEGENDS
+      ============================================================ */}
+      <section className="section legends" id="legends">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">01</span>
+              Legends
+            </div>
+            <h2 className="section-title">
+              The Icons<br /><em>Who Defined the Game</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <p className="section-desc">
+              From Buenos Aires to Turin, from Amsterdam to Madrid.
+              These are the jerseys worn by those who transcended football
+              and became symbols of an entire era.
+            </p>
+            <a href="#" className="section-link">Explore Legends</a>
+          </div>
+        </div>
+
+        <div className="legends-grid">
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num" style={{ fontSize: '9rem' }}>10</span>
+              <JerseySvg className="jersey-svg-lg" />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Pelé</div>
+              <div className="jersey-card-detail">Brazil · No. 10 · 1970</div>
+              <div className="jersey-card-era">World Cup Mexico</div>
+            </div>
+          </a>
+
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num">7</span>
+              <JerseySvg />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Eric Cantona</div>
+              <div className="jersey-card-detail">Manchester United · No. 7 · 1996</div>
+              <div className="jersey-card-era">Premier League</div>
+            </div>
+          </a>
+
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num">9</span>
+              <JerseySvg />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Ronaldo R9</div>
+              <div className="jersey-card-detail">Brazil · No. 9 · 2002</div>
+              <div className="jersey-card-era">World Cup Korea / Japan</div>
+            </div>
+          </a>
+        </div>
       </section>
 
-      <section>
-        <ul>
-          <li>
-            <article>
-              <header>
-                <span>EX 002</span>
-                <span>1970</span>
-              </header>
-              <img src="img/brazil-1970.jpg" alt="Brazil 1970 World Cup Jersey" />
-              <p>Brazil - 1970</p>
-              <h3>The Most Beautiful Team</h3>
-              <p>
-                Pele&apos;s last World Cup. Rivelino. Jairzinho. A 4-1 final that redefined what football could be - art, not sport.
-              </p>
-              <p>
-                $219 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
+      {/* ============================================================
+          02 — ETERNAL FINALS
+      ============================================================ */}
+      <section className="section finals" id="finals">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">02</span>
+              Eternal Finals
+            </div>
+            <h2 className="section-title">
+              The Matches<br /><em>Time Cannot Erase</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <p className="section-desc">
+              Some matches belong to history. The jerseys worn in those
+              defining ninety minutes carry an emotion no record or
+              photograph can fully capture.
+            </p>
+            <a href="#" className="section-link">Explore Finals</a>
+          </div>
+        </div>
 
-          <li>
-            <article>
-              <header>
-                <span>EX 003</span>
-                <span>1986</span>
-              </header>
-              <img src="img/argentina-1986.jpg" alt="Argentina 1986 World Cup Jersey" />
-              <p>Argentina - 1986</p>
-              <h3>The Hand &amp; The Goal</h3>
-              <p>
-                Mexico City, June 22nd. Two goals in four minutes. One with a fist, one with a god. Diego Armando Maradona at his most human
-                and divine.
-              </p>
-              <p>
-                $199 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
+        <div className="finals-layout">
+          <a href="#" className="jersey-card finals-feature">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num" style={{ fontSize: '9rem' }}>1</span>
+              <JerseySvg className="jersey-svg-lg" />
+            </div>
+            <div className="jersey-card-info">
+              <div className="match-tag" style={{ display: 'inline-block', marginBottom: '0.75rem' }}>
+                Champions League Final · 1999
+              </div>
+              <div className="jersey-card-player">Manchester United</div>
+              <div className="jersey-card-detail">Treble Season · Camp Nou · 26 May</div>
+            </div>
+          </a>
 
-          <li>
-            <article>
-              <header>
-                <span>EX 004</span>
-                <span>1989</span>
-              </header>
-              <img src="img/acmilan-1989.jpg" alt="AC Milan 1988/89 Champions League Jersey" />
-              <p>AC Milan - 1988/89</p>
-              <h3>Sacchi&apos;s Red Machine</h3>
-              <p>
-                The most dominant club side of its era. Gullit, Van Basten, Rijkaard. They didn&apos;t just win the European Cup - they rewrote
-                how football was played.
-              </p>
-              <p>
-                $179 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
+          <div className="finals-sidebar">
+            <a href="#" className="finals-sidebar-card">
+              <div className="finals-sidebar-image">
+                <span className="finals-sidebar-num">5</span>
+                <JerseySvg className="jersey-svg-sm" />
+              </div>
+              <div className="finals-sidebar-info">
+                <div className="match-tag">World Cup Final · 2006</div>
+                <div className="sidebar-player">Italy</div>
+                <div className="sidebar-detail">Azzurri · Berlin · July 9</div>
+              </div>
+            </a>
 
-          <li>
-            <article>
-              <header>
-                <span>EX 005</span>
-                <span>1998</span>
-              </header>
-              <img src="img/france-1998.jpg" alt="France 1998 World Cup Jersey" />
-              <p>France - 1998</p>
-              <h3>A Nation United</h3>
-              <p>
-                July 12, 1998. Stade de France. Zidane headed twice. A generation of immigrants became French heroes. Football changed society
-                that night.
-              </p>
-              <p>
-                $189 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
+            <a href="#" className="finals-sidebar-card">
+              <div className="finals-sidebar-image">
+                <span className="finals-sidebar-num">3</span>
+                <JerseySvg className="jersey-svg-sm" />
+              </div>
+              <div className="finals-sidebar-info">
+                <div className="match-tag">Champions League Final · 2005</div>
+                <div className="sidebar-player">Liverpool</div>
+                <div className="sidebar-detail">Istanbul · The great comeback</div>
+              </div>
+            </a>
 
-          <li>
-            <article>
-              <header>
-                <span>EX 006</span>
-                <span>2009</span>
-              </header>
-              <img src="img/barcelona-2009.jpg" alt="FC Barcelona 2008/09 Treble Season Jersey" />
-              <p>FC Barcelona - 2008/09</p>
-              <h3>The Treble Season</h3>
-              <p>
-                Pep Guardiola&apos;s first year. 6 trophies in one calendar year. Messi&apos;s goal against Real Madrid. Iniesta everywhere. The most
-                complete football ever played.
-              </p>
-              <p>
-                $169 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
-
-          <li>
-            <article>
-              <header>
-                <span>EX 007</span>
-                <span>2002</span>
-              </header>
-              <img src="img/realmadrid-2002.jpg" alt="Real Madrid 2001/02 Champions League Jersey" />
-              <p>Real Madrid - 2001/02</p>
-              <h3>Zidane&apos;s Volley</h3>
-              <p>
-                Glasgow, May 15th. Zidane met the ball on the half-volley. His left foot. The Hampden Park night sky. Some moments deserve to
-                live forever.
-              </p>
-              <p>
-                $179 <span>/ replica</span>
-              </p>
-              <a href="#">Acquire</a>
-            </article>
-          </li>
-        </ul>
+            <a href="#" className="finals-sidebar-card">
+              <div className="finals-sidebar-image">
+                <span className="finals-sidebar-num">10</span>
+                <JerseySvg className="jersey-svg-sm" />
+              </div>
+              <div className="finals-sidebar-info">
+                <div className="match-tag">World Cup Final · 1970</div>
+                <div className="sidebar-player">Brazil</div>
+                <div className="sidebar-detail">Mexico City · The beautiful game</div>
+              </div>
+            </a>
+          </div>
+        </div>
       </section>
 
-      <section id="timeline">
-        <p>The Chronicle</p>
-        <h2>A Century in Cotton</h2>
+      {/* ============================================================
+          03 — IMMORTAL NUMBERS
+      ============================================================ */}
+      <section className="section numbers" id="numbers">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">03</span>
+              Immortal Numbers
+            </div>
+            <h2 className="section-title">
+              Numbers That<br /><em>Became Mythology</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <p className="section-desc">
+              Some shirt numbers are no longer just numbers. They are symbols.
+              Passed from giant to giant, they carry the weight
+              of entire footballing lineages.
+            </p>
+            <a href="#" className="section-link">Explore Numbers</a>
+          </div>
+        </div>
 
-        <ol>
-          <li>
-            <time dateTime="1930">1930</time>
-            <h3>The First World Cup</h3>
-            <p>
-              Uruguay. The jersey as national identity is born. Wool, heavy, soaked in sweat and pride. Football finds its first uniform
-              mythology.
+        <div className="numbers-grid">
+          <a href="#" className="number-card">
+            <div className="number-digit">10</div>
+            <div className="number-title">The Creator&apos;s Number</div>
+            <p className="number-desc">
+              The number that separated genius from the rest.
+              Worn by those who saw what others could not.
             </p>
-          </li>
-          <li>
-            <time dateTime="1966">1966</time>
-            <h3>The England Myth</h3>
-            <p>
-              Wembley. The red away kit becomes iconic not because England wore it - but because of what they won in it. A jersey that carries
-              a once-in-history moment.
+            <div className="number-names">Pelé · Maradona · Zidane · Messi</div>
+          </a>
+
+          <a href="#" className="number-card">
+            <div className="number-digit">7</div>
+            <div className="number-title">The Number of Kings</div>
+            <p className="number-desc">
+              Flair. Danger. Inevitability.
+              The number that promised something extraordinary every time.
             </p>
-          </li>
-          <li>
-            <time dateTime="1986">1986</time>
-            <h3>The God Plays Dress-Up</h3>
-            <p>
-              Maradona chooses Argentina&apos;s blue-and-white. In one afternoon in Mexico City, a shirt becomes a theological debate. Still
-              unsettled.
+            <div className="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
+          </a>
+
+          <a href="#" className="number-card">
+            <div className="number-digit">9</div>
+            <div className="number-title">The Striker&apos;s Inheritance</div>
+            <p className="number-desc">
+              Goals. Power. The pure and ancient art of finishing.
+              The number that belongs to those born to score.
             </p>
-          </li>
-          <li>
-            <time dateTime="1999">1999</time>
-            <h3>The Treble Night</h3>
-            <p>
-              Camp Nou, Champions League Final. Sheringham. Solskjar. Manchester United&apos;s red shirt under the Barcelona floodlights. The most
-              dramatic three minutes in football history.
-            </p>
-          </li>
-          <li>
-            <time dateTime="2010">2010</time>
-            <h3>Spain&apos;s Golden Decade</h3>
-            <p>
-              Three major tournaments. One philosophy. Iniesta&apos;s extra-time winner in Johannesburg. The red jersey becomes shorthand for
-              possession, for beauty, for dominance.
-            </p>
-          </li>
-        </ol>
+            <div className="number-names">R9 · Van Nistelrooy · Lewandowski</div>
+          </a>
+        </div>
       </section>
 
-      <blockquote>
-        <p>
-          &quot;Football is not about stadiums or trophies. It is about the shirt on your back and the story it carries into the world with
-          you.&quot;
-        </p>
-        <cite>Johan Cruyff, 1974</cite>
-      </blockquote>
+      {/* ============================================================
+          04 — JERSEYS THAT MADE HISTORY
+      ============================================================ */}
+      <section className="section history" id="history">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">04</span>
+              Made History
+            </div>
+            <h2 className="section-title">
+              Jerseys Tied<br /><em>to Turning Points</em>
+            </h2>
+          </div>
+        </div>
 
-      <section id="newsletter">
-        <h2>New acquisitions, once a month.</h2>
-        <p>
-          Join 24,000 collectors and football historians who receive our monthly curation. No noise - only stories worth reading.
-        </p>
-        <form>
-          <label htmlFor="name">Full name</label>
-          <input type="text" id="name" name="name" placeholder="Your full name" />
+        <div className="history-layout">
+          <div>
+            <p className="section-desc">
+              Some jerseys mark the exact moment when football changed forever.
+              These pieces are not simply worn — they are kept. They are evidence
+              of what the game once was, and what it made us feel.
+            </p>
+            <a href="#" className="section-link" style={{ marginTop: '2rem', display: 'inline-flex' }}>
+              View Full Archive
+            </a>
+          </div>
 
-          <label htmlFor="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="Your email address" />
+          <div className="history-timeline">
+            <a href="#" className="history-item">
+              <div className="history-year">1970</div>
+              <div>
+                <div className="history-title">Pelé&apos;s Final World Cup Shirt</div>
+                <p className="history-desc">
+                  The last jersey worn by the greatest in his final World Cup.
+                  Brazil won 4–1. The world watched the game reach its highest point.
+                </p>
+                <span className="history-tag">World Cup · Mexico</span>
+              </div>
+            </a>
 
-          <button type="submit">Join the Museum</button>
-        </form>
+            <a href="#" className="history-item">
+              <div className="history-year">1986</div>
+              <div>
+                <div className="history-title">The Hand of God</div>
+                <p className="history-desc">
+                  Maradona&apos;s Argentina shirt from the quarter-final against England.
+                  Two goals. One hand. One genius. One legend cemented forever.
+                </p>
+                <span className="history-tag">World Cup · Mexico</span>
+              </div>
+            </a>
+
+            <a href="#" className="history-item">
+              <div className="history-year">1994</div>
+              <div>
+                <div className="history-title">Baggio&apos;s Last Penalty</div>
+                <p className="history-desc">
+                  The jersey worn when Roberto Baggio stepped forward in the final.
+                  The missed penalty. The bowed head. The eternal image of football&apos;s grief.
+                </p>
+                <span className="history-tag">World Cup Final · USA</span>
+              </div>
+            </a>
+
+            <a href="#" className="history-item">
+              <div className="history-year">2005</div>
+              <div>
+                <div className="history-title">Istanbul — The Comeback</div>
+                <p className="history-desc">
+                  Liverpool&apos;s shirt from the Champions League final. 3–0 down at half time.
+                  One of the most extraordinary halves ever played followed.
+                </p>
+                <span className="history-tag">Champions League · Istanbul</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </section>
 
-      <footer>
-        <p>The Jersey Museum</p>
-        <p>Copyright 2026 The Jersey Museum. All artifacts reserved.</p>
-        <ul>
-          <li>
-            <a href="#">Privacy</a>
-          </li>
-          <li>
-            <a href="#">Authentication</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
+      {/* ============================================================
+          SPOTLIGHT — FEATURED STORY
+      ============================================================ */}
+      <section className="spotlight">
+        <div className="spotlight-inner">
+          <div>
+            <div className="spotlight-jersey-box">
+              <span className="spotlight-ghost-num">10</span>
+              <JerseySvg className="jersey-svg-lg" />
+              <div className="spotlight-caption">
+                <div className="spotlight-caption-text">
+                  Argentina · World Cup 1986 · No. 10 — Ref. ARG-86-10
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="spotlight-eyebrow">Featured Exhibit</div>
+            <h2 className="spotlight-headline">
+              The Most Iconic<br />Jersey in<br />Football History
+            </h2>
+            <p className="spotlight-subtitle">Argentina · Maradona · Mexico 1986</p>
+
+            <p className="spotlight-body">
+              No jersey carries the weight of this one. In the summer of 1986,
+              a man from Villa Fiorito almost single-handedly guided Argentina
+              to the World Cup title. The light-blue and white stripes of that
+              tournament shirt witnessed two of football&apos;s most defining moments
+              in the span of four minutes — both scored by the same man,
+              in the same match, in the same shirt.
+            </p>
+            <p className="spotlight-body">
+              The Hand of God. The Goal of the Century.
+              The number 10 on the back of that jersey is no longer just a number.
+              It is a myth.
+            </p>
+
+            <div className="spotlight-stats">
+              <div>
+                <div className="stat-value">1986</div>
+                <div className="stat-label">Year</div>
+              </div>
+              <div>
+                <div className="stat-value">No. 10</div>
+                <div className="stat-label">Shirt Number</div>
+              </div>
+              <div>
+                <div className="stat-value">2</div>
+                <div className="stat-label">Goals vs England</div>
+              </div>
+              <div>
+                <div className="stat-value">Mexico</div>
+                <div className="stat-label">Tournament</div>
+              </div>
+            </div>
+
+            <a href="#" className="btn-primary">View This Piece</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          05 — ICONIC DROPS
+      ============================================================ */}
+      <section className="section drops" id="drops">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">05</span>
+              Iconic Drops
+            </div>
+            <h2 className="section-title">
+              Rare Pieces<br /><em>For the Collector</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <p className="section-desc">
+              Limited. Cultured. Coveted. These are the jerseys that serious
+              collectors pursue — pieces where rarity, cultural significance,
+              and collector&apos;s value converge in a single object.
+            </p>
+            <a href="#" className="section-link">View All Drops</a>
+          </div>
+        </div>
+
+        <div className="drops-grid">
+          <a href="#" className="drop-card">
+            <div className="drop-card-image">
+              <span className="drop-badge">Rare</span>
+              <span className="drop-ghost-num">10</span>
+              <JerseySvg />
+            </div>
+            <div className="drop-card-info">
+              <div className="drop-player">Zidane</div>
+              <div className="drop-detail">Real Madrid · 2001–02 · No. 10</div>
+            </div>
+          </a>
+
+          <a href="#" className="drop-card">
+            <div className="drop-card-image">
+              <span className="drop-badge">Archive</span>
+              <span className="drop-ghost-num">10</span>
+              <JerseySvg />
+            </div>
+            <div className="drop-card-info">
+              <div className="drop-player">Ronaldinho</div>
+              <div className="drop-detail">Barcelona · 2005–06 · No. 10</div>
+            </div>
+          </a>
+
+          <a href="#" className="drop-card">
+            <div className="drop-card-image">
+              <span className="drop-badge">Icon</span>
+              <span className="drop-ghost-num">3</span>
+              <JerseySvg />
+            </div>
+            <div className="drop-card-info">
+              <div className="drop-player">Maldini</div>
+              <div className="drop-detail">AC Milan · 2002–03 · No. 3</div>
+            </div>
+          </a>
+
+          <a href="#" className="drop-card">
+            <div className="drop-card-image">
+              <span className="drop-badge">Collector</span>
+              <span className="drop-ghost-num">10</span>
+              <JerseySvg />
+            </div>
+            <div className="drop-card-info">
+              <div className="drop-player">Bergkamp</div>
+              <div className="drop-detail">Netherlands · 1998 · No. 10</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* ============================================================
+          CURATED SELECTION
+      ============================================================ */}
+      <section className="curated">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">—</span>
+              Selection
+            </div>
+            <h2 className="section-title">
+              Curated<br /><em>From the Archive</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <p className="section-desc">
+              A handful of pieces chosen from across the entire archive.
+              Different eras. Different stories. One common thread —
+              they all changed something.
+            </p>
+            <a href="#" className="section-link">Browse Full Archive</a>
+          </div>
+        </div>
+
+        <div className="curated-grid">
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num" style={{ fontSize: '8rem' }}>14</span>
+              <JerseySvg className="jersey-svg-lg" />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Johan Cruyff</div>
+              <div className="jersey-card-detail">Netherlands · No. 14 · 1974</div>
+            </div>
+          </a>
+
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num" style={{ fontSize: '8rem' }}>6</span>
+              <JerseySvg className="jersey-svg-lg" />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Franco Baresi</div>
+              <div className="jersey-card-detail">AC Milan · No. 6 · 1993</div>
+            </div>
+          </a>
+
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num">10</span>
+              <JerseySvg />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Alessandro Del Piero</div>
+              <div className="jersey-card-detail">Juventus · No. 10 · 1996</div>
+            </div>
+          </a>
+
+          <a href="#" className="jersey-card">
+            <div className="jersey-card-image">
+              <span className="card-ghost-num">11</span>
+              <JerseySvg />
+            </div>
+            <div className="jersey-card-info">
+              <div className="jersey-card-player">Ryan Giggs</div>
+              <div className="jersey-card-detail">Manchester United · No. 11 · 1999</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* ============================================================
+          FOOTER
+      ============================================================ */}
+      <footer className="footer">
+        <div className="footer-top">
+          <div>
+            <div className="footer-brand-name">The <span>Archive</span></div>
+            <p className="footer-tagline">
+              A curated collection of football&apos;s most iconic jerseys.
+              History, preserved in cloth.
+            </p>
+          </div>
+
+          <div>
+            <div className="footer-col-title">The Archive</div>
+            <ul className="footer-links">
+              <li><a href="#">Legends</a></li>
+              <li><a href="#">Eternal Finals</a></li>
+              <li><a href="#">Immortal Numbers</a></li>
+              <li><a href="#">Made History</a></li>
+              <li><a href="#">Iconic Drops</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="footer-col-title">Information</div>
+            <ul className="footer-links">
+              <li><a href="#">About the Archive</a></li>
+              <li><a href="#">Authentication</a></li>
+              <li><a href="#">Collecting Guide</a></li>
+              <li><a href="#">Shipping &amp; Care</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="footer-col-title">Contact</div>
+            <ul className="footer-links">
+              <li><a href="#">Inquiries</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Consignments</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <div className="footer-copy">© 2026 The Archive. All rights reserved.</div>
+          <div className="footer-note">Football heritage, preserved in cloth.</div>
+        </div>
       </footer>
-    </main>
+    </>
   );
 }
