@@ -106,7 +106,7 @@ export default function HomePage() {
       {/* ============================================================
           01 — LEGENDS
       ============================================================ */}
-      <section className="section legends" id="legends">
+      <section className="section legends" id ="legends">
         <div className="section-header">
           <div>
             <div className="section-label">
@@ -519,76 +519,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================================================
-          CURATED SELECTION
-      ============================================================ */}
-      <section className="curated">
-        <div className="section-header">
-          <div>
-            <div className="section-label">
-              <span className="section-label-num">—</span>
-              Selection
-            </div>
-            <h2 className="section-title">
-              Curated<br /><em>From the Archive</em>
-            </h2>
-          </div>
-          <div className="section-right">
-            <p className="section-desc">
-              A handful of pieces chosen from across the entire archive.
-              Different eras. Different stories. One common thread —
-              they all changed something.
-            </p>
-            <a href="#" className="section-link">Browse Full Archive</a>
-          </div>
-        </div>
-
-        <div className="curated-grid">
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: '8rem' }}>14</span>
-              <JerseySvg className="jersey-svg-lg" />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Johan Cruyff</div>
-              <div className="jersey-card-detail">Netherlands · No. 14 · 1974</div>
-            </div>
-          </a>
-
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: '8rem' }}>6</span>
-              <JerseySvg className="jersey-svg-lg" />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Franco Baresi</div>
-              <div className="jersey-card-detail">AC Milan · No. 6 · 1993</div>
-            </div>
-          </a>
-
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num">10</span>
-              <JerseySvg />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Alessandro Del Piero</div>
-              <div className="jersey-card-detail">Juventus · No. 10 · 1996</div>
-            </div>
-          </a>
-
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num">11</span>
-              <JerseySvg />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Ryan Giggs</div>
-              <div className="jersey-card-detail">Manchester United · No. 11 · 1999</div>
-            </div>
-          </a>
-        </div>
-      </section>
+      
 
       {/* ============================================================
           FOOTER

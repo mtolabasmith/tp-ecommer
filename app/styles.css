@@ -144,7 +144,6 @@ a {
 
 .hero {
   height: 100svh;
-  scroll-snap-align: start;
   display: flex;
   align-items: center;
   position: relative;
@@ -401,8 +400,6 @@ a {
 ============================================================ */
 
 .intro {
-  scroll-snap-align: start;
-  scroll-margin-top: var(--nav-h);
   min-height: calc(100svh - var(--nav-h));
   padding: var(--section-pad-y) 4rem;
   border-top: 1px solid var(--border);
@@ -444,14 +441,13 @@ a {
 ============================================================ */
 
 .section {
-  scroll-snap-align: start;
-  scroll-margin-top: var(--nav-h);
   min-height: calc(100svh - var(--nav-h));
   padding: var(--section-pad-y) 4rem;
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-margin-top: 50px;
 }
 
 .section-header {
@@ -788,7 +784,13 @@ a {
   grid-template-columns: 1fr 2fr;
   gap: 7rem;
   align-items: start;
+  margin-top: -4rem ;
 }
+
+.history-layout > div:first-child {
+  margin-top: 3rem;
+}
+
 
 .history-timeline { display: flex; flex-direction: column; }
 
@@ -828,6 +830,7 @@ a {
   color: var(--text-3);
   line-height: 1.85;
   margin-bottom: 0.85rem;
+
 }
 
 .history-tag {
@@ -845,8 +848,6 @@ a {
 ============================================================ */
 
 .spotlight {
-  scroll-snap-align: start;
-  scroll-margin-top: var(--nav-h);
   background: var(--bg-2);
   border-top: 1px solid var(--border);
   min-height: calc(100svh - var(--nav-h));
@@ -969,12 +970,16 @@ a {
    SECTION 05 — ICONIC DROPS
 ============================================================ */
 
-.drops { background: var(--bg-3); }
+.section.drops { background: var(--bg-3);
+    background: var(--bg-3);
+    ;
+}
+
 
 .drops-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.75rem;
+  gap: 1.75rem;  
 }
 
 .drop-card {
@@ -1039,32 +1044,7 @@ a {
   color: var(--text-3);
 }
 
-/* ============================================================
-   CURATED SELECTION
-============================================================ */
 
-.curated {
-  scroll-snap-align: start;
-  scroll-margin-top: var(--nav-h);
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  min-height: calc(100svh - var(--nav-h));
-  padding: var(--section-pad-y) 4rem;
-  display: flex;
-  align-items: center;
-}
-
-.curated-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  align-items: start;
-}
-
-.curated-grid .jersey-card:nth-child(1) .jersey-card-image,
-.curated-grid .jersey-card:nth-child(2) .jersey-card-image {
-  aspect-ratio: 4 / 3;
-}
 
 /* ============================================================
    FOOTER
@@ -1163,7 +1143,6 @@ a {
   .finals-layout { gap: 3rem; }
   .history-layout { gap: 4rem; }
   .drops-grid { grid-template-columns: repeat(2, 1fr); }
-  .curated-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
 }
 
@@ -1189,7 +1168,6 @@ a {
   .history-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .spotlight-inner { grid-template-columns: 1fr; gap: 3rem; }
   .drops-grid { grid-template-columns: 1fr 1fr; }
-  .curated-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
