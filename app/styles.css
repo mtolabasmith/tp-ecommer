@@ -712,12 +712,17 @@ a {
    SECTION 03 — IMMORTAL NUMBERS
 ============================================================ */
 
-.numbers { background: var(--bg); }
+.numbers { background: var(--bg);
+}
 
+.numbers .number-title {
+  margin-top: 3rem;
+}
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  
 }
 
 .number-card {
@@ -782,13 +787,13 @@ a {
 .history-layout {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 7rem;
+  gap: 0rem;
   align-items: start;
-  margin-top: -4rem ;
+  margin-top: -8rem ;
 }
 
 .history-layout > div:first-child {
-  margin-top: 3rem;
+  margin-top: 7rem;
 }
 
 
@@ -975,12 +980,14 @@ a {
     ;
 }
 
+.section.drops .section-header { margin-top: -10rem; }
 
 .drops-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.75rem;  
+  gap: 1.75rem;
 }
+
 
 .drop-card {
   display: flex;

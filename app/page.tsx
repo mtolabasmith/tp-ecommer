@@ -367,17 +367,6 @@ export default function HomePage() {
               </div>
             </a>
 
-            <a href="#" className="history-item">
-              <div className="history-year">2005</div>
-              <div>
-                <div className="history-title">Istanbul — The Comeback</div>
-                <p className="history-desc">
-                  Liverpool&apos;s shirt from the Champions League final. 3–0 down at half time.
-                  One of the most extraordinary halves ever played followed.
-                </p>
-                <span className="history-tag">Champions League · Istanbul</span>
-              </div>
-            </a>
           </div>
         </div>
       </section>
