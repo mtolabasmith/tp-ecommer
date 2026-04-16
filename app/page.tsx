@@ -164,6 +164,8 @@ export default function HomePage() {
             </div>
           </a>
         </div>
+
+       
       </section>
 
       {/* ============================================================
@@ -366,18 +368,6 @@ export default function HomePage() {
                 <span className="history-tag">World Cup Final · USA</span>
               </div>
             </a>
-
-            <a href="#" className="history-item">
-              <div className="history-year">2005</div>
-              <div>
-                <div className="history-title">Istanbul — The Comeback</div>
-                <p className="history-desc">
-                  Liverpool&apos;s shirt from the Champions League final. 3–0 down at half time.
-                  One of the most extraordinary halves ever played followed.
-                </p>
-                <span className="history-tag">Champions League · Istanbul</span>
-              </div>
-            </a>
           </div>
         </div>
       </section>
@@ -570,6 +560,34 @@ export default function HomePage() {
           <div className="footer-note">Football heritage, preserved in cloth.</div>
         </div>
       </footer>
+
+      <script>
+        {`
+          document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function updateActiveLink() {
+              sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+
+                if (rect.top < window.innerHeight / 2 && rect.bottom > 0) {
+                  const sectionId = section.id;
+                  navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                      link.classList.add('active');
+                    }
+                  });
+                }
+              });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+          });
+        `}
+      </script>
     </>
   );
 }

@@ -23,6 +23,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
 }
 
@@ -117,6 +118,11 @@ a {
 
 .nav-links a:hover {
   color: var(--text);
+}
+
+.nav-links a.active {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .nav-utils {
@@ -572,6 +578,11 @@ a {
   font-size: clamp(4.1rem, 6.2vw, 5.4rem);
   bottom: 0.5rem;
   right: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.card-ghost-num:hover {
+  transform: scale(1.1);
 }
 
 .jersey-card-info {
@@ -608,16 +619,43 @@ a {
 
 .legends { background: var(--bg); }
 
+.legends .section-header { margin-top: -4rem; }
+
 .legends-grid {
   display: grid;
-  grid-template-columns: 1.45fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: clamp(0.9rem, 1.8vw, 1.6rem);
   align-items: start;
 }
 
-.legends-grid .jersey-card:first-child .jersey-card-image {
-  aspect-ratio: 4 / 3;
+.legends-grid .jersey-card:nth-child(1) .jersey-card-image {
+  border-top: 3px solid #75AADB;
+  transition: transform 0.4s ease;
+
 }
+
+.legends-grid .jersey-card:nth-child(1):hover .jersey-card-image {
+  transform: translateY(-4px);
+}
+
+.legends-grid .jersey-card:nth-child(2) .jersey-card-image {
+   border-top: 3px solid #DA291C;
+   transition: transform 0.4s ease;
+}
+
+.legends-grid .jersey-card:nth-child(2):hover .jersey-card-image {
+  transform: translateY(-4px);
+}
+
+.legends-grid .jersey-card:nth-child(3) .jersey-card-image {
+   border-top: 3px solid #FEDD00;
+    transition: transform 0.4s ease;
+}
+
+.legends-grid .jersey-card:nth-child(3):hover .jersey-card-image {
+  transform: scale(1.1);
+}
+
 
 /* ============================================================
    SECTION 02 — ETERNAL FINALS
@@ -714,6 +752,15 @@ a {
 
 .numbers { background: var(--bg); }
 
+.number-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.65rem, 2.9vw, 2.6rem);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.1;
+  margin-top: 4rem;
+}
+
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -784,11 +831,11 @@ a {
   grid-template-columns: 1fr 2fr;
   gap: 7rem;
   align-items: start;
-  margin-top: -4rem ;
+  margin-top: -8rem ;
 }
 
 .history-layout > div:first-child {
-  margin-top: 3rem;
+  margin-top: 8rem;
 }
 
 
@@ -974,7 +1021,7 @@ a {
     background: var(--bg-3);
     ;
 }
-
+.section.drops .section-header { margin-top: -10rem; }
 
 .drops-grid {
   display: grid;
