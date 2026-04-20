@@ -118,11 +118,6 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              From Buenos Aires to Turin, from Amsterdam to Madrid.
-              These are the jerseys worn by those who transcended football
-              and became symbols of an entire era.
-            </p>
             <a href="#" className="section-link">Explore Legends</a>
           </div>
         </div>
@@ -135,8 +130,8 @@ export default function HomePage() {
             </div>
             <div className="jersey-card-info">
               <div className="jersey-card-player">Messi</div>
-              <div className="jersey-card-detail">Argentina · No. 10 · 2022</div>
-              <div className="jersey-card-era">World Cup Qatar</div>
+              <div className="jersey-card-detail">Argentina · No. 10 </div>
+              <div className="jersey-card-era">World Cup Qatar 2022</div>
             </div>
           </a>
 
@@ -147,8 +142,8 @@ export default function HomePage() {
             </div>
             <div className="jersey-card-info">
               <div className="jersey-card-player">Cristiano</div>
-              <div className="jersey-card-detail">Manchester United · No. 7 · 2008</div>
-              <div className="jersey-card-era">Premier League</div>
+              <div className="jersey-card-detail">Manchester United · No. 7 </div>
+              <div className="jersey-card-era">Premier League 2008</div>
             </div>
           </a>
 
@@ -159,8 +154,8 @@ export default function HomePage() {
             </div>
             <div className="jersey-card-info">
               <div className="jersey-card-player">Ronaldo R9</div>
-              <div className="jersey-card-detail">Brazil · No. 9 · 2002</div>
-              <div className="jersey-card-era">World Cup Korea / Japan</div>
+              <div className="jersey-card-detail">Brazil · No. 9 </div>
+              <div className="jersey-card-era">World Cup Korea / Japan 2002</div>
             </div>
           </a>
         </div>
@@ -183,11 +178,6 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              Some matches belong to history. The jerseys worn in those
-              defining ninety minutes carry an emotion no record or
-              photograph can fully capture.
-            </p>
             <a href="#" className="section-link">Explore Finals</a>
           </div>
         </div>
