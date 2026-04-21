@@ -1,3 +1,6 @@
+'use client'
+import { useEffect } from "react";  
+
 function JerseySvg({ className }: { className?: string }) {
   return (
     <svg
@@ -504,80 +507,7 @@ export default function HomePage() {
       {/* ============================================================
           FOOTER
       ============================================================ */}
-      <footer className="footer">
-        <div className="footer-top">
-          <div>
-            <div className="footer-brand-name">The <span>Archive</span></div>
-            <p className="footer-tagline">
-              A curated collection of football&apos;s most iconic jerseys.
-              History, preserved in cloth.
-            </p>
-          </div>
-
-          <div>
-            <div className="footer-col-title">The Archive</div>
-            <ul className="footer-links">
-              <li><a href="#">Legends</a></li>
-              <li><a href="#">Eternal Finals</a></li>
-              <li><a href="#">Immortal Numbers</a></li>
-              <li><a href="#">Made History</a></li>
-              <li><a href="#">Iconic Drops</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="footer-col-title">Information</div>
-            <ul className="footer-links">
-              <li><a href="#">About the Archive</a></li>
-              <li><a href="#">Authentication</a></li>
-              <li><a href="#">Collecting Guide</a></li>
-              <li><a href="#">Shipping &amp; Care</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="footer-col-title">Contact</div>
-            <ul className="footer-links">
-              <li><a href="#">Inquiries</a></li>
-              <li><a href="#">Press</a></li>
-              <li><a href="#">Consignments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <div className="footer-copy">© 2026 The Archive. All rights reserved.</div>
-          <div className="footer-note">Football heritage, preserved in cloth.</div>
-        </div>
-      </footer>
-
-      <script>
-        {`
-          document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-
-            function updateActiveLink() {
-              sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-
-                if (rect.top < window.innerHeight / 2 && rect.bottom > 0) {
-                  const sectionId = section.id;
-                  navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + sectionId) {
-                      link.classList.add('active');
-                    }
-                  });
-                }
-              });
-            }
-
-            window.addEventListener('scroll', updateActiveLink);
-            updateActiveLink();
-          });
-        `}
-      </script>
+      
     </>
   );
 }
