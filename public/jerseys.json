@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "player": "Messi",
+    "detail": "Argentina · No. 10",
+    "era": "World Cup Qatar 2022",
+    "number": "10"
+  },
+  {
+    "id": 2,
+    "player": "Cristiano",
+    "detail": "Manchester United · No. 7",
+    "era": "Premier League 2008",
+    "number": "7"
+  },
+  {
+    "id": 3,
+    "player": "Ronaldo R9",
+    "detail": "Brazil · No. 9",
+    "era": "World Cup Korea / Japan 2002",
+    "number": "9"
+  }
+]

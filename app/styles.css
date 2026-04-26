@@ -24,7 +24,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -376,6 +375,7 @@ a {
   text-align: center;
   display: flex;
   align-items: center;
+  scroll-margin-top: 68px;
 }
 
 .intro-inner {
@@ -417,7 +417,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-margin-top: 50px;
+  scroll-margin-top: 68px;
 }
 
 .section-header {
@@ -583,7 +583,7 @@ a {
 
 .legends { background: var(--bg); }
 
-.legends .section-header { margin-top: -4rem; }
+.legends .section-header { margin-top: -1rem; }
 
 .legends .section-right { align-self: flex-end; }
 
@@ -636,8 +636,11 @@ a {
   align-items: start;
 }
 
-.finals .section-right { 
-  align-self: flex-end;}
+.finals .section-right {
+  margin-top: 4rem;
+}
+
+
 
 .finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
 
@@ -645,6 +648,7 @@ a {
   display: flex;
   flex-direction: column;
   padding-top: 0.5rem;
+  margin-top: -3rem;
 }
 
 .finals-sidebar-card {
@@ -730,6 +734,10 @@ a {
   margin-top: 4rem;
 }
 
+.numbers .section-right { 
+margin-top: 7rem;
+}
+
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -799,16 +807,18 @@ a {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 7rem;
-  align-items: start;
-  margin-top: -8rem ;
+  margin-top: -8rem;
 }
 
-.history-layout > div:first-child {
-  margin-top: 8rem;
+.history-layout .section-right {
+ margin-top: 6rem;
 }
 
+.history-timeline { 
+display: flex; 
+flex-direction: column; 
 
-.history-timeline { display: flex; flex-direction: column; }
+}
 
 .history-item {
   display: grid;
@@ -859,6 +869,8 @@ a {
   padding: 0.28rem 0.65rem;
 }
 
+
+
 /* ============================================================
    SPOTLIGHT
 ============================================================ */
@@ -870,6 +882,7 @@ a {
   padding: var(--section-pad-y) 4rem;
   display: flex;
   align-items: center;
+  scroll-margin-top: 68px;
 }
 
 .spotlight-inner {
@@ -1164,6 +1177,7 @@ a {
 
 @media (max-width: 768px) {
   html { scroll-snap-type: none; }
+  .section { scroll-margin-top: 68px; }
   .navbar { padding: 0 1.5rem; }
   .nav-links { display: none; }
   .hero { padding: 0 1.5rem; padding-top: 68px; }
