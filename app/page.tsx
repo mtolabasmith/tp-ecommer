@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
+import { useEffect, useState } from "react";  
 
 function JerseySvg({ className }: { className?: string }) {
   return (
@@ -31,6 +30,8 @@ export default function HomePage() {
   const [jerseys, setJerseys] = useState<any[]>([]);
   const [email, setEmail] = useState('')
   const [subscribeStatus, setSubscribeStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [carouselIndex, setCarouselIndex] = useState(0)
+  const [carouselDirection, setCarouselDirection] = useState<"next" | "prev">("next")
 
   useEffect(() => {
     async function loadJerseys() {
@@ -46,6 +47,28 @@ export default function HomePage() {
   }, [])
 
   const handleAddToCart = () => setCartCount(prev => prev + 1)
+
+  const visibleCount = 3
+
+  const handleNext = () => {
+    if (jerseys.length === 0) return
+    setCarouselDirection("next")
+    setCarouselIndex((prev) => (prev + 1) % jerseys.length)
+  }
+
+  const handlePrev = () => {
+    if (jerseys.length === 0) return
+    setCarouselDirection("prev")
+    setCarouselIndex((prev) => (prev - 1 + jerseys.length) % jerseys.length)
+  }
+
+  const visibleJerseys =
+    jerseys.length > 0
+      ? Array.from(
+          { length: Math.min(visibleCount, jerseys.length) },
+          (_, i) => jerseys[(carouselIndex + i) % jerseys.length]
+        )
+      : []
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -70,7 +93,23 @@ export default function HomePage() {
       {/* ============================================================
           NAVBAR
       ============================================================ */}
-      <Navbar cartCount={cartCount} />
+      <nav className="navbar" aria-label="Navegación principal">
+        <a href="#" onClick={(e) => e.preventDefault()} className="nav-brand">
+          The <span>Archive</span>
+        </a>
+        <ul className="nav-links" role="list">
+          <li role="listitem"><a href="#legends">Legends</a></li>
+          <li role="listitem"><a href="#finals">Eternal Finals</a></li>
+          <li role="listitem"><a href="#numbers">Immortal Numbers</a></li>
+          <li role="listitem"><a href="#history">Made History</a></li>
+          <li role="listitem"><a href="#drops">Iconic Drops</a></li>
+        </ul>
+        <div className="nav-utils">
+          <a href="#" onClick={(e) => e.preventDefault()}>Archive</a>
+          <a href="#" onClick={(e) => e.preventDefault()}>About</a>
+          <a href="#" onClick={(e) => e.preventDefault()}>Cart ({cartCount})</a>
+        </div>
+      </nav>
 
       {/* ============================================================
           HERO
@@ -149,30 +188,81 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="legends-grid">
-          {jerseys.map((jersey) => (
-            <a href="#" onClick={(e) => e.preventDefault()} className="jersey-card" key={jersey.id}>
-              <div className="jersey-card-image">
-                <span className="card-ghost-num" aria-hidden="true">{jersey.number}</span>
-                <JerseySvg className="jersey-svg-lg" />
-              </div>
-              <div className="jersey-card-info">
-                <div className="jersey-card-player">{jersey.player}</div>
-                <div className="jersey-card-detail">{jersey.detail}</div>
-                <div className="jersey-card-era">{jersey.era}</div>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    handleAddToCart()
-                  }}
-                  className="btn-add-cart"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </a>
-          ))}
+        <div className="legends-carousel">
+          <div
+            className={`legends-grid carousel-track carousel-track-${carouselDirection}`}
+            key={`${carouselIndex}-${carouselDirection}`}
+          >
+            {visibleJerseys.map((jersey, idx) => (
+              <a
+                href="#"
+                className="jersey-card"
+                key={`${jersey.id}-${idx}`}
+                onClick={(e) => e.preventDefault()}
+              >
+                <div className="jersey-card-image">
+                  <span className="card-ghost-num" aria-hidden="true">
+                    {jersey.number}
+                  </span>
+                  <JerseySvg className="jersey-svg-lg" />
+                </div>
+
+                <div className="jersey-card-info">
+                  <div className="jersey-card-player">{jersey.player}</div>
+                  <div className="jersey-card-detail">{jersey.detail}</div>
+                  <div className="jersey-card-era">{jersey.era}</div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleAddToCart()
+                    }}
+                    className="btn-add-cart"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="carousel-controls">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                handlePrev()
+              }}
+              className="carousel-arrow carousel-arrow-left"
+              aria-label="Previous jersey"
+            >
+              ←
+            </button>
+
+            <span className="carousel-counter" aria-live="polite" aria-atomic="true">
+              <span className="carousel-counter-current">
+                {String(carouselIndex + 1).padStart(2, '0')}
+              </span>
+              <span className="carousel-counter-sep"> / </span>
+              <span className="carousel-counter-total">
+                {String(jerseys.length).padStart(2, '0')}
+              </span>
+            </span>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                handleNext()
+              }}
+              className="carousel-arrow carousel-arrow-right"
+              aria-label="Next jersey"
+            >
+              →
+            </button>
+          </div>
         </div>
 
        
