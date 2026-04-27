@@ -1,0 +1,24 @@
+<svg width="780" height="960" viewBox="0 0 780 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="780" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1ECE1"/>
+      <stop offset="1" stop-color="#E6DDCD"/>
+    </linearGradient>
+    <linearGradient id="fabric" x1="132" y1="64" x2="648" y2="872" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAF6EE"/>
+      <stop offset="1" stop-color="#E9DFCF"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(390 852) rotate(90) scale(86 252)">
+      <stop stop-color="#1B1714" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#1B1714" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="780" height="960" fill="url(#bg)"/>
+  <ellipse cx="390" cy="852" rx="252" ry="86" fill="url(#shadow)"/>
+  <path d="M132 188L236 64C260 50 287 46 314 54L342 62C371 70 409 70 438 62L466 54C493 46 520 50 544 64L648 188L578 282L524 246V872H256V246L202 282L132 188Z" fill="url(#fabric)" stroke="#4A4037" stroke-opacity="0.58" stroke-width="8"/>
+  <path d="M320 84L344 168H436L460 84" stroke="#40362F" stroke-width="9" stroke-linecap="round"/>
+  <line x1="390" y1="214" x2="390" y2="872" stroke="#B29A78" stroke-opacity="0.6" stroke-width="3"/>
+  <text x="390" y="512" text-anchor="middle" fill="#3A312B" fill-opacity="0.88" font-family="Georgia, serif" font-size="204" letter-spacing="8">10</text>
+  <rect x="256" y="326" width="268" height="5" fill="#B89E7B" fill-opacity="0.55"/>
+  <rect x="256" y="672" width="268" height="5" fill="#B89E7B" fill-opacity="0.55"/>
+</svg>

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "player": "Maradona",
+    "detail": "Argentina · No. 10",
+    "era": "World Cup Mexico 1986",
+    "number": "10"
+  },
+  {
+    "id": 2,
+    "player": "Pelé",
+    "detail": "Brazil · No. 10",
+    "era": "World Cup Mexico 1970",
+    "number": "10"
+  },
+  {
+    "id": 3,
+    "player": "Cruyff",
+    "detail": "Netherlands · No. 14",
+    "era": "World Cup 1974",
+    "number": "14"
+  },
+  {
+    "id": 4,
+    "player": "Beckenbauer",
+    "detail": "Germany · No. 5",
+    "era": "World Cup 1974",
+    "number": "5"
+  },
+  {
+    "id": 5,
+    "player": "Zidane",
+    "detail": "France · No. 10",
+    "era": "World Cup 1998",
+    "number": "10"
+  },
+  {
+    "id": 6,
+    "player": "Ronaldo",
+    "detail": "Brazil · No. 9",
+    "era": "World Cup 2002",
+    "number": "9"
+  },
+  {
+    "id": 7,
+    "player": "Ronaldinho",
+    "detail": "Barcelona · No. 10",
+    "era": "La Liga 2005-06",
+    "number": "10"
+  },
+  {
+    "id": 8,
+    "player": "Maldini",
+    "detail": "AC Milan · No. 3",
+    "era": "Serie A 1990s",
+    "number": "3"
+  },
+  {
+    "id": 9,
+    "player": "Henry",
+    "detail": "Arsenal · No. 14",
+    "era": "Premier League 2003-04",
+    "number": "14"
+  },
+  {
+    "id": 10,
+    "player": "Gerrard",
+    "detail": "Liverpool · No. 8",
+    "era": "Champions League 2005",
+    "number": "8"
+  }
+]

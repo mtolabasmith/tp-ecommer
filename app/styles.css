@@ -23,7 +23,7 @@
 }
 
 html {
-  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -117,6 +117,11 @@ a {
 
 .nav-links a:hover {
   color: var(--text);
+}
+
+.nav-links a.active {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .nav-utils {
@@ -338,42 +343,6 @@ a {
   margin-top: 0.3rem;
 }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.hero-scroll-text {
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-
-.hero-scroll-line {
-  width: 1px;
-  height: 52px;
-  background: var(--border-2);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-scroll-line::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--gold);
-  animation: scroll-line 2.2s ease-in-out infinite;
-}
-
 /* ============================================================
    SVG JERSEY
 ============================================================ */
@@ -406,6 +375,7 @@ a {
   text-align: center;
   display: flex;
   align-items: center;
+  scroll-margin-top: 68px;
 }
 
 .intro-inner {
@@ -447,7 +417,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-margin-top: 50px;
+  scroll-margin-top: 68px;
 }
 
 .section-header {
@@ -572,6 +542,11 @@ a {
   font-size: clamp(4.1rem, 6.2vw, 5.4rem);
   bottom: 0.5rem;
   right: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.card-ghost-num:hover {
+  transform: scale(1.1);
 }
 
 .jersey-card-info {
@@ -608,16 +583,45 @@ a {
 
 .legends { background: var(--bg); }
 
+.legends .section-header { margin-top: -1rem; }
+
+.legends .section-right { align-self: flex-end; }
+
 .legends-grid {
   display: grid;
-  grid-template-columns: 1.45fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: clamp(0.9rem, 1.8vw, 1.6rem);
   align-items: start;
 }
 
-.legends-grid .jersey-card:first-child .jersey-card-image {
-  aspect-ratio: 4 / 3;
+.legends-grid .jersey-card:nth-child(1) .jersey-card-image {
+  border-top: 3px solid #75AADB;
+  transition: transform 0.4s ease;
+
 }
+
+.legends-grid .jersey-card:nth-child(1):hover .jersey-card-image {
+  transform: translateY(-4px);
+}
+
+.legends-grid .jersey-card:nth-child(2) .jersey-card-image {
+   border-top: 3px solid #DA291C;
+   transition: transform 0.4s ease;
+}
+
+.legends-grid .jersey-card:nth-child(2):hover .jersey-card-image {
+  transform: translateY(-4px);
+}
+
+.legends-grid .jersey-card:nth-child(3) .jersey-card-image {
+   border-top: 3px solid #FEDD00;
+    transition: transform 0.4s ease;
+}
+
+.legends-grid .jersey-card:nth-child(3):hover .jersey-card-image {
+  transform: translateY(-4px);
+}
+
 
 /* ============================================================
    SECTION 02 — ETERNAL FINALS
@@ -632,12 +636,19 @@ a {
   align-items: start;
 }
 
+.finals .section-right {
+  margin-top: 4rem;
+}
+
+
+
 .finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
 
 .finals-sidebar {
   display: flex;
   flex-direction: column;
   padding-top: 0.5rem;
+  margin-top: -3rem;
 }
 
 .finals-sidebar-card {
@@ -714,6 +725,19 @@ a {
 
 .numbers { background: var(--bg); }
 
+.number-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.65rem, 2.9vw, 2.6rem);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.1;
+  margin-top: 4rem;
+}
+
+.numbers .section-right { 
+margin-top: 7rem;
+}
+
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -783,16 +807,18 @@ a {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 7rem;
-  align-items: start;
-  margin-top: -4rem ;
+  margin-top: -8rem;
 }
 
-.history-layout > div:first-child {
-  margin-top: 3rem;
+.history-layout .section-right {
+ margin-top: 6rem;
 }
 
+.history-timeline { 
+display: flex; 
+flex-direction: column; 
 
-.history-timeline { display: flex; flex-direction: column; }
+}
 
 .history-item {
   display: grid;
@@ -843,6 +869,8 @@ a {
   padding: 0.28rem 0.65rem;
 }
 
+
+
 /* ============================================================
    SPOTLIGHT
 ============================================================ */
@@ -854,6 +882,7 @@ a {
   padding: var(--section-pad-y) 4rem;
   display: flex;
   align-items: center;
+  scroll-margin-top: 68px;
 }
 
 .spotlight-inner {
@@ -974,7 +1003,7 @@ a {
     background: var(--bg-3);
     ;
 }
-
+.section.drops .section-header { margin-top: -10rem; }
 
 .drops-grid {
   display: grid;
@@ -1148,6 +1177,7 @@ a {
 
 @media (max-width: 768px) {
   html { scroll-snap-type: none; }
+  .section { scroll-margin-top: 68px; }
   .navbar { padding: 0 1.5rem; }
   .nav-links { display: none; }
   .hero { padding: 0 1.5rem; padding-top: 68px; }

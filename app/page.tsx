@@ -1,7 +1,12 @@
+'use client'
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+
 function JerseySvg({ className }: { className?: string }) {
   return (
     <svg
       className={`jersey-svg${className ? ` ${className}` : ''}`}
+      aria-hidden="true"
       viewBox="0 0 80 92"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,28 +23,54 @@ function JerseySvg({ className }: { className?: string }) {
 }
 
 export default function HomePage() {
+  useEffect(() => {
+    document.title = "The Archive — Historic Football Jerseys"
+  }, [])
+
+  const [cartCount, setCartCount] = useState(0);
+  const [jerseys, setJerseys] = useState<any[]>([]);
+  const [email, setEmail] = useState('')
+  const [subscribeStatus, setSubscribeStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  useEffect(() => {
+    async function loadJerseys() {
+      try {
+        const response = await fetch('/jerseys.json')
+        const data = await response.json()
+        setJerseys(data)
+      } catch (error) {
+        console.error('Error loading jerseys:', error)
+      }
+    }
+    loadJerseys()
+  }, [])
+
+  const handleAddToCart = () => setCartCount(prev => prev + 1)
+
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email.trim()) {
+      setSubscribeStatus('error')
+      return
+    }
+    if (!isValidEmail(email)) {
+      setSubscribeStatus('error')
+      return
+    }
+    setSubscribeStatus('success')
+    setEmail('')
+  }
+
   return (
     <>
       {/* ============================================================
           NAVBAR
       ============================================================ */}
-      <nav className="navbar">
-        <a href="#" className="nav-brand">
-          The <span>Archive</span>
-        </a>
-        <ul className="nav-links">
-          <li><a href="#legends">Legends</a></li>
-          <li><a href="#finals">Eternal Finals</a></li>
-          <li><a href="#numbers">Immortal Numbers</a></li>
-          <li><a href="#history">Made History</a></li>
-          <li><a href="#drops">Iconic Drops</a></li>
-        </ul>
-        <div className="nav-utils">
-          <a href="#">Archive</a>
-          <a href="#">About</a>
-          <a href="#">Cart (0)</a>
-        </div>
-      </nav>
+      <Navbar cartCount={cartCount} />
 
       {/* ============================================================
           HERO
@@ -59,15 +90,15 @@ export default function HomePage() {
               that changed how we see the game forever.
             </p>
             <div className="hero-ctas">
-              <a href="#" className="btn-primary">Enter the Archive</a>
-              <a href="#legends" className="btn-ghost">Explore Collection</a>
+              <a href="#" onClick={(e) => e.preventDefault()} className="btn-primary" aria-label="Entrar al archivo de camisetas históricas">Enter the Archive</a>
+              <a href="#legends" className="btn-ghost" aria-label="Explorar la colección de camisetas">Explore Collection</a>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="hero-frame-wrap">
               <div className="hero-jersey-box">
-                <span className="hero-ghost-num">10</span>
+                <span className="hero-ghost-num" aria-hidden="true">10</span>
                 <JerseySvg className="jersey-svg-lg" />
               </div>
             </div>
@@ -78,10 +109,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="hero-scroll">
-          <span className="hero-scroll-text">Scroll</span>
-          <div className="hero-scroll-line"></div>
-        </div>
       </section>
 
       {/* ============================================================
@@ -118,52 +145,37 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              From Buenos Aires to Turin, from Amsterdam to Madrid.
-              These are the jerseys worn by those who transcended football
-              and became symbols of an entire era.
-            </p>
-            <a href="#" className="section-link">Explore Legends</a>
+            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Legends</a>
           </div>
         </div>
 
         <div className="legends-grid">
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: '9rem' }}>10</span>
-              <JerseySvg className="jersey-svg-lg" />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Messi</div>
-              <div className="jersey-card-detail">Argentina · No. 10 · 2022</div>
-              <div className="jersey-card-era">World Cup Qatar</div>
-            </div>
-          </a>
-
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num">7</span>
-              <JerseySvg />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Cristiano</div>
-              <div className="jersey-card-detail">Manchester United · No. 7 · 2008</div>
-              <div className="jersey-card-era">Premier League</div>
-            </div>
-          </a>
-
-          <a href="#" className="jersey-card">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num">9</span>
-              <JerseySvg />
-            </div>
-            <div className="jersey-card-info">
-              <div className="jersey-card-player">Ronaldo R9</div>
-              <div className="jersey-card-detail">Brazil · No. 9 · 2002</div>
-              <div className="jersey-card-era">World Cup Korea / Japan</div>
-            </div>
-          </a>
+          {jerseys.map((jersey) => (
+            <a href="#" onClick={(e) => e.preventDefault()} className="jersey-card" key={jersey.id}>
+              <div className="jersey-card-image">
+                <span className="card-ghost-num" aria-hidden="true">{jersey.number}</span>
+                <JerseySvg className="jersey-svg-lg" />
+              </div>
+              <div className="jersey-card-info">
+                <div className="jersey-card-player">{jersey.player}</div>
+                <div className="jersey-card-detail">{jersey.detail}</div>
+                <div className="jersey-card-era">{jersey.era}</div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleAddToCart()
+                  }}
+                  className="btn-add-cart"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </a>
+          ))}
         </div>
+
+       
       </section>
 
       {/* ============================================================
@@ -181,19 +193,14 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              Some matches belong to history. The jerseys worn in those
-              defining ninety minutes carry an emotion no record or
-              photograph can fully capture.
-            </p>
-            <a href="#" className="section-link">Explore Finals</a>
+            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Finals</a>
           </div>
         </div>
 
         <div className="finals-layout">
-          <a href="#" className="jersey-card finals-feature">
+          <a href="#" onClick={(e) => e.preventDefault()} className="jersey-card finals-feature">
             <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: '9rem' }}>1</span>
+              <span className="card-ghost-num" style={{ fontSize: '9rem' }} aria-hidden="true">1</span>
               <JerseySvg className="jersey-svg-lg" />
             </div>
             <div className="jersey-card-info">
@@ -202,13 +209,23 @@ export default function HomePage() {
               </div>
               <div className="jersey-card-player">Manchester United</div>
               <div className="jersey-card-detail">Treble Season · Camp Nou · 26 May</div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleAddToCart()
+                }}
+                className="btn-add-cart"
+              >
+                Add to Cart
+              </button>
             </div>
           </a>
 
           <div className="finals-sidebar">
-            <a href="#" className="finals-sidebar-card">
+            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
               <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num">5</span>
+                <span className="finals-sidebar-num" aria-hidden="true">5</span>
                 <JerseySvg className="jersey-svg-sm" />
               </div>
               <div className="finals-sidebar-info">
@@ -218,9 +235,9 @@ export default function HomePage() {
               </div>
             </a>
 
-            <a href="#" className="finals-sidebar-card">
+            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
               <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num">3</span>
+                <span className="finals-sidebar-num" aria-hidden="true">3</span>
                 <JerseySvg className="jersey-svg-sm" />
               </div>
               <div className="finals-sidebar-info">
@@ -230,9 +247,9 @@ export default function HomePage() {
               </div>
             </a>
 
-            <a href="#" className="finals-sidebar-card">
+            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
               <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num">10</span>
+                <span className="finals-sidebar-num" aria-hidden="true">10</span>
                 <JerseySvg className="jersey-svg-sm" />
               </div>
               <div className="finals-sidebar-info">
@@ -260,17 +277,12 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              Some shirt numbers are no longer just numbers. They are symbols.
-              Passed from giant to giant, they carry the weight
-              of entire footballing lineages.
-            </p>
-            <a href="#" className="section-link">Explore Numbers</a>
+            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Numbers</a>
           </div>
         </div>
 
         <div className="numbers-grid">
-          <a href="#" className="number-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
             <div className="number-digit">10</div>
             <div className="number-title">The Creator&apos;s Number</div>
             <p className="number-desc">
@@ -280,7 +292,7 @@ export default function HomePage() {
             <div className="number-names">Pelé · Maradona · Zidane · Messi</div>
           </a>
 
-          <a href="#" className="number-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
             <div className="number-digit">7</div>
             <div className="number-title">The Number of Kings</div>
             <p className="number-desc">
@@ -290,7 +302,7 @@ export default function HomePage() {
             <div className="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
           </a>
 
-          <a href="#" className="number-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
             <div className="number-digit">9</div>
             <div className="number-title">The Striker&apos;s Inheritance</div>
             <p className="number-desc">
@@ -319,19 +331,14 @@ export default function HomePage() {
         </div>
 
         <div className="history-layout">
-          <div>
-            <p className="section-desc">
-              Some jerseys mark the exact moment when football changed forever.
-              These pieces are not simply worn — they are kept. They are evidence
-              of what the game once was, and what it made us feel.
-            </p>
-            <a href="#" className="section-link" style={{ marginTop: '2rem', display: 'inline-flex' }}>
+          <div className="section-right">
+            <a href="#" onClick={(e) => e.preventDefault()} className="section-link" style={{ marginTop: '2rem', display: 'inline-flex' }}>
               View Full Archive
             </a>
           </div>
 
           <div className="history-timeline">
-            <a href="#" className="history-item">
+            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
               <div className="history-year">1970</div>
               <div>
                 <div className="history-title">Pelé&apos;s Final World Cup Shirt</div>
@@ -343,7 +350,7 @@ export default function HomePage() {
               </div>
             </a>
 
-            <a href="#" className="history-item">
+            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
               <div className="history-year">1986</div>
               <div>
                 <div className="history-title">The Hand of God</div>
@@ -355,7 +362,7 @@ export default function HomePage() {
               </div>
             </a>
 
-            <a href="#" className="history-item">
+            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
               <div className="history-year">1994</div>
               <div>
                 <div className="history-title">Baggio&apos;s Last Penalty</div>
@@ -364,18 +371,6 @@ export default function HomePage() {
                   The missed penalty. The bowed head. The eternal image of football&apos;s grief.
                 </p>
                 <span className="history-tag">World Cup Final · USA</span>
-              </div>
-            </a>
-
-            <a href="#" className="history-item">
-              <div className="history-year">2005</div>
-              <div>
-                <div className="history-title">Istanbul — The Comeback</div>
-                <p className="history-desc">
-                  Liverpool&apos;s shirt from the Champions League final. 3–0 down at half time.
-                  One of the most extraordinary halves ever played followed.
-                </p>
-                <span className="history-tag">Champions League · Istanbul</span>
               </div>
             </a>
           </div>
@@ -389,7 +384,7 @@ export default function HomePage() {
         <div className="spotlight-inner">
           <div>
             <div className="spotlight-jersey-box">
-              <span className="spotlight-ghost-num">10</span>
+              <span className="spotlight-ghost-num" aria-hidden="true">10</span>
               <JerseySvg className="jersey-svg-lg" />
               <div className="spotlight-caption">
                 <div className="spotlight-caption-text">
@@ -439,7 +434,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <a href="#" className="btn-primary">View This Piece</a>
+            <a href="#" onClick={(e) => e.preventDefault()} className="btn-primary">View This Piece</a>
           </div>
         </div>
       </section>
@@ -459,61 +454,96 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <p className="section-desc">
-              Limited. Cultured. Coveted. These are the jerseys that serious
-              collectors pursue — pieces where rarity, cultural significance,
-              and collector&apos;s value converge in a single object.
-            </p>
-            <a href="#" className="section-link">View All Drops</a>
+            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">View All Drops</a>
           </div>
         </div>
 
         <div className="drops-grid">
-          <a href="#" className="drop-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
             <div className="drop-card-image">
               <span className="drop-badge">Rare</span>
-              <span className="drop-ghost-num">10</span>
+              <span className="drop-ghost-num" aria-hidden="true">10</span>
               <JerseySvg />
             </div>
             <div className="drop-card-info">
               <div className="drop-player">Zidane</div>
               <div className="drop-detail">Real Madrid · 2001–02 · No. 10</div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleAddToCart()
+                }}
+                className="btn-add-cart"
+              >
+                Add to Cart
+              </button>
             </div>
           </a>
 
-          <a href="#" className="drop-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
             <div className="drop-card-image">
               <span className="drop-badge">Archive</span>
-              <span className="drop-ghost-num">10</span>
+              <span className="drop-ghost-num" aria-hidden="true">10</span>
               <JerseySvg />
             </div>
             <div className="drop-card-info">
               <div className="drop-player">Ronaldinho</div>
               <div className="drop-detail">Barcelona · 2005–06 · No. 10</div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleAddToCart()
+                }}
+                className="btn-add-cart"
+              >
+                Add to Cart
+              </button>
             </div>
           </a>
 
-          <a href="#" className="drop-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
             <div className="drop-card-image">
               <span className="drop-badge">Icon</span>
-              <span className="drop-ghost-num">3</span>
+              <span className="drop-ghost-num" aria-hidden="true">3</span>
               <JerseySvg />
             </div>
             <div className="drop-card-info">
               <div className="drop-player">Maldini</div>
               <div className="drop-detail">AC Milan · 2002–03 · No. 3</div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleAddToCart()
+                }}
+                className="btn-add-cart"
+              >
+                Add to Cart
+              </button>
             </div>
           </a>
 
-          <a href="#" className="drop-card">
+          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
             <div className="drop-card-image">
               <span className="drop-badge">Collector</span>
-              <span className="drop-ghost-num">10</span>
+              <span className="drop-ghost-num" aria-hidden="true">10</span>
               <JerseySvg />
             </div>
             <div className="drop-card-info">
               <div className="drop-player">Bergkamp</div>
               <div className="drop-detail">Netherlands · 1998 · No. 10</div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleAddToCart()
+                }}
+                className="btn-add-cart"
+              >
+                Add to Cart
+              </button>
             </div>
           </a>
         </div>
@@ -524,52 +554,265 @@ export default function HomePage() {
       {/* ============================================================
           FOOTER
       ============================================================ */}
-      <footer className="footer">
-        <div className="footer-top">
-          <div>
-            <div className="footer-brand-name">The <span>Archive</span></div>
-            <p className="footer-tagline">
-              A curated collection of football&apos;s most iconic jerseys.
-              History, preserved in cloth.
-            </p>
+      <footer className="footer" role="contentinfo">
+        <div className="footer-inner">
+          <div className="footer-top">
+            <div className="footer-brand-col">
+              <a href="#" onClick={(e) => e.preventDefault()} className="footer-brand" aria-label="The Archive - Volver al inicio">
+                The <span>Archive</span>
+              </a>
+              <p className="footer-tagline">
+                A heritage collection of football&apos;s most iconic jerseys.
+                Each piece holds a story. Each stitch carries a moment.
+              </p>
+            </div>
+
+            <div className="footer-links-col">
+              <div className="footer-col-title">Collection</div>
+              <nav aria-label="Links de colección">
+                <ul className="footer-links">
+                  <li><a href="#legends">Legends</a></li>
+                  <li><a href="#finals">Eternal Finals</a></li>
+                  <li><a href="#numbers">Immortal Numbers</a></li>
+                  <li><a href="#history">Made History</a></li>
+                  <li><a href="#drops">Iconic Drops</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div className="footer-links-col">
+              <div className="footer-col-title">Account</div>
+              <nav aria-label="Links de cuenta">
+                <ul className="footer-links">
+                  <li><a href="#" onClick={(e) => e.preventDefault()}>My Account</a></li>
+                  <li><a href="#" onClick={(e) => e.preventDefault()}>My Orders</a></li>
+                  <li><a href="#" onClick={(e) => e.preventDefault()}>Wishlist</a></li>
+                  <li><a href="#" onClick={(e) => e.preventDefault()}>About The Archive</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div className="footer-newsletter-col">
+              <div className="footer-col-title">The Archive Letter</div>
+              <p className="footer-newsletter-desc">
+                New pieces. Rare drops. Stories behind the jerseys.
+                No noise. Only heritage.
+              </p>
+              <form className="footer-form" onSubmit={handleSubscribe} noValidate>
+                <div className="footer-input-wrap">
+                  <input
+                    type="email"
+                    className="footer-input"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    aria-label="Tu dirección de email"
+                  />
+                  <button type="submit" className="footer-submit">
+                    Subscribe
+                  </button>
+                </div>
+                {subscribeStatus === 'success' && (
+                  <p className="footer-msg footer-msg--success">
+                    You&apos;re in. Welcome to The Archive.
+                  </p>
+                )}
+                {subscribeStatus === 'error' && (
+                  <p className="footer-msg footer-msg--error" role="alert">
+                    Please enter a valid email address.
+                  </p>
+                )}
+              </form>
+            </div>
           </div>
 
-          <div>
-            <div className="footer-col-title">The Archive</div>
-            <ul className="footer-links">
-              <li><a href="#">Legends</a></li>
-              <li><a href="#">Eternal Finals</a></li>
-              <li><a href="#">Immortal Numbers</a></li>
-              <li><a href="#">Made History</a></li>
-              <li><a href="#">Iconic Drops</a></li>
-            </ul>
+          <div className="footer-bottom">
+            <p className="footer-copy">© 2026 The Archive. All rights reserved.</p>
+            <p className="footer-note">Where football becomes heritage.</p>
           </div>
-
-          <div>
-            <div className="footer-col-title">Information</div>
-            <ul className="footer-links">
-              <li><a href="#">About the Archive</a></li>
-              <li><a href="#">Authentication</a></li>
-              <li><a href="#">Collecting Guide</a></li>
-              <li><a href="#">Shipping &amp; Care</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="footer-col-title">Contact</div>
-            <ul className="footer-links">
-              <li><a href="#">Inquiries</a></li>
-              <li><a href="#">Press</a></li>
-              <li><a href="#">Consignments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <div className="footer-copy">© 2026 The Archive. All rights reserved.</div>
-          <div className="footer-note">Football heritage, preserved in cloth.</div>
         </div>
       </footer>
+      <style>{`
+        .btn-add-cart {
+          margin-top: 0.85rem;
+          display: inline-block;
+          padding: 0.55rem 1.4rem;
+          border: 1px solid rgba(200, 168, 75, 0.35);
+          color: #c8a84b;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 400;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          background: transparent;
+          cursor: pointer;
+          transition: background 0.3s ease, color 0.3s ease;
+        }
+        .btn-add-cart:hover {
+          background: #c8a84b;
+          color: #0d0c0a;
+        }
+
+        .footer {
+          background: var(--bg);
+          border-top: 1px solid var(--border);
+          padding: 5.5rem 4rem 3rem;
+        }
+
+        .footer-inner {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .footer-top {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1.5fr;
+          gap: 4rem;
+          padding-bottom: 4rem;
+          border-bottom: 1px solid var(--border);
+          margin-bottom: 2.5rem;
+        }
+
+        .footer-brand {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+          color: var(--text);
+          text-decoration: none;
+          display: block;
+          margin-bottom: 1.25rem;
+        }
+
+        .footer-brand span { color: var(--gold); }
+
+        .footer-tagline {
+          font-size: 0.78rem;
+          color: var(--text-3);
+          line-height: 1.85;
+          max-width: 240px;
+        }
+
+        .footer-col-title {
+          font-size: 0.58rem;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: var(--text-2);
+          margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+        }
+
+        .footer-links a {
+          font-size: 0.78rem;
+          color: var(--text-3);
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover { color: var(--text-2); }
+
+        .footer-newsletter-desc {
+          font-size: 0.75rem;
+          color: var(--text-3);
+          line-height: 1.8;
+          margin-bottom: 1.5rem;
+        }
+
+        .footer-form {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .footer-input-wrap {
+          display: flex;
+          gap: 0;
+        }
+
+        .footer-input {
+          flex: 1;
+          background: var(--bg-3);
+          border: 1px solid var(--border-2);
+          border-right: none;
+          color: var(--text);
+          font-family: 'Inter', sans-serif;
+          font-size: 0.72rem;
+          padding: 0.75rem 1rem;
+          outline: none;
+          transition: border-color 0.3s ease;
+        }
+
+        .footer-input::placeholder { color: var(--text-3); }
+        .footer-input:focus { border-color: var(--gold-dim); }
+
+        .footer-submit {
+          background: transparent;
+          border: 1px solid var(--gold-dim);
+          color: var(--gold);
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          padding: 0.75rem 1.25rem;
+          cursor: pointer;
+          transition: background 0.3s ease, color 0.3s ease;
+          white-space: nowrap;
+        }
+
+        .footer-submit:hover {
+          background: var(--gold);
+          color: var(--bg);
+        }
+
+        .footer-msg {
+          font-size: 0.7rem;
+          letter-spacing: 0.05em;
+        }
+
+        .footer-msg--success { color: #6abf6a; }
+        .footer-msg--error { color: #bf6a6a; }
+
+        .footer-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .footer-copy {
+          font-size: 0.65rem;
+          color: var(--text-3);
+          letter-spacing: 0.04em;
+          opacity: 0.6;
+        }
+
+        .footer-note {
+          font-size: 0.65rem;
+          color: var(--text-3);
+          font-style: italic;
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          opacity: 0.5;
+        }
+
+        @media (max-width: 1100px) {
+          .footer { padding: 5rem 2.5rem 3rem; }
+          .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+          .footer { padding: 4rem 1.5rem 2.5rem; }
+          .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+          .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+          .footer-tagline { max-width: 100%; }
+        }
+      `}</style>
     </>
   );
 }
