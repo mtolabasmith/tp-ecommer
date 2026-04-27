@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useState } from "react";  
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
 
 function JerseySvg({ className }: { className?: string }) {
   return (
@@ -69,23 +70,7 @@ export default function HomePage() {
       {/* ============================================================
           NAVBAR
       ============================================================ */}
-      <nav className="navbar" aria-label="Navegación principal">
-        <a href="#" onClick={(e) => e.preventDefault()} className="nav-brand">
-          The <span>Archive</span>
-        </a>
-        <ul className="nav-links" role="list">
-          <li role="listitem"><a href="#legends">Legends</a></li>
-          <li role="listitem"><a href="#finals">Eternal Finals</a></li>
-          <li role="listitem"><a href="#numbers">Immortal Numbers</a></li>
-          <li role="listitem"><a href="#history">Made History</a></li>
-          <li role="listitem"><a href="#drops">Iconic Drops</a></li>
-        </ul>
-        <div className="nav-utils">
-          <a href="#" onClick={(e) => e.preventDefault()}>Archive</a>
-          <a href="#" onClick={(e) => e.preventDefault()}>About</a>
-          <a href="#" onClick={(e) => e.preventDefault()}>Cart ({cartCount})</a>
-        </div>
-      </nav>
+      <Navbar cartCount={cartCount} />
 
       {/* ============================================================
           HERO
