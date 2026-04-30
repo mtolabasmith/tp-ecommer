@@ -1240,26 +1240,37 @@ flex-direction: column;
 @media (max-width: 768px) {
   html { scroll-snap-type: none; }
   .section { scroll-margin-top: 68px; }
-  .navbar { padding: 0 1.5rem; }
+  .navbar { padding: 0.85rem 1.25rem; }
   .nav-links { display: none; }
-  .hero { padding: 0 1.5rem; padding-top: 68px; }
+  .nav-utils a:not(:last-child) { display: none; }
+  .hero { padding: 5rem 1.25rem 4rem; min-height: auto; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
-  .hero-headline { font-size: clamp(2.5rem, 10vw, 3.5rem); }
-  .section, .spotlight, .curated { min-height: auto; padding: 3.25rem 1.5rem; }
-  .intro { min-height: auto; padding: 3.25rem 1.5rem; }
+  .hero-headline { font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 1.05; }
+  .hero-body { margin: 1.5rem 0; }
+  .section, .spotlight, .curated { min-height: auto; padding: 4rem 1.25rem; }
+  .intro { min-height: auto; padding: 4rem 1.25rem; }
+  .intro-quote { font-size: clamp(1.1rem, 4.5vw, 1.4rem); }
   .footer { padding: 4rem 1.5rem 2.5rem; }
-  .section-header { flex-direction: column; gap: 2rem; }
+  .section-header { flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; }
+  .section-title { font-size: clamp(1.75rem, 8vw, 2.5rem); line-height: 1.1; }
   .section-right { max-width: 100%; }
+  .jersey-card-image { aspect-ratio: 4 / 3; min-height: auto; }
+  .jersey-svg-lg { max-width: 35%; }
+  .card-ghost-num { font-size: 4rem !important; }
+  .legends-carousel { gap: 0.5rem; }
+  .legends-carousel .legends-grid { gap: 1.5rem; }
   .legends-grid { grid-template-columns: 1fr; }
   .legends-grid .jersey-card:first-child { grid-column: unset; }
-  .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 3 / 4; }
+  .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 4 / 3; }
   .finals-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-  .finals-feature .jersey-card-image { aspect-ratio: 3 / 4; }
+  .finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
   .numbers-grid { grid-template-columns: 1fr; }
   .history-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .history-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
   .spotlight-inner { grid-template-columns: 1fr; gap: 3rem; }
-  .drops-grid { grid-template-columns: 1fr 1fr; }
+  .spotlight-grid { gap: 2rem; }
+  .drops-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
@@ -1402,4 +1413,279 @@ flex-direction: column;
 @media (prefers-reduced-motion: reduce) {
   .carousel-track { animation: none; }
   .carousel-arrow { transition: none; }
+}
+
+/* ============================================================
+   EXTRA-TIGHT — very small phones
+============================================================ */
+
+@media (max-width: 480px) {
+  .navbar { padding: 0.75rem 1rem; }
+  .nav-brand { font-size: 0.75rem; letter-spacing: 0.25em; }
+  .hero { padding: 4rem 1rem 3rem; }
+  .section { padding: 3.5rem 1rem; }
+  .jersey-card-image { aspect-ratio: 5 / 4; }
+}
+
+/* ============================================================
+   CART PANEL
+============================================================ */
+
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 90;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 420px;
+  max-width: 100%;
+  background: #0d0c0a;
+  border-left: 1px solid rgba(200, 168, 75, 0.2);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-panel--open {
+  transform: translateX(0);
+}
+
+.cart-panel-header {
+  padding: 2.5rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cart-panel-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: #c8a84b;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.cart-panel-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #ede7d9;
+  margin: 0;
+  font-style: italic;
+}
+
+.cart-close {
+  background: transparent;
+  border: 1px solid rgba(200, 168, 75, 0.3);
+  color: #c8a84b;
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.cart-close:hover {
+  background: #c8a84b;
+  color: #0d0c0a;
+}
+
+.cart-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+}
+
+.cart-empty {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  color: #9b9082;
+  text-align: center;
+  padding: 3rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  color: rgba(200, 168, 75, 0.4);
+  font-style: italic;
+  line-height: 1;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cart-item-player {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem;
+  color: #ede7d9;
+  font-style: italic;
+}
+
+.cart-item-detail {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: #9b9082;
+  text-transform: uppercase;
+}
+
+.cart-item-era {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #c8a84b;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.cart-item-qty {
+  font-size: 0.7rem;
+  color: #9b9082;
+  margin-top: 0.5rem;
+}
+
+.cart-item-remove {
+  background: transparent;
+  border: none;
+  color: #9b9082;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  transition: color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.cart-item-remove:hover {
+  color: #c8a84b;
+}
+
+.cart-panel-footer {
+  border-top: 1px solid rgba(200, 168, 75, 0.2);
+  padding: 1.5rem 2rem 2rem;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.cart-total-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: #9b9082;
+  text-transform: uppercase;
+}
+
+.cart-total-value {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.5rem;
+  color: #ede7d9;
+}
+
+.cart-checkout-btn {
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid #c8a84b;
+  background: transparent;
+  color: #c8a84b;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.cart-checkout-btn:hover {
+  background: #c8a84b;
+  color: #0d0c0a;
+}
+
+@media (max-width: 768px) {
+  .cart-panel {
+    width: 100%;
+  }
+  .cart-panel-header {
+    padding: 2rem 1.5rem 1.25rem;
+  }
+  .cart-panel-body {
+    padding: 1.25rem 1.5rem;
+  }
+  .cart-panel-footer {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+}
+
+.jersey-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(15%) brightness(0.95);
+  transition: filter 0.4s ease, transform 0.6s ease;
+}
+
+.jersey-card:hover .jersey-photo {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.02);
+}
+
+.jersey-card-image:has(.jersey-photo) {
+  background: #0d0c0a;
+  overflow: hidden;
 }

@@ -1,5 +1,15 @@
 'use client'
-import { useEffect, useState } from "react";  
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+
+type CartItem = {
+  id: number
+  player: string
+  detail: string
+  era: string
+  number: string
+  quantity: number
+}
 
 function JerseySvg({ className }: { className?: string }) {
   return (
@@ -26,7 +36,8 @@ export default function HomePage() {
     document.title = "The Archive — Historic Football Jerseys"
   }, [])
 
-  const [cartCount, setCartCount] = useState(0);
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const [jerseys, setJerseys] = useState<any[]>([]);
   const [email, setEmail] = useState('')
   const [subscribeStatus, setSubscribeStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -46,7 +57,26 @@ export default function HomePage() {
     loadJerseys()
   }, [])
 
-  const handleAddToCart = () => setCartCount(prev => prev + 1)
+  const handleAddToCart = (jersey: any) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === jersey.id)
+      if (existing) {
+        return prev.map((item) =>
+          item.id === jersey.id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      }
+      return [...prev, { ...jersey, quantity: 1 }]
+    })
+  }
+
+  const handleRemoveFromCart = (id: number) => {
+    setCart((prev) => prev.filter((item) => item.id !== id))
+  }
+
+  const handleOpenCart = () => setIsCartOpen(true)
+  const handleCloseCart = () => setIsCartOpen(false)
+
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const visibleCount = 3
 
@@ -90,26 +120,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ============================================================
-          NAVBAR
-      ============================================================ */}
-      <nav className="navbar" aria-label="Navegación principal">
-        <a href="#" onClick={(e) => e.preventDefault()} className="nav-brand">
-          The <span>Archive</span>
-        </a>
-        <ul className="nav-links" role="list">
-          <li role="listitem"><a href="#legends">Legends</a></li>
-          <li role="listitem"><a href="#finals">Eternal Finals</a></li>
-          <li role="listitem"><a href="#numbers">Immortal Numbers</a></li>
-          <li role="listitem"><a href="#history">Made History</a></li>
-          <li role="listitem"><a href="#drops">Iconic Drops</a></li>
-        </ul>
-        <div className="nav-utils">
-          <a href="#" onClick={(e) => e.preventDefault()}>Archive</a>
-          <a href="#" onClick={(e) => e.preventDefault()}>About</a>
-          <a href="#" onClick={(e) => e.preventDefault()}>Cart ({cartCount})</a>
-        </div>
-      </nav>
+      <Navbar cartCount={cartCount} onCartClick={handleOpenCart} />
 
       {/* ============================================================
           HERO
@@ -201,10 +212,19 @@ export default function HomePage() {
                 onClick={(e) => e.preventDefault()}
               >
                 <div className="jersey-card-image">
-                  <span className="card-ghost-num" aria-hidden="true">
-                    {jersey.number}
-                  </span>
-                  <JerseySvg className="jersey-svg-lg" />
+                  {jersey.image ? (
+                    <img
+                      src={jersey.image}
+                      alt={`Camiseta de ${jersey.player}`}
+                      className="jersey-photo"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <span className="card-ghost-num" aria-hidden="true">{jersey.number}</span>
+                      <JerseySvg className="jersey-svg-lg" />
+                    </>
+                  )}
                 </div>
 
                 <div className="jersey-card-info">
@@ -217,7 +237,7 @@ export default function HomePage() {
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
-                      handleAddToCart()
+                      handleAddToCart(jersey)
                     }}
                     className="btn-add-cart"
                   >
@@ -303,7 +323,7 @@ export default function HomePage() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleAddToCart()
+                  handleAddToCart({ id: 1001, player: 'Manchester United', detail: 'Treble Season · Camp Nou · 26 May', era: 'Champions League Final · 1999', number: '1' })
                 }}
                 className="btn-add-cart"
               >
@@ -562,7 +582,7 @@ export default function HomePage() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleAddToCart()
+                  handleAddToCart({ id: 1002, player: 'Zidane', detail: 'Real Madrid · 2001–02 · No. 10', era: 'Rare Drop', number: '10' })
                 }}
                 className="btn-add-cart"
               >
@@ -584,7 +604,7 @@ export default function HomePage() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleAddToCart()
+                  handleAddToCart({ id: 1003, player: 'Ronaldinho', detail: 'Barcelona · 2005–06 · No. 10', era: 'Archive Drop', number: '10' })
                 }}
                 className="btn-add-cart"
               >
@@ -606,7 +626,7 @@ export default function HomePage() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleAddToCart()
+                  handleAddToCart({ id: 1004, player: 'Maldini', detail: 'AC Milan · 2002–03 · No. 3', era: 'Icon Drop', number: '3' })
                 }}
                 className="btn-add-cart"
               >
@@ -628,7 +648,7 @@ export default function HomePage() {
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleAddToCart()
+                  handleAddToCart({ id: 1005, player: 'Bergkamp', detail: 'Netherlands · 1998 · No. 10', era: 'Collector Drop', number: '10' })
                 }}
                 className="btn-add-cart"
               >
@@ -903,6 +923,72 @@ export default function HomePage() {
           .footer-tagline { max-width: 100%; }
         }
       `}</style>
+
+      {isCartOpen && (
+        <div className="cart-overlay" onClick={handleCloseCart} aria-hidden="true" />
+      )}
+
+      <aside
+        className={`cart-panel ${isCartOpen ? 'cart-panel--open' : ''}`}
+        aria-label="Carrito de compras"
+        aria-hidden={!isCartOpen}
+      >
+        <div className="cart-panel-header">
+          <div>
+            <div className="cart-panel-label">YOUR ARCHIVE</div>
+            <h2 className="cart-panel-title">The Cart</h2>
+          </div>
+          <button
+            onClick={handleCloseCart}
+            className="cart-close"
+            aria-label="Cerrar carrito"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="cart-panel-body">
+          {cart.length === 0 ? (
+            <p className="cart-empty">
+              No pieces in your archive yet.<br />
+              Start curating your collection.
+            </p>
+          ) : (
+            <ul className="cart-items" role="list">
+              {cart.map((item) => (
+                <li key={item.id} className="cart-item" role="listitem">
+                  <div className="cart-item-num" aria-hidden="true">{item.number}</div>
+                  <div className="cart-item-info">
+                    <div className="cart-item-player">{item.player}</div>
+                    <div className="cart-item-detail">{item.detail}</div>
+                    <div className="cart-item-era">{item.era}</div>
+                    <div className="cart-item-qty">Quantity: {item.quantity}</div>
+                    <button
+                      onClick={() => handleRemoveFromCart(item.id)}
+                      className="cart-item-remove"
+                      aria-label={`Quitar ${item.player} del carrito`}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {cart.length > 0 && (
+          <div className="cart-panel-footer">
+            <div className="cart-total-row">
+              <span className="cart-total-label">TOTAL ITEMS</span>
+              <span className="cart-total-value">{cartCount}</span>
+            </div>
+            <button className="cart-checkout-btn">
+              Proceed to Checkout
+            </button>
+          </div>
+        )}
+      </aside>
     </>
   );
 }

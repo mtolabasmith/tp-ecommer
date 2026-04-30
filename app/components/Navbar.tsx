@@ -2,9 +2,10 @@
 
 type NavbarProps = {
   cartCount: number;
+  onCartClick: () => void;
 };
 
-export default function Navbar({ cartCount }: NavbarProps) {
+export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
   return (
     <nav className="navbar" aria-label="Navegación principal">
       <a href="#" onClick={(e) => e.preventDefault()} className="nav-brand">
@@ -20,7 +21,15 @@ export default function Navbar({ cartCount }: NavbarProps) {
       <div className="nav-utils">
         <a href="#" onClick={(e) => e.preventDefault()}>Archive</a>
         <a href="#" onClick={(e) => e.preventDefault()}>About</a>
-        <a href="#" onClick={(e) => e.preventDefault()}>Cart ({cartCount})</a>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onCartClick();
+          }}
+        >
+          Cart ({cartCount})
+        </a>
       </div>
     </nav>
   );
