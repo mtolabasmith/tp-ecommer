@@ -1,20 +1,15 @@
-'use client'
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
+"use client";
 
-type CartItem = {
-  id: number
-  player: string
-  detail: string
-  era: string
-  number: string
-  quantity: number
-}
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useCart } from "./components/CartProvider";
+import { formatPrice } from "@/lib/format";
+import type { Product } from "@/lib/types";
 
 function JerseySvg({ className }: { className?: string }) {
   return (
     <svg
-      className={`jersey-svg${className ? ` ${className}` : ''}`}
+      className={`jersey-svg${className ? ` ${className}` : ""}`}
       aria-hidden="true"
       viewBox="0 0 80 92"
       fill="none"
@@ -32,99 +27,46 @@ function JerseySvg({ className }: { className?: string }) {
 }
 
 export default function HomePage() {
-  useEffect(() => {
-    document.title = "The Archive — Historic Football Jerseys"
-  }, [])
-
-  const [cart, setCart] = useState<CartItem[]>([])
-  const [isCartOpen, setIsCartOpen] = useState(false)
-  const [jerseys, setJerseys] = useState<any[]>([]);
-  const [email, setEmail] = useState('')
-  const [subscribeStatus, setSubscribeStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [carouselIndex, setCarouselIndex] = useState(0)
-  const [carouselDirection, setCarouselDirection] = useState<"next" | "prev">("next")
+  const { addItem } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] = useState<"next" | "prev">("next");
 
   useEffect(() => {
-    async function loadJerseys() {
-      try {
-        const response = await fetch('/jerseys.json')
-        const data = await response.json()
-        setJerseys(data)
-      } catch (error) {
-        console.error('Error loading jerseys:', error)
-      }
-    }
-    loadJerseys()
-  }, [])
+    fetch("/api/products")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data: Product[]) => setProducts(data))
+      .catch(() => setProducts([]));
+  }, []);
 
-  const handleAddToCart = (jersey: any) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === jersey.id)
-      if (existing) {
-        return prev.map((item) =>
-          item.id === jersey.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      }
-      return [...prev, { ...jersey, quantity: 1 }]
-    })
-  }
+  const legends = products.filter((p) => p.category === "leyendas");
+  const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
 
-  const handleRemoveFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id))
-  }
-
-  const handleOpenCart = () => setIsCartOpen(true)
-  const handleCloseCart = () => setIsCartOpen(false)
-
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
-
-  const visibleCount = 3
+  const visibleCount = 3;
+  const carouselPool = legends;
 
   const handleNext = () => {
-    if (jerseys.length === 0) return
-    setCarouselDirection("next")
-    setCarouselIndex((prev) => (prev + 1) % jerseys.length)
-  }
+    if (carouselPool.length === 0) return;
+    setCarouselDirection("next");
+    setCarouselIndex((prev) => (prev + 1) % carouselPool.length);
+  };
 
   const handlePrev = () => {
-    if (jerseys.length === 0) return
-    setCarouselDirection("prev")
-    setCarouselIndex((prev) => (prev - 1 + jerseys.length) % jerseys.length)
-  }
+    if (carouselPool.length === 0) return;
+    setCarouselDirection("prev");
+    setCarouselIndex((prev) => (prev - 1 + carouselPool.length) % carouselPool.length);
+  };
 
   const visibleJerseys =
-    jerseys.length > 0
-      ? Array.from(
-          { length: Math.min(visibleCount, jerseys.length) },
-          (_, i) => jerseys[(carouselIndex + i) % jerseys.length]
+    carouselPool.length > 0
+      ? Array.from({ length: Math.min(visibleCount, carouselPool.length) }, (_, i) =>
+          carouselPool[(carouselIndex + i) % carouselPool.length]
         )
-      : []
-
-  const isValidEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email.trim()) {
-      setSubscribeStatus('error')
-      return
-    }
-    if (!isValidEmail(email)) {
-      setSubscribeStatus('error')
-      return
-    }
-    setSubscribeStatus('success')
-    setEmail('')
-  }
+      : [];
 
   return (
     <>
-      <Navbar cartCount={cartCount} onCartClick={handleOpenCart} />
-
-      {/* ============================================================
-          HERO
-      ============================================================ */}
+      {/* ============ HERO ============ */}
       <section className="hero">
         <div className="hero-inner">
           <div>
@@ -135,55 +77,58 @@ export default function HomePage() {
               <em>Weight of Time</em>
             </h1>
             <p className="hero-body">
-              A curated archive of the most iconic football jerseys in history.
-              Each piece holds a story. Each stitch carries the weight of a moment
-              that changed how we see the game forever.
+              Un archivo curado de las camisetas más icónicas de la historia del fútbol.
+              Cada pieza guarda una historia. Cada puntada lleva el peso de un momento.
             </p>
             <div className="hero-ctas">
-              <a href="#" onClick={(e) => e.preventDefault()} className="btn-primary" aria-label="Entrar al archivo de camisetas históricas">Enter the Archive</a>
-              <a href="#legends" className="btn-ghost" aria-label="Explorar la colección de camisetas">Explore Collection</a>
+              <Link href="/products" className="btn-primary">
+                Entrar al archivo
+              </Link>
+              <Link href="#legends" className="btn-ghost">
+                Explorar colección
+              </Link>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="hero-frame-wrap">
               <div className="hero-jersey-box">
-                <span className="hero-ghost-num" aria-hidden="true">10</span>
+                <span className="hero-ghost-num" aria-hidden="true">
+                  10
+                </span>
                 <JerseySvg className="jersey-svg-lg" />
               </div>
             </div>
             <div className="hero-jersey-meta">
               <div className="hero-jersey-meta-player">Diego Maradona</div>
-              <div className="hero-jersey-meta-detail">Argentina · No. 10 · World Cup 1986</div>
+              <div className="hero-jersey-meta-detail">
+                Argentina · No. 10 · World Cup 1986
+              </div>
             </div>
           </div>
         </div>
-
       </section>
 
-      {/* ============================================================
-          INTRO
-      ============================================================ */}
+      {/* ============ INTRO ============ */}
       <section className="intro">
         <div className="intro-inner">
           <p className="intro-quote">
-            &ldquo;A football jersey is not a garment.<br />
-            It is a document of what happened.&rdquo;
+            &ldquo;Una camiseta de fútbol no es una prenda.
+            <br />
+            Es un documento de lo que pasó.&rdquo;
           </p>
           <div className="intro-divider"></div>
           <p className="intro-body">
-            The Archive is a curated collection of football jerseys treated as historical objects.
-            Here, every piece belongs to a larger story — of players who defined eras,
-            of finals that will never be forgotten, of numbers that became mythology.
-            This is not a store. This is a heritage collection.
+            The Archive es una colección curada de camisetas de fútbol tratadas como
+            objetos históricos. Cada pieza pertenece a una historia más grande — de
+            jugadores que definieron épocas, de finales inolvidables, de números que se
+            volvieron mitología.
           </p>
         </div>
       </section>
 
-      {/* ============================================================
-          01 — LEGENDS
-      ============================================================ */}
-      <section className="section legends" id ="legends">
+      {/* ============ 01 — LEGENDS (carrusel data-driven) ============ */}
+      <section className="section legends" id="legends">
         <div className="section-header">
           <div>
             <div className="section-label">
@@ -191,11 +136,14 @@ export default function HomePage() {
               Legends
             </div>
             <h2 className="section-title">
-              The Icons<br /><em>Who Defined the Game</em>
+              The Icons<br />
+              <em>Who Defined the Game</em>
             </h2>
           </div>
           <div className="section-right">
-            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Legends</a>
+            <Link href="/products?category=leyendas" className="section-link">
+              Explorar leyendas
+            </Link>
           </div>
         </div>
 
@@ -205,92 +153,73 @@ export default function HomePage() {
             key={`${carouselIndex}-${carouselDirection}`}
           >
             {visibleJerseys.map((jersey, idx) => (
-              <a
-                href="#"
-                className="jersey-card"
-                key={`${jersey.id}-${idx}`}
-                onClick={(e) => e.preventDefault()}
-              >
-                <div className="jersey-card-image">
-                  {jersey.image ? (
-                    <img
-                      src={jersey.image}
-                      alt={`Camiseta de ${jersey.player}`}
-                      className="jersey-photo"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <>
-                      <span className="card-ghost-num" aria-hidden="true">{jersey.number}</span>
+              <article className="jersey-card" key={`${jersey.id}-${idx}`}>
+                <Link href={`/products/${jersey.id}`} className="product-card-media">
+                  <div className="jersey-card-image">
+                    {jersey.image_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={jersey.image_url}
+                        alt={jersey.name}
+                        className="jersey-photo"
+                        loading="lazy"
+                      />
+                    ) : (
                       <JerseySvg className="jersey-svg-lg" />
-                    </>
-                  )}
-                </div>
+                    )}
+                  </div>
+                </Link>
 
                 <div className="jersey-card-info">
-                  <div className="jersey-card-player">{jersey.player}</div>
-                  <div className="jersey-card-detail">{jersey.detail}</div>
-                  <div className="jersey-card-era">{jersey.era}</div>
-
+                  <Link href={`/products/${jersey.id}`} className="product-card-title">
+                    <div className="jersey-card-player">{jersey.name}</div>
+                  </Link>
+                  <div className="jersey-card-era">{formatPrice(jersey.price)}</div>
                   <button
                     type="button"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      handleAddToCart(jersey)
-                    }}
+                    onClick={() => addItem(jersey)}
                     className="btn-add-cart"
                   >
-                    Add to Cart
+                    Agregar al carrito
                   </button>
                 </div>
-              </a>
+              </article>
             ))}
           </div>
 
           <div className="carousel-controls">
             <button
               type="button"
-              onClick={(e) => {
-                e.preventDefault()
-                handlePrev()
-              }}
+              onClick={handlePrev}
               className="carousel-arrow carousel-arrow-left"
-              aria-label="Previous jersey"
+              aria-label="Camiseta anterior"
             >
               ←
             </button>
 
             <span className="carousel-counter" aria-live="polite" aria-atomic="true">
               <span className="carousel-counter-current">
-                {String(carouselIndex + 1).padStart(2, '0')}
+                {String(Math.min(carouselIndex + 1, carouselPool.length || 1)).padStart(2, "0")}
               </span>
               <span className="carousel-counter-sep"> / </span>
               <span className="carousel-counter-total">
-                {String(jerseys.length).padStart(2, '0')}
+                {String(carouselPool.length).padStart(2, "0")}
               </span>
             </span>
 
             <button
               type="button"
-              onClick={(e) => {
-                e.preventDefault()
-                handleNext()
-              }}
+              onClick={handleNext}
               className="carousel-arrow carousel-arrow-right"
-              aria-label="Next jersey"
+              aria-label="Camiseta siguiente"
             >
               →
             </button>
           </div>
         </div>
-
-       
       </section>
 
-      {/* ============================================================
-          02 — ETERNAL FINALS
-      ============================================================ */}
+      {/* ============ 02 — ETERNAL FINALS (editorial) ============ */}
       <section className="section finals" id="finals">
         <div className="section-header">
           <div>
@@ -299,41 +228,36 @@ export default function HomePage() {
               Eternal Finals
             </div>
             <h2 className="section-title">
-              The Matches<br /><em>Time Cannot Erase</em>
+              The Matches<br />
+              <em>Time Cannot Erase</em>
             </h2>
           </div>
           <div className="section-right">
-            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Finals</a>
+            <Link href="/products?category=finales" className="section-link">
+              Ver finales
+            </Link>
           </div>
         </div>
 
         <div className="finals-layout">
-          <a href="#" onClick={(e) => e.preventDefault()} className="jersey-card finals-feature">
+          <Link href="/products?category=finales" className="jersey-card finals-feature">
             <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: '9rem' }} aria-hidden="true">1</span>
+              <span className="card-ghost-num" style={{ fontSize: "9rem" }} aria-hidden="true">
+                1
+              </span>
               <JerseySvg className="jersey-svg-lg" />
             </div>
             <div className="jersey-card-info">
-              <div className="match-tag" style={{ display: 'inline-block', marginBottom: '0.75rem' }}>
+              <div className="match-tag" style={{ display: "inline-block", marginBottom: "0.75rem" }}>
                 Champions League Final · 1999
               </div>
               <div className="jersey-card-player">Manchester United</div>
               <div className="jersey-card-detail">Treble Season · Camp Nou · 26 May</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleAddToCart({ id: 1001, player: 'Manchester United', detail: 'Treble Season · Camp Nou · 26 May', era: 'Champions League Final · 1999', number: '1' })
-                }}
-                className="btn-add-cart"
-              >
-                Add to Cart
-              </button>
             </div>
-          </a>
+          </Link>
 
           <div className="finals-sidebar">
-            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
+            <Link href="/products?category=finales" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">5</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -343,9 +267,9 @@ export default function HomePage() {
                 <div className="sidebar-player">Italy</div>
                 <div className="sidebar-detail">Azzurri · Berlin · July 9</div>
               </div>
-            </a>
+            </Link>
 
-            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
+            <Link href="/products?category=finales" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">3</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -355,9 +279,9 @@ export default function HomePage() {
                 <div className="sidebar-player">Liverpool</div>
                 <div className="sidebar-detail">Istanbul · The great comeback</div>
               </div>
-            </a>
+            </Link>
 
-            <a href="#" onClick={(e) => e.preventDefault()} className="finals-sidebar-card">
+            <Link href="/products?category=finales" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">10</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -367,14 +291,12 @@ export default function HomePage() {
                 <div className="sidebar-player">Brazil</div>
                 <div className="sidebar-detail">Mexico City · The beautiful game</div>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-          03 — IMMORTAL NUMBERS
-      ============================================================ */}
+      {/* ============ 03 — IMMORTAL NUMBERS (editorial) ============ */}
       <section className="section numbers" id="numbers">
         <div className="section-header">
           <div>
@@ -383,113 +305,46 @@ export default function HomePage() {
               Immortal Numbers
             </div>
             <h2 className="section-title">
-              Numbers That<br /><em>Became Mythology</em>
+              Numbers That<br />
+              <em>Became Mythology</em>
             </h2>
-          </div>
-          <div className="section-right">
-            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">Explore Numbers</a>
           </div>
         </div>
 
         <div className="numbers-grid">
-          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
+          <div className="number-card">
             <div className="number-digit">10</div>
             <div className="number-title">The Creator&apos;s Number</div>
             <p className="number-desc">
-              The number that separated genius from the rest.
-              Worn by those who saw what others could not.
+              El número que separó al genio del resto. Usado por quienes veían lo que otros
+              no podían.
             </p>
             <div className="number-names">Pelé · Maradona · Zidane · Messi</div>
-          </a>
+          </div>
 
-          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
+          <div className="number-card">
             <div className="number-digit">7</div>
             <div className="number-title">The Number of Kings</div>
             <p className="number-desc">
-              Flair. Danger. Inevitability.
-              The number that promised something extraordinary every time.
+              Talento. Peligro. Inevitabilidad. El número que prometía algo extraordinario
+              cada vez.
             </p>
-            <div className="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
-          </a>
+            <div className="number-names">Best · Cantona · Figo · CR7</div>
+          </div>
 
-          <a href="#" onClick={(e) => e.preventDefault()} className="number-card">
+          <div className="number-card">
             <div className="number-digit">9</div>
             <div className="number-title">The Striker&apos;s Inheritance</div>
             <p className="number-desc">
-              Goals. Power. The pure and ancient art of finishing.
-              The number that belongs to those born to score.
+              Goles. Potencia. El arte puro y antiguo de definir. El número de los nacidos
+              para convertir.
             </p>
             <div className="number-names">R9 · Van Nistelrooy · Lewandowski</div>
-          </a>
-        </div>
-      </section>
-
-      {/* ============================================================
-          04 — JERSEYS THAT MADE HISTORY
-      ============================================================ */}
-      <section className="section history" id="history">
-        <div className="section-header">
-          <div>
-            <div className="section-label">
-              <span className="section-label-num">04</span>
-              Made History
-            </div>
-            <h2 className="section-title">
-              Jerseys Tied<br /><em>to Turning Points</em>
-            </h2>
-          </div>
-        </div>
-
-        <div className="history-layout">
-          <div className="section-right">
-            <a href="#" onClick={(e) => e.preventDefault()} className="section-link" style={{ marginTop: '2rem', display: 'inline-flex' }}>
-              View Full Archive
-            </a>
-          </div>
-
-          <div className="history-timeline">
-            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
-              <div className="history-year">1970</div>
-              <div>
-                <div className="history-title">Pelé&apos;s Final World Cup Shirt</div>
-                <p className="history-desc">
-                  The last jersey worn by the greatest in his final World Cup.
-                  Brazil won 4–1. The world watched the game reach its highest point.
-                </p>
-                <span className="history-tag">World Cup · Mexico</span>
-              </div>
-            </a>
-
-            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
-              <div className="history-year">1986</div>
-              <div>
-                <div className="history-title">The Hand of God</div>
-                <p className="history-desc">
-                  Maradona&apos;s Argentina shirt from the quarter-final against England.
-                  Two goals. One hand. One genius. One legend cemented forever.
-                </p>
-                <span className="history-tag">World Cup · Mexico</span>
-              </div>
-            </a>
-
-            <a href="#" onClick={(e) => e.preventDefault()} className="history-item">
-              <div className="history-year">1994</div>
-              <div>
-                <div className="history-title">Baggio&apos;s Last Penalty</div>
-                <p className="history-desc">
-                  The jersey worn when Roberto Baggio stepped forward in the final.
-                  The missed penalty. The bowed head. The eternal image of football&apos;s grief.
-                </p>
-                <span className="history-tag">World Cup Final · USA</span>
-              </div>
-            </a>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-          SPOTLIGHT — FEATURED STORY
-      ============================================================ */}
+      {/* ============ SPOTLIGHT ============ */}
       <section className="spotlight">
         <div className="spotlight-inner">
           <div>
@@ -510,19 +365,10 @@ export default function HomePage() {
               The Most Iconic<br />Jersey in<br />Football History
             </h2>
             <p className="spotlight-subtitle">Argentina · Maradona · Mexico 1986</p>
-
             <p className="spotlight-body">
-              No jersey carries the weight of this one. In the summer of 1986,
-              a man from Villa Fiorito almost single-handedly guided Argentina
-              to the World Cup title. The light-blue and white stripes of that
-              tournament shirt witnessed two of football&apos;s most defining moments
-              in the span of four minutes — both scored by the same man,
-              in the same match, in the same shirt.
-            </p>
-            <p className="spotlight-body">
-              The Hand of God. The Goal of the Century.
-              The number 10 on the back of that jersey is no longer just a number.
-              It is a myth.
+              Ninguna camiseta carga el peso de esta. En el verano de 1986, un hombre de
+              Villa Fiorito llevó casi en soledad a Argentina al título del mundo. La Mano
+              de Dios. El Gol del Siglo. El número 10 dejó de ser un número: es un mito.
             </p>
 
             <div className="spotlight-stats">
@@ -544,451 +390,65 @@ export default function HomePage() {
               </div>
             </div>
 
-            <a href="#" onClick={(e) => e.preventDefault()} className="btn-primary">View This Piece</a>
+            <Link href="/products?category=leyendas" className="btn-primary">
+              Ver leyendas
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-          05 — ICONIC DROPS
-      ============================================================ */}
+      {/* ============ 05 — ICONIC DROPS (data-driven) ============ */}
       <section className="section drops" id="drops">
         <div className="section-header">
           <div>
             <div className="section-label">
-              <span className="section-label-num">05</span>
+              <span className="section-label-num">04</span>
               Iconic Drops
             </div>
             <h2 className="section-title">
-              Rare Pieces<br /><em>For the Collector</em>
+              Rare Pieces<br />
+              <em>For the Collector</em>
             </h2>
           </div>
           <div className="section-right">
-            <a href="#" onClick={(e) => e.preventDefault()} className="section-link">View All Drops</a>
+            <Link href="/products?category=drops-iconicos" className="section-link">
+              Ver todos los drops
+            </Link>
           </div>
         </div>
 
         <div className="drops-grid">
-          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
-            <div className="drop-card-image">
-              <span className="drop-badge">Rare</span>
-              <span className="drop-ghost-num" aria-hidden="true">10</span>
-              <JerseySvg />
-            </div>
-            <div className="drop-card-info">
-              <div className="drop-player">Zidane</div>
-              <div className="drop-detail">Real Madrid · 2001–02 · No. 10</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleAddToCart({ id: 1002, player: 'Zidane', detail: 'Real Madrid · 2001–02 · No. 10', era: 'Rare Drop', number: '10' })
-                }}
-                className="btn-add-cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </a>
-
-          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
-            <div className="drop-card-image">
-              <span className="drop-badge">Archive</span>
-              <span className="drop-ghost-num" aria-hidden="true">10</span>
-              <JerseySvg />
-            </div>
-            <div className="drop-card-info">
-              <div className="drop-player">Ronaldinho</div>
-              <div className="drop-detail">Barcelona · 2005–06 · No. 10</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleAddToCart({ id: 1003, player: 'Ronaldinho', detail: 'Barcelona · 2005–06 · No. 10', era: 'Archive Drop', number: '10' })
-                }}
-                className="btn-add-cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </a>
-
-          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
-            <div className="drop-card-image">
-              <span className="drop-badge">Icon</span>
-              <span className="drop-ghost-num" aria-hidden="true">3</span>
-              <JerseySvg />
-            </div>
-            <div className="drop-card-info">
-              <div className="drop-player">Maldini</div>
-              <div className="drop-detail">AC Milan · 2002–03 · No. 3</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleAddToCart({ id: 1004, player: 'Maldini', detail: 'AC Milan · 2002–03 · No. 3', era: 'Icon Drop', number: '3' })
-                }}
-                className="btn-add-cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </a>
-
-          <a href="#" onClick={(e) => e.preventDefault()} className="drop-card">
-            <div className="drop-card-image">
-              <span className="drop-badge">Collector</span>
-              <span className="drop-ghost-num" aria-hidden="true">10</span>
-              <JerseySvg />
-            </div>
-            <div className="drop-card-info">
-              <div className="drop-player">Bergkamp</div>
-              <div className="drop-detail">Netherlands · 1998 · No. 10</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleAddToCart({ id: 1005, player: 'Bergkamp', detail: 'Netherlands · 1998 · No. 10', era: 'Collector Drop', number: '10' })
-                }}
-                className="btn-add-cart"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </a>
+          {drops.map((drop) => (
+            <article className="drop-card" key={drop.id}>
+              <Link href={`/products/${drop.id}`} className="product-card-media">
+                <div className="drop-card-image">
+                  <span className="drop-badge">Drop</span>
+                  {drop.image_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={drop.image_url}
+                      alt={drop.name}
+                      className="jersey-photo"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <JerseySvg />
+                  )}
+                </div>
+              </Link>
+              <div className="drop-card-info">
+                <Link href={`/products/${drop.id}`} className="product-card-title">
+                  <div className="drop-player">{drop.name}</div>
+                </Link>
+                <div className="drop-detail">{formatPrice(drop.price)}</div>
+                <button type="button" onClick={() => addItem(drop)} className="btn-add-cart">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
-
-      
-
-      {/* ============================================================
-          FOOTER
-      ============================================================ */}
-      <footer className="footer" role="contentinfo">
-        <div className="footer-inner">
-          <div className="footer-top">
-            <div className="footer-brand-col">
-              <a href="#" onClick={(e) => e.preventDefault()} className="footer-brand" aria-label="The Archive - Volver al inicio">
-                The <span>Archive</span>
-              </a>
-              <p className="footer-tagline">
-                A heritage collection of football&apos;s most iconic jerseys.
-                Each piece holds a story. Each stitch carries a moment.
-              </p>
-            </div>
-
-            <div className="footer-links-col">
-              <div className="footer-col-title">Collection</div>
-              <nav aria-label="Links de colección">
-                <ul className="footer-links">
-                  <li><a href="#legends">Legends</a></li>
-                  <li><a href="#finals">Eternal Finals</a></li>
-                  <li><a href="#numbers">Immortal Numbers</a></li>
-                  <li><a href="#history">Made History</a></li>
-                  <li><a href="#drops">Iconic Drops</a></li>
-                </ul>
-              </nav>
-            </div>
-
-            <div className="footer-links-col">
-              <div className="footer-col-title">Account</div>
-              <nav aria-label="Links de cuenta">
-                <ul className="footer-links">
-                  <li><a href="#" onClick={(e) => e.preventDefault()}>My Account</a></li>
-                  <li><a href="#" onClick={(e) => e.preventDefault()}>My Orders</a></li>
-                  <li><a href="#" onClick={(e) => e.preventDefault()}>Wishlist</a></li>
-                  <li><a href="#" onClick={(e) => e.preventDefault()}>About The Archive</a></li>
-                </ul>
-              </nav>
-            </div>
-
-            <div className="footer-newsletter-col">
-              <div className="footer-col-title">The Archive Letter</div>
-              <p className="footer-newsletter-desc">
-                New pieces. Rare drops. Stories behind the jerseys.
-                No noise. Only heritage.
-              </p>
-              <form className="footer-form" onSubmit={handleSubscribe} noValidate>
-                <div className="footer-input-wrap">
-                  <input
-                    type="email"
-                    className="footer-input"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    aria-label="Tu dirección de email"
-                  />
-                  <button type="submit" className="footer-submit">
-                    Subscribe
-                  </button>
-                </div>
-                {subscribeStatus === 'success' && (
-                  <p className="footer-msg footer-msg--success">
-                    You&apos;re in. Welcome to The Archive.
-                  </p>
-                )}
-                {subscribeStatus === 'error' && (
-                  <p className="footer-msg footer-msg--error" role="alert">
-                    Please enter a valid email address.
-                  </p>
-                )}
-              </form>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <p className="footer-copy">© 2026 The Archive. All rights reserved.</p>
-            <p className="footer-note">Where football becomes heritage.</p>
-          </div>
-        </div>
-      </footer>
-      <style>{`
-        .btn-add-cart {
-          margin-top: 0.85rem;
-          display: inline-block;
-          padding: 0.55rem 1.4rem;
-          border: 1px solid rgba(200, 168, 75, 0.35);
-          color: #c8a84b;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.62rem;
-          font-weight: 400;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          background: transparent;
-          cursor: pointer;
-          transition: background 0.3s ease, color 0.3s ease;
-        }
-        .btn-add-cart:hover {
-          background: #c8a84b;
-          color: #0d0c0a;
-        }
-
-        .footer {
-          background: var(--bg);
-          border-top: 1px solid var(--border);
-          padding: 5.5rem 4rem 3rem;
-        }
-
-        .footer-inner {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-
-        .footer-top {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: 4rem;
-          padding-bottom: 4rem;
-          border-bottom: 1px solid var(--border);
-          margin-bottom: 2.5rem;
-        }
-
-        .footer-brand {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.35em;
-          text-transform: uppercase;
-          color: var(--text);
-          text-decoration: none;
-          display: block;
-          margin-bottom: 1.25rem;
-        }
-
-        .footer-brand span { color: var(--gold); }
-
-        .footer-tagline {
-          font-size: 0.78rem;
-          color: var(--text-3);
-          line-height: 1.85;
-          max-width: 240px;
-        }
-
-        .footer-col-title {
-          font-size: 0.58rem;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: var(--text-2);
-          margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0.85rem;
-        }
-
-        .footer-links a {
-          font-size: 0.78rem;
-          color: var(--text-3);
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover { color: var(--text-2); }
-
-        .footer-newsletter-desc {
-          font-size: 0.75rem;
-          color: var(--text-3);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
-        }
-
-        .footer-form {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .footer-input-wrap {
-          display: flex;
-          gap: 0;
-        }
-
-        .footer-input {
-          flex: 1;
-          background: var(--bg-3);
-          border: 1px solid var(--border-2);
-          border-right: none;
-          color: var(--text);
-          font-family: 'Inter', sans-serif;
-          font-size: 0.72rem;
-          padding: 0.75rem 1rem;
-          outline: none;
-          transition: border-color 0.3s ease;
-        }
-
-        .footer-input::placeholder { color: var(--text-3); }
-        .footer-input:focus { border-color: var(--gold-dim); }
-
-        .footer-submit {
-          background: transparent;
-          border: 1px solid var(--gold-dim);
-          color: var(--gold);
-          font-family: 'Inter', sans-serif;
-          font-size: 0.6rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          padding: 0.75rem 1.25rem;
-          cursor: pointer;
-          transition: background 0.3s ease, color 0.3s ease;
-          white-space: nowrap;
-        }
-
-        .footer-submit:hover {
-          background: var(--gold);
-          color: var(--bg);
-        }
-
-        .footer-msg {
-          font-size: 0.7rem;
-          letter-spacing: 0.05em;
-        }
-
-        .footer-msg--success { color: #6abf6a; }
-        .footer-msg--error { color: #bf6a6a; }
-
-        .footer-bottom {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .footer-copy {
-          font-size: 0.65rem;
-          color: var(--text-3);
-          letter-spacing: 0.04em;
-          opacity: 0.6;
-        }
-
-        .footer-note {
-          font-size: 0.65rem;
-          color: var(--text-3);
-          font-style: italic;
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          opacity: 0.5;
-        }
-
-        @media (max-width: 1100px) {
-          .footer { padding: 5rem 2.5rem 3rem; }
-          .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        }
-
-        @media (max-width: 768px) {
-          .footer { padding: 4rem 1.5rem 2.5rem; }
-          .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-          .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
-          .footer-tagline { max-width: 100%; }
-        }
-      `}</style>
-
-      {isCartOpen && (
-        <div className="cart-overlay" onClick={handleCloseCart} aria-hidden="true" />
-      )}
-
-      <aside
-        className={`cart-panel ${isCartOpen ? 'cart-panel--open' : ''}`}
-        aria-label="Carrito de compras"
-        aria-hidden={!isCartOpen}
-      >
-        <div className="cart-panel-header">
-          <div>
-            <div className="cart-panel-label">YOUR ARCHIVE</div>
-            <h2 className="cart-panel-title">The Cart</h2>
-          </div>
-          <button
-            onClick={handleCloseCart}
-            className="cart-close"
-            aria-label="Cerrar carrito"
-          >
-            ×
-          </button>
-        </div>
-
-        <div className="cart-panel-body">
-          {cart.length === 0 ? (
-            <p className="cart-empty">
-              No pieces in your archive yet.<br />
-              Start curating your collection.
-            </p>
-          ) : (
-            <ul className="cart-items" role="list">
-              {cart.map((item) => (
-                <li key={item.id} className="cart-item" role="listitem">
-                  <div className="cart-item-num" aria-hidden="true">{item.number}</div>
-                  <div className="cart-item-info">
-                    <div className="cart-item-player">{item.player}</div>
-                    <div className="cart-item-detail">{item.detail}</div>
-                    <div className="cart-item-era">{item.era}</div>
-                    <div className="cart-item-qty">Quantity: {item.quantity}</div>
-                    <button
-                      onClick={() => handleRemoveFromCart(item.id)}
-                      className="cart-item-remove"
-                      aria-label={`Quitar ${item.player} del carrito`}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {cart.length > 0 && (
-          <div className="cart-panel-footer">
-            <div className="cart-total-row">
-              <span className="cart-total-label">TOTAL ITEMS</span>
-              <span className="cart-total-value">{cartCount}</span>
-            </div>
-            <button className="cart-checkout-btn">
-              Proceed to Checkout
-            </button>
-          </div>
-        )}
-      </aside>
     </>
   );
 }
