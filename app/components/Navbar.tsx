@@ -1,35 +1,42 @@
 "use client";
 
-type NavbarProps = {
-  cartCount: number;
-  onCartClick: () => void;
-};
+import Link from "next/link";
+import { useCart } from "./CartProvider";
 
-export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
+export default function Navbar() {
+  const { count, openCart } = useCart();
+
   return (
     <nav className="navbar" aria-label="Navegación principal">
-      <a href="#" onClick={(e) => e.preventDefault()} className="nav-brand">
+      <Link href="/" className="nav-brand">
         The <span>Archive</span>
-      </a>
+      </Link>
+
       <ul className="nav-links" role="list">
-        <li role="listitem"><a href="#legends">Legends</a></li>
-        <li role="listitem"><a href="#finals">Eternal Finals</a></li>
-        <li role="listitem"><a href="#numbers">Immortal Numbers</a></li>
-        <li role="listitem"><a href="#history">Made History</a></li>
-        <li role="listitem"><a href="#drops">Iconic Drops</a></li>
+        <li>
+          <Link href="/products">Catálogo</Link>
+        </li>
+        <li>
+          <Link href="/products?category=leyendas">Leyendas</Link>
+        </li>
+        <li>
+          <Link href="/products?category=finales">Finales</Link>
+        </li>
+        <li>
+          <Link href="/products?category=drops-iconicos">Drops</Link>
+        </li>
       </ul>
+
       <div className="nav-utils">
-        <a href="#" onClick={(e) => e.preventDefault()}>Archive</a>
-        <a href="#" onClick={(e) => e.preventDefault()}>About</a>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            onCartClick();
-          }}
+        <Link href="/login">Cuenta</Link>
+        <button
+          type="button"
+          className="nav-cart-btn"
+          onClick={openCart}
+          aria-label={`Abrir carrito, ${count} ${count === 1 ? "artículo" : "artículos"}`}
         >
-          Cart ({cartCount})
-        </a>
+          Carrito ({count})
+        </button>
       </div>
     </nav>
   );
