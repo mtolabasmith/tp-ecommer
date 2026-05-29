@@ -141,7 +141,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <Link href="/products?category=leyendas" className="section-link">
+            <Link href="/legends" className="section-link">
               Explorar leyendas
             </Link>
           </div>
@@ -233,14 +233,14 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <Link href="/products?category=finales" className="section-link">
+            <Link href="/finals" className="section-link">
               Ver finales
             </Link>
           </div>
         </div>
 
         <div className="finals-layout">
-          <Link href="/products?category=finales" className="jersey-card finals-feature">
+          <Link href="/finals" className="jersey-card finals-feature">
             <div className="jersey-card-image">
               <span className="card-ghost-num" style={{ fontSize: "9rem" }} aria-hidden="true">
                 1
@@ -257,7 +257,7 @@ export default function HomePage() {
           </Link>
 
           <div className="finals-sidebar">
-            <Link href="/products?category=finales" className="finals-sidebar-card">
+            <Link href="/finals" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">5</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -269,7 +269,7 @@ export default function HomePage() {
               </div>
             </Link>
 
-            <Link href="/products?category=finales" className="finals-sidebar-card">
+            <Link href="/finals" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">3</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -281,7 +281,7 @@ export default function HomePage() {
               </div>
             </Link>
 
-            <Link href="/products?category=finales" className="finals-sidebar-card">
+            <Link href="/finals" className="finals-sidebar-card">
               <div className="finals-sidebar-image">
                 <span className="finals-sidebar-num" aria-hidden="true">10</span>
                 <JerseySvg className="jersey-svg-sm" />
@@ -308,6 +308,11 @@ export default function HomePage() {
               Numbers That<br />
               <em>Became Mythology</em>
             </h2>
+          </div>
+          <div className="section-right">
+            <Link href="/numbers" className="section-link">
+              Explorar números
+            </Link>
           </div>
         </div>
 
@@ -390,7 +395,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <Link href="/products?category=leyendas" className="btn-primary">
+            <Link href="/legends" className="btn-primary">
               Ver leyendas
             </Link>
           </div>
@@ -411,7 +416,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="section-right">
-            <Link href="/products?category=drops-iconicos" className="section-link">
+            <Link href="/drops" className="section-link">
               Ver todos los drops
             </Link>
           </div>
