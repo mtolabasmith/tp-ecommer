@@ -28,7 +28,7 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-utils">
-        <Link href="/login">Cuenta</Link>
+        <Link href="/account">Cuenta</Link>
         <button
           type="button"
           className="nav-cart-btn"
