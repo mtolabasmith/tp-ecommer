@@ -95,7 +95,13 @@ export default function ProductCatalog() {
         </div>
       </div>
 
-      {loading && <p className="catalog-state" aria-live="polite">Loading catalog…</p>}
+      {loading && (
+        <div className="catalog-grid" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="skeleton-card" />
+          ))}
+        </div>
+      )}
 
       {error && (
         <p className="catalog-state catalog-state--error" role="alert">

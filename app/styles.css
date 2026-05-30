@@ -13,7 +13,7 @@
   --bg-4:     #201e19;
   --text:     #ede7d9;
   --text-2:   #9b9082;
-  --text-3:   #5e5750;
+  --text-3:   #877e72;
   --gold:     #c8a84b;
   --gold-dim: #7d6628;
   --border:   #252219;
@@ -411,7 +411,6 @@ a {
 ============================================================ */
 
 .section {
-  min-height: calc(100svh - var(--nav-h));
   padding: var(--section-pad-y) 4rem;
   border-top: 1px solid var(--border);
   display: flex;
@@ -510,7 +509,7 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   transition: border-color 0.4s ease;
 }
 
@@ -704,7 +703,7 @@ a {
 
 
 
-.finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
+.finals-feature .jersey-card-image { aspect-ratio: 3 / 4; }
 
 .finals-sidebar {
   display: flex;
@@ -785,7 +784,9 @@ a {
    SECTION 03 — IMMORTAL NUMBERS
 ============================================================ */
 
-.numbers { background: var(--bg); }
+.numbers {
+  background: radial-gradient(ellipse 55% 55% at 82% 22%, rgba(200, 168, 75, 0.05), transparent 70%), var(--bg);
+}
 
 .number-title {
   font-family: 'Cormorant Garamond', serif;
@@ -863,7 +864,9 @@ margin-top: 7rem;
    SECTION 04 — JERSEYS THAT MADE HISTORY
 ============================================================ */
 
-.history { background: var(--bg-2); }
+.history {
+  background: radial-gradient(ellipse 55% 55% at 18% 22%, rgba(200, 168, 75, 0.045), transparent 70%), var(--bg-2);
+}
 
 .history-layout {
   display: block;
@@ -1086,7 +1089,7 @@ flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   transition: border-color 0.4s ease;
 }
 
@@ -1253,16 +1256,16 @@ flex-direction: column;
   .section-header { flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; }
   .section-title { font-size: clamp(1.75rem, 8vw, 2.5rem); line-height: 1.1; }
   .section-right { max-width: 100%; }
-  .jersey-card-image { aspect-ratio: 4 / 3; min-height: auto; }
+  .jersey-card-image { aspect-ratio: 3 / 4; min-height: auto; }
   .jersey-svg-lg { max-width: 35%; }
   .card-ghost-num { font-size: 4rem !important; }
   .legends-carousel { gap: 0.5rem; }
   .legends-carousel .legends-grid { gap: 1.5rem; }
   .legends-grid { grid-template-columns: 1fr; }
   .legends-grid .jersey-card:first-child { grid-column: unset; }
-  .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 4 / 3; }
+  .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 3 / 4; }
   .finals-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-  .finals-feature .jersey-card-image { aspect-ratio: 4 / 3; }
+  .finals-feature .jersey-card-image { aspect-ratio: 3 / 4; }
   .numbers-grid { grid-template-columns: 1fr; }
   .history-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .history-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
@@ -1422,7 +1425,7 @@ flex-direction: column;
   .nav-brand { font-size: 0.75rem; letter-spacing: 0.25em; }
   .hero { padding: 4rem 1rem 3rem; }
   .section { padding: 3.5rem 1rem; }
-  .jersey-card-image { aspect-ratio: 5 / 4; }
+  .jersey-card-image { aspect-ratio: 3 / 4; }
 }
 
 /* ============================================================

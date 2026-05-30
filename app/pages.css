@@ -839,3 +839,104 @@
 .footer-msg--error {
   color: #bf6a6a;
 }
+
+/* —— Accesibilidad: foco visible por teclado —— */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* —— Skeleton loaders —— */
+.skeleton-card {
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--border);
+  background: linear-gradient(100deg, var(--bg-3) 30%, var(--bg-4) 50%, var(--bg-3) 70%);
+  background-size: 300% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card { animation: none; }
+}
+
+/* —— Navbar mobile (hamburguesa) —— */
+.nav-burger {
+  display: none;
+}
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--border-2);
+    cursor: pointer;
+  }
+  .nav-burger span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    margin: 0 auto;
+    background: var(--text-2);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .nav-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: rgba(13, 12, 10, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1.5rem 1.25rem;
+    transform: translateY(-120%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150;
+  }
+  .nav-mobile.is-open {
+    transform: translateY(0);
+  }
+  .nav-mobile a {
+    padding: 0.9rem 0;
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile a:last-child {
+    border-bottom: none;
+  }
+  .nav-mobile a:hover {
+    color: var(--gold);
+  }
+}

@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: "The Archive — Football Heritage Collection",
   description:
     "Online store of historic football jerseys. Legends, eternal finals and iconic drops.",
+  openGraph: {
+    title: "The Archive — Football Heritage Collection",
+    description:
+      "Online store of historic football jerseys. Legends, eternal finals and iconic drops.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
