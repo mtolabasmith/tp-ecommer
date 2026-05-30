@@ -42,6 +42,12 @@ export default function HomePage() {
   const legends = products.filter((p) => p.category === "leyendas");
   const finals = products.filter((p) => p.category === "finales");
   const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
+  const spotlightProduct = products.find(
+    (p) => /maradona/i.test(p.name) && p.name.includes("1986")
+  );
+  const spotlightImage =
+    spotlightProduct?.image_url ??
+    "/camisetas/leyendas/maradona/maradona-argentina-86-home.jpg";
 
   const visibleCount = 3;
   // En el home mostramos solo 10 leyendas como muestra; el catálogo completo está en /legends
@@ -414,8 +420,12 @@ export default function HomePage() {
         <div className="spotlight-inner">
           <div>
             <div className="spotlight-jersey-box">
-              <span className="spotlight-ghost-num" aria-hidden="true">10</span>
-              <JerseySvg className="jersey-svg-lg" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={spotlightImage}
+                alt="Maradona — Argentina, World Cup 1986"
+                className="spotlight-photo"
+              />
               <div className="spotlight-caption">
                 <div className="spotlight-caption-text">
                   Argentina · World Cup 1986 · No. 10 — Ref. ARG-86-10
@@ -456,7 +466,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <Link href="/legends" className="btn-primary">
+            <Link
+              href={spotlightProduct ? `/products/${spotlightProduct.id}` : "/legends"}
+              className="btn-primary"
+            >
               View This Piece
             </Link>
           </div>

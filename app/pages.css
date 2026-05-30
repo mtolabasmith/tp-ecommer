@@ -840,6 +840,14 @@
   color: #bf6a6a;
 }
 
+/* —— Spotlight / Featured Exhibit: foto del producto —— */
+.spotlight-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 /* —— Accesibilidad: foco visible por teclado —— */
 a:focus-visible,
 button:focus-visible,
