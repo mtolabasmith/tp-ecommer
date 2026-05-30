@@ -866,14 +866,12 @@ margin-top: 7rem;
 .history { background: var(--bg-2); }
 
 .history-layout {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 7rem;
-  margin-top: -8rem;
+  display: block;
+  margin-top: 0;
 }
 
-.history-layout .section-right {
- margin-top: 6rem;
+.history-layout .history-timeline {
+  max-width: 820px;
 }
 
 .history-timeline { 
