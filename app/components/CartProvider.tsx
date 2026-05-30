@@ -16,6 +16,7 @@ type CartContextValue = {
   count: number;
   total: number;
   isOpen: boolean;
+  toast: string | null;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -31,6 +32,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   // Cargar el carrito guardado al montar
   useEffect(() => {
@@ -56,6 +58,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, hydrated]);
 
+  // Auto-ocultar el toast tras unos segundos
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2500);
+    return () => clearTimeout(t);
+  }, [toast]);
+
   const addItem = useCallback((product: Product, quantity = 1) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id);
@@ -66,7 +75,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...product, quantity }];
     });
-    setIsOpen(true);
+    setToast(product.name);
   }, []);
 
   const removeItem = useCallback((id: string) => {
@@ -99,6 +108,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     count,
     total,
     isOpen,
+    toast,
     addItem,
     removeItem,
     updateQuantity,

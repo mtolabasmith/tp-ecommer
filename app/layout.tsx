@@ -7,6 +7,7 @@ import { CartProvider } from "./components/CartProvider";
 import Navbar from "./components/Navbar";
 import SiteFooter from "./components/SiteFooter";
 import CartDrawer from "./components/CartDrawer";
+import Toast from "./components/Toast";
 
 export const metadata: Metadata = {
   title: "The Archive — Football Heritage Collection",
@@ -33,6 +34,7 @@ export default function RootLayout({
           {children}
           <SiteFooter />
           <CartDrawer />
+          <Toast />
         </CartProvider>
       </body>
     </html>

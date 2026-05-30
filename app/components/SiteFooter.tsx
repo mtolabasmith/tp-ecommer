@@ -111,7 +111,12 @@ export default function SiteFooter() {
 
         <div className="footer-bottom">
           <p className="footer-copy">© 2026 The Archive. All rights reserved.</p>
-          <p className="footer-note">Where football becomes heritage.</p>
+          <nav className="footer-bottom-nav" aria-label="Information">
+            <Link href="/about">About</Link>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/faq#shipping">Shipping</Link>
+            <Link href="/faq#returns">Returns</Link>
+          </nav>
         </div>
       </div>
     </footer>

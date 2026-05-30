@@ -160,6 +160,37 @@
 .catalog-search input:focus {
   border-color: var(--gold-dim);
 }
+.catalog-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.catalog-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.catalog-control select {
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+.catalog-price input[type="range"] {
+  accent-color: var(--gold);
+  cursor: pointer;
+  width: 140px;
+}
+
 .catalog-count {
   font-size: 0.62rem;
   letter-spacing: 0.16em;
@@ -846,6 +877,97 @@
   height: 100%;
   object-fit: contain;
   display: block;
+}
+
+/* —— Páginas de contenido (About / FAQ) —— */
+.info-prose {
+  max-width: 720px;
+}
+.info-prose p {
+  color: var(--text-2);
+  line-height: 1.9;
+  margin-bottom: 1.25rem;
+  font-size: 0.92rem;
+}
+.info-prose strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.info-prose h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 2.5rem 0 1rem;
+}
+.info-prose section:first-of-type h2 {
+  margin-top: 1rem;
+}
+.faq-item {
+  border-top: 1px solid var(--border);
+  padding: 1.1rem 0;
+}
+.faq-item h3 {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.faq-item p {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+.info-prose .btn-primary {
+  margin-top: 1.5rem;
+}
+
+/* —— Footer: nav inferior (About / FAQ) —— */
+.footer-bottom-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-bottom-nav a {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-bottom-nav a:hover {
+  color: var(--gold);
+}
+
+/* —— Toast (feedback al agregar al carrito) —— */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translate(-50%, 160%);
+  z-index: 320;
+  background: var(--bg-3);
+  border: 1px solid var(--gold-dim);
+  color: var(--text);
+  padding: 0.85rem 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+}
+.toast--show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.toast strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: opacity 0.2s ease;
+  }
 }
 
 /* —— Accesibilidad: foco visible por teclado —— */

@@ -12,6 +12,13 @@ const CATEGORIES = [
   { value: "drops-iconicos", label: "Iconic Drops" },
 ];
 
+const SORTS = [
+  { value: "featured", label: "Featured" },
+  { value: "price-asc", label: "Price ↑" },
+  { value: "price-desc", label: "Price ↓" },
+  { value: "name", label: "Name A–Z" },
+];
+
 export default function ProductCatalog() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -21,6 +28,8 @@ export default function ProductCatalog() {
   const [loadedCategory, setLoadedCategory] = useState<string | null>(null);
   const [errorCategory, setErrorCategory] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("featured");
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -52,6 +61,11 @@ export default function ProductCatalog() {
   const loading = loadedCategory !== category && errorCategory !== category;
   const error = errorCategory === category;
 
+  const priceCeil = products.length
+    ? Math.ceil(Math.max(...products.map((p) => p.price)))
+    : 0;
+  const effectiveMax = maxPrice ?? priceCeil;
+
   function selectCategory(value: string) {
     const params = new URLSearchParams();
     if (value) params.set("category", value);
@@ -59,9 +73,12 @@ export default function ProductCatalog() {
     router.push(`/products${qs ? `?${qs}` : ""}`);
   }
 
-  const visible = products.filter((p) =>
-    p.name.toLowerCase().includes(search.trim().toLowerCase())
-  );
+  let visible = products
+    .filter((p) => p.name.toLowerCase().includes(search.trim().toLowerCase()))
+    .filter((p) => p.price <= effectiveMax);
+  if (sort === "price-asc") visible = [...visible].sort((a, b) => a.price - b.price);
+  else if (sort === "price-desc") visible = [...visible].sort((a, b) => b.price - a.price);
+  else if (sort === "name") visible = [...visible].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
@@ -93,6 +110,34 @@ export default function ProductCatalog() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+      </div>
+
+      <div className="catalog-controls">
+        <label className="catalog-control">
+          <span>Sort</span>
+          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+            {SORTS.map((s) => (
+              <option key={s.value} value={s.value}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {priceCeil > 0 && (
+          <label className="catalog-control catalog-price">
+            <span>Up to ${effectiveMax}</span>
+            <input
+              type="range"
+              min={0}
+              max={priceCeil}
+              step={5}
+              value={effectiveMax}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              aria-label="Maximum price"
+            />
+          </label>
+        )}
       </div>
 
       {loading && (

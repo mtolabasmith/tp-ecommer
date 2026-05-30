@@ -32,6 +32,7 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-utils">
+        <Link href="/about">About</Link>
         <Link href="/account">Account</Link>
         <button
           type="button"
@@ -62,6 +63,12 @@ export default function Navbar() {
         ))}
         <Link href="/products" onClick={close}>
           Catalog
+        </Link>
+        <Link href="/about" onClick={close}>
+          About
+        </Link>
+        <Link href="/faq" onClick={close}>
+          FAQ
         </Link>
         <Link href="/account" onClick={close}>
           Account
