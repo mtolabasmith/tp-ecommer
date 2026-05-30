@@ -416,8 +416,8 @@ a {
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  scroll-margin-top: 68px;
+  justify-content: flex-start;
+  scroll-margin-top: var(--nav-h);
 }
 
 .section-header {
@@ -583,7 +583,7 @@ a {
 
 .legends { background: var(--bg); }
 
-.legends .section-header { margin-top: -1rem; }
+.legends .section-header { margin-top: 0; }
 
 .legends .section-right { align-self: flex-end; }
 
@@ -1063,7 +1063,7 @@ flex-direction: column;
     background: var(--bg-3);
     ;
 }
-.section.drops .section-header { margin-top: -10rem; }
+.section.drops .section-header { margin-top: 0; }
 
 .drops-grid {
   display: grid;
