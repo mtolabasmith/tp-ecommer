@@ -134,8 +134,15 @@ scripts/gen-catalog.mjs    # Genera el catálogo de respaldo desde el seed
 ## 📜 Scripts
 
 ```bash
-npm run dev     # desarrollo
-npm run build   # build de producción
-npm run start   # servir el build
-npm run lint    # linter
+npm run dev       # desarrollo
+npm run build     # build de producción
+npm run start     # servir el build
+npm run lint      # linter
+npm test          # tests unitarios (Vitest)
+npm run test:e2e  # tests end-to-end (Playwright)
 ```
+
+## ✅ Tests
+
+- **Vitest** (unitarios): `npm test` — cubre la capa de datos (`lib/products`, fallback del catálogo) y los helpers (`lib/format`). Corren sin red ni base de datos. Se ejecutan también en CI.
+- **Playwright** (e2e): primero `npx playwright install`, luego `npm run test:e2e` — levanta la app y prueba el flujo home → catálogo → agregar al carrito.
