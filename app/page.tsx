@@ -40,6 +40,7 @@ export default function HomePage() {
   }, []);
 
   const legends = products.filter((p) => p.category === "leyendas");
+  const finals = products.filter((p) => p.category === "finales");
   const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
 
   const visibleCount = 3;
@@ -241,58 +242,54 @@ export default function HomePage() {
         </div>
 
         <div className="finals-layout">
-          <Link href="/finals" className="jersey-card finals-feature">
-            <div className="jersey-card-image">
-              <span className="card-ghost-num" style={{ fontSize: "9rem" }} aria-hidden="true">
-                1
-              </span>
-              <JerseySvg className="jersey-svg-lg" />
-            </div>
-            <div className="jersey-card-info">
-              <div className="match-tag" style={{ display: "inline-block", marginBottom: "0.75rem" }}>
-                Champions League Final · 1999
+          {finals[0] && (
+            <Link href={`/products/${finals[0].id}`} className="jersey-card finals-feature">
+              <div className="jersey-card-image">
+                {finals[0].image_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={finals[0].image_url}
+                    alt={finals[0].name}
+                    className="jersey-photo"
+                    loading="lazy"
+                  />
+                ) : (
+                  <JerseySvg className="jersey-svg-lg" />
+                )}
               </div>
-              <div className="jersey-card-player">Manchester United</div>
-              <div className="jersey-card-detail">Treble Season · Camp Nou · 26 May</div>
-            </div>
-          </Link>
+              <div className="jersey-card-info">
+                <div className="jersey-card-player">{finals[0].name}</div>
+                <div className="jersey-card-era">{formatPrice(finals[0].price)}</div>
+              </div>
+            </Link>
+          )}
 
           <div className="finals-sidebar">
-            <Link href="/finals" className="finals-sidebar-card">
-              <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num" aria-hidden="true">5</span>
-                <JerseySvg className="jersey-svg-sm" />
-              </div>
-              <div className="finals-sidebar-info">
-                <div className="match-tag">World Cup Final · 2006</div>
-                <div className="sidebar-player">Italy</div>
-                <div className="sidebar-detail">Azzurri · Berlin · July 9</div>
-              </div>
-            </Link>
-
-            <Link href="/finals" className="finals-sidebar-card">
-              <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num" aria-hidden="true">3</span>
-                <JerseySvg className="jersey-svg-sm" />
-              </div>
-              <div className="finals-sidebar-info">
-                <div className="match-tag">Champions League Final · 2005</div>
-                <div className="sidebar-player">Liverpool</div>
-                <div className="sidebar-detail">Istanbul · The great comeback</div>
-              </div>
-            </Link>
-
-            <Link href="/finals" className="finals-sidebar-card">
-              <div className="finals-sidebar-image">
-                <span className="finals-sidebar-num" aria-hidden="true">10</span>
-                <JerseySvg className="jersey-svg-sm" />
-              </div>
-              <div className="finals-sidebar-info">
-                <div className="match-tag">World Cup Final · 1970</div>
-                <div className="sidebar-player">Brazil</div>
-                <div className="sidebar-detail">Mexico City · The beautiful game</div>
-              </div>
-            </Link>
+            {finals.slice(1, 4).map((item) => (
+              <Link
+                href={`/products/${item.id}`}
+                className="finals-sidebar-card"
+                key={item.id}
+              >
+                <div className="finals-sidebar-image">
+                  {item.image_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.image_url}
+                      alt={item.name}
+                      className="jersey-photo"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <JerseySvg className="jersey-svg-sm" />
+                  )}
+                </div>
+                <div className="finals-sidebar-info">
+                  <div className="sidebar-player">{item.name}</div>
+                  <div className="sidebar-detail">{formatPrice(item.price)}</div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
