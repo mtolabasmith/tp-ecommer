@@ -44,7 +44,8 @@ export default function HomePage() {
   const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
 
   const visibleCount = 3;
-  const carouselPool = legends;
+  // En el home mostramos solo 10 leyendas como muestra; el catálogo completo está en /legends
+  const carouselPool = legends.slice(0, 10);
 
   const handleNext = () => {
     if (carouselPool.length === 0) return;
