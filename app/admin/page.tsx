@@ -4,7 +4,7 @@ import { requireAdmin } from "@/lib/auth";
 import AdminClient from "./AdminClient";
 
 export const metadata: Metadata = {
-  title: "Panel admin — The Archive",
+  title: "Admin panel — The Archive",
 };
 
 export default async function AdminPage() {
@@ -16,17 +16,17 @@ export default async function AdminPage() {
         <header className="subpage-header">
           <div className="section-label">
             <span className="section-label-num">—</span>
-            Administración
+            Administration
           </div>
           <h1 className="section-title">
-            Acceso <em>restringido</em>
+            Access <em>restricted</em>
           </h1>
         </header>
         <p className="catalog-state">
-          Necesitás iniciar sesión como administrador para entrar al panel.
+          You need to sign in as an administrator to access the panel.
         </p>
         <Link href="/login?redirect=/admin" className="btn-primary">
-          Iniciar sesión
+          Sign in
         </Link>
       </main>
     );

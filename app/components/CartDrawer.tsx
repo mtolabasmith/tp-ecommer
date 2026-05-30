@@ -16,7 +16,7 @@ export default function CartDrawer() {
 
       <aside
         className={`cart-panel ${isOpen ? "cart-panel--open" : ""}`}
-        aria-label="Carrito de compras"
+        aria-label="Shopping cart"
         aria-hidden={!isOpen}
       >
         <div className="cart-panel-header">
@@ -24,7 +24,7 @@ export default function CartDrawer() {
             <div className="cart-panel-label">YOUR ARCHIVE</div>
             <h2 className="cart-panel-title">The Cart</h2>
           </div>
-          <button onClick={closeCart} className="cart-close" aria-label="Cerrar carrito">
+          <button onClick={closeCart} className="cart-close" aria-label="Close cart">
             ×
           </button>
         </div>
@@ -32,9 +32,9 @@ export default function CartDrawer() {
         <div className="cart-panel-body">
           {items.length === 0 ? (
             <p className="cart-empty">
-              No hay piezas en tu archivo todavía.
+              No pieces in your archive yet.
               <br />
-              Empezá a curar tu colección.
+              Start curating your collection.
             </p>
           ) : (
             <ul className="cart-items" role="list">
@@ -53,7 +53,7 @@ export default function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        aria-label={`Restar uno de ${item.name}`}
+                        aria-label={`Decrease quantity of ${item.name}`}
                       >
                         −
                       </button>
@@ -61,7 +61,7 @@ export default function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        aria-label={`Sumar uno de ${item.name}`}
+                        aria-label={`Increase quantity of ${item.name}`}
                       >
                         +
                       </button>
@@ -69,9 +69,9 @@ export default function CartDrawer() {
                     <button
                       onClick={() => removeItem(item.id)}
                       className="cart-item-remove"
-                      aria-label={`Quitar ${item.name} del carrito`}
+                      aria-label={`Remove ${item.name} from cart`}
                     >
-                      Quitar
+                      Remove
                     </button>
                   </div>
                 </li>
@@ -92,14 +92,10 @@ export default function CartDrawer() {
               onClick={closeCart}
               style={{ display: "block", textAlign: "center", textDecoration: "none" }}
             >
-              Finalizar compra
+              Checkout
             </Link>
-            <Link
-              href="/cart"
-              onClick={closeCart}
-              className="cart-view-link"
-            >
-              Ver carrito completo
+            <Link href="/cart" onClick={closeCart} className="cart-view-link">
+              View full cart
             </Link>
           </div>
         )}

@@ -14,22 +14,22 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const admin = await requireAdmin();
   if (!admin) {
-    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   if (!isAdminConfigured) {
     return NextResponse.json(
-      { error: "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor" },
+      { error: "Missing SUPABASE_SERVICE_ROLE_KEY on the server" },
       { status: 500 }
     );
   }
 
   const body = await request.json().catch(() => null);
   if (!body || typeof body.name !== "string" || !body.name.trim()) {
-    return NextResponse.json({ error: "name es obligatorio" }, { status: 400 });
+    return NextResponse.json({ error: "name is required" }, { status: 400 });
   }
   if (typeof body.price !== "number" || body.price < 0) {
     return NextResponse.json(
-      { error: "price debe ser un número >= 0" },
+      { error: "price must be a number >= 0" },
       { status: 400 }
     );
   }

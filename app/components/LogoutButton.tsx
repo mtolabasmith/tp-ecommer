@@ -15,7 +15,7 @@ export default function LogoutButton() {
         router.refresh();
       }}
     >
-      Cerrar sesión
+      Sign out
     </button>
   );
 }

@@ -6,10 +6,10 @@ import ProductCard from "@/app/components/ProductCard";
 import type { Product } from "@/lib/types";
 
 const CATEGORIES = [
-  { value: "", label: "Todas" },
-  { value: "leyendas", label: "Leyendas" },
-  { value: "finales", label: "Finales" },
-  { value: "drops-iconicos", label: "Drops icónicos" },
+  { value: "", label: "All" },
+  { value: "leyendas", label: "Legends" },
+  { value: "finales", label: "Finals" },
+  { value: "drops-iconicos", label: "Iconic Drops" },
 ];
 
 export default function ProductCatalog() {
@@ -48,7 +48,7 @@ export default function ProductCatalog() {
     };
   }, [category]);
 
-  // Estado derivado: evita setState síncrono dentro del effect.
+  // Derived state: avoids calling setState synchronously inside the effect.
   const loading = loadedCategory !== category && errorCategory !== category;
   const error = errorCategory === category;
 
@@ -66,7 +66,7 @@ export default function ProductCatalog() {
   return (
     <>
       <div className="catalog-toolbar">
-        <div className="catalog-filters" role="tablist" aria-label="Filtrar por categoría">
+        <div className="catalog-filters" role="tablist" aria-label="Filter by category">
           {CATEGORIES.map((c) => (
             <button
               key={c.value || "all"}
@@ -83,34 +83,34 @@ export default function ProductCatalog() {
 
         <div className="catalog-search">
           <label htmlFor="catalog-search-input" className="sr-only">
-            Buscar camiseta
+            Search jersey
           </label>
           <input
             id="catalog-search-input"
             type="search"
-            placeholder="Buscar por nombre…"
+            placeholder="Search by name…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
 
-      {loading && <p className="catalog-state" aria-live="polite">Cargando catálogo…</p>}
+      {loading && <p className="catalog-state" aria-live="polite">Loading catalog…</p>}
 
       {error && (
         <p className="catalog-state catalog-state--error" role="alert">
-          No pudimos cargar el catálogo. Intentá de nuevo más tarde.
+          We couldn&apos;t load the catalog. Please try again later.
         </p>
       )}
 
       {!loading && !error && visible.length === 0 && (
-        <p className="catalog-state">No hay productos para esta búsqueda.</p>
+        <p className="catalog-state">No products match your search.</p>
       )}
 
       {!loading && !error && visible.length > 0 && (
         <>
           <p className="catalog-count" aria-live="polite">
-            {visible.length} {visible.length === 1 ? "pieza" : "piezas"}
+            {visible.length} {visible.length === 1 ? "piece" : "pieces"}
           </p>
           <div className="catalog-grid">
             {visible.map((product) => (

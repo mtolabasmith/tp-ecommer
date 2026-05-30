@@ -10,7 +10,7 @@ type Params = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { id } = await params;
   const product = await getProduct(id);
-  if (!product) return { title: "Producto no encontrado — The Archive" };
+  if (!product) return { title: "Product not found — The Archive" };
   return {
     title: `${product.name} — The Archive`,
     description: product.description,
@@ -25,7 +25,7 @@ export default async function ProductDetailPage({ params }: Params) {
   return (
     <main className="subpage">
       <Link href="/products" className="back-link">
-        ← Volver al catálogo
+        ← Back to catalog
       </Link>
 
       <div className="detail-layout">
@@ -52,8 +52,8 @@ export default async function ProductDetailPage({ params }: Params) {
           <p className="detail-desc">{product.description}</p>
           <div className="detail-stock">
             {product.stock > 0
-              ? `${product.stock} unidades en stock`
-              : "Sin stock disponible"}
+              ? `${product.stock} in stock`
+              : "Out of stock"}
           </div>
 
           <AddToCartButton product={product} />

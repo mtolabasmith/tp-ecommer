@@ -4,11 +4,11 @@ export default function NotFound() {
   return (
     <main className="subpage checkout-result">
       <h1 className="section-title">
-        404 — <em>Pieza no encontrada</em>
+        404 — <em>Piece not found</em>
       </h1>
-      <p className="catalog-state">La página que buscás no existe en el archivo.</p>
+      <p className="catalog-state">The page you&apos;re looking for doesn&apos;t exist in the archive.</p>
       <Link href="/products" className="btn-primary">
-        Ir al catálogo
+        Go to catalog
       </Link>
     </main>
   );

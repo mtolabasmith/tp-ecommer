@@ -5,7 +5,7 @@ import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
 import { formatPrice } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "Compra — The Archive",
+  title: "Order — The Archive",
 };
 
 type SearchParams = {
@@ -22,7 +22,7 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
 
   if (order && isAdminConfigured) {
     const supabase = createAdminClient();
-    // En modo demo (sin Mercado Pago) confirmamos la orden acá.
+    // Demo mode (no Mercado Pago): confirm the order here.
     if (demo === "1") {
       await supabase
         .from("orders")
@@ -49,12 +49,12 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
 
       {failed ? (
         <>
-          <h1 className="section-title">Pago no completado</h1>
+          <h1 className="section-title">Payment not completed</h1>
           <p className="catalog-state">
-            El pago no se pudo procesar. Podés intentar de nuevo desde tu carrito.
+            The payment could not be processed. You can try again from your cart.
           </p>
           <Link href="/cart" className="btn-primary">
-            Volver al carrito
+            Back to cart
           </Link>
         </>
       ) : (
@@ -63,18 +63,18 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
             ✓
           </div>
           <h1 className="section-title">
-            ¡Gracias por tu <em>compra</em>!
+            Thanks for your <em>purchase</em>!
           </h1>
           <p className="catalog-state">
             {displayStatus === "paid"
-              ? "Tu pago fue confirmado."
-              : "Recibimos tu orden. El estado del pago se actualizará en breve."}
+              ? "Your payment was confirmed."
+              : "We received your order. The payment status will update shortly."}
           </p>
 
           {orderData && (
             <div className="result-order">
               <div>
-                <span>Orden</span>
+                <span>Order</span>
                 <strong className="admin-mono">{orderData.id}</strong>
               </div>
               <div>
@@ -82,7 +82,7 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
                 <strong>{formatPrice(orderData.total)}</strong>
               </div>
               <div>
-                <span>Estado</span>
+                <span>Status</span>
                 <strong className={`order-status order-status--${displayStatus}`}>
                   {displayStatus}
                 </strong>
@@ -91,7 +91,7 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
           )}
 
           <Link href="/products" className="btn-primary">
-            Seguir explorando
+            Keep exploring
           </Link>
         </>
       )}

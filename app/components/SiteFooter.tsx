@@ -24,47 +24,47 @@ export default function SiteFooter() {
       <div className="footer-inner">
         <div className="footer-top">
           <div className="footer-brand-col">
-            <Link href="/" className="footer-brand" aria-label="The Archive - Volver al inicio">
+            <Link href="/" className="footer-brand" aria-label="The Archive - Back to home">
               The <span>Archive</span>
             </Link>
             <p className="footer-tagline">
-              Una colección patrimonial de las camisetas más icónicas del fútbol.
-              Cada pieza guarda una historia.
+              A heritage collection of football&apos;s most iconic jerseys. Each piece holds
+              a story. Each stitch carries a moment.
             </p>
           </div>
 
           <div className="footer-links-col">
-            <div className="footer-col-title">Colección</div>
-            <nav aria-label="Links de colección">
+            <div className="footer-col-title">Collection</div>
+            <nav aria-label="Collection links">
               <ul className="footer-links">
                 <li>
-                  <Link href="/products">Catálogo completo</Link>
+                  <Link href="/products">Full Catalog</Link>
                 </li>
                 <li>
-                  <Link href="/products?category=leyendas">Leyendas</Link>
+                  <Link href="/legends">Legends</Link>
                 </li>
                 <li>
-                  <Link href="/products?category=finales">Finales</Link>
+                  <Link href="/finals">Eternal Finals</Link>
                 </li>
                 <li>
-                  <Link href="/products?category=drops-iconicos">Drops icónicos</Link>
+                  <Link href="/drops">Iconic Drops</Link>
                 </li>
               </ul>
             </nav>
           </div>
 
           <div className="footer-links-col">
-            <div className="footer-col-title">Cuenta</div>
-            <nav aria-label="Links de cuenta">
+            <div className="footer-col-title">Account</div>
+            <nav aria-label="Account links">
               <ul className="footer-links">
                 <li>
-                  <Link href="/login">Iniciar sesión</Link>
+                  <Link href="/account">My Account</Link>
                 </li>
                 <li>
-                  <Link href="/cart">Mi carrito</Link>
+                  <Link href="/cart">My Cart</Link>
                 </li>
                 <li>
-                  <Link href="/admin">Panel admin</Link>
+                  <Link href="/login">Sign In</Link>
                 </li>
               </ul>
             </nav>
@@ -73,18 +73,18 @@ export default function SiteFooter() {
           <div className="footer-newsletter-col">
             <div className="footer-col-title">The Archive Letter</div>
             <p className="footer-newsletter-desc">
-              Nuevas piezas. Drops raros. Las historias detrás de las camisetas.
+              New pieces. Rare drops. The stories behind the jerseys.
             </p>
             <form className="footer-form" onSubmit={handleSubscribe} noValidate>
               <div className="footer-input-wrap">
                 <label htmlFor="newsletter-email" className="sr-only">
-                  Tu dirección de email
+                  Your email address
                 </label>
                 <input
                   id="newsletter-email"
                   type="email"
                   className="footer-input"
-                  placeholder="tu@email.com"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -92,17 +92,17 @@ export default function SiteFooter() {
                   }}
                 />
                 <button type="submit" className="footer-submit">
-                  Suscribirme
+                  Subscribe
                 </button>
               </div>
               {status === "success" && (
                 <p className="footer-msg footer-msg--success" role="status">
-                  Listo. Bienvenido a The Archive.
+                  You&apos;re in. Welcome to The Archive.
                 </p>
               )}
               {status === "error" && (
                 <p className="footer-msg footer-msg--error" role="alert">
-                  Ingresá un email válido.
+                  Please enter a valid email address.
                 </p>
               )}
             </form>
@@ -110,8 +110,8 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copy">© 2026 The Archive. Todos los derechos reservados.</p>
-          <p className="footer-note">Donde el fútbol se vuelve patrimonio.</p>
+          <p className="footer-copy">© 2026 The Archive. All rights reserved.</p>
+          <p className="footer-note">Where football becomes heritage.</p>
         </div>
       </div>
     </footer>

@@ -6,7 +6,7 @@ import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
 export async function GET() {
   const admin = await requireAdmin();
   if (!admin) {
-    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   if (!isAdminConfigured) {
     return NextResponse.json([]);

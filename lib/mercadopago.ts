@@ -21,7 +21,7 @@ export async function createPreference(opts: {
   items: PreferenceItem[];
   baseUrl: string;
 }): Promise<string> {
-  if (!MP_TOKEN) throw new Error("MP_ACCESS_TOKEN no configurado");
+  if (!MP_TOKEN) throw new Error("MP_ACCESS_TOKEN not configured");
 
   const isHttps = opts.baseUrl.startsWith("https://");
 
@@ -53,7 +53,7 @@ export async function createPreference(opts: {
 
   if (!res.ok) {
     const detail = await res.text();
-    throw new Error(`Mercado Pago rechazó la preferencia: ${detail}`);
+    throw new Error(`Mercado Pago rejected the preference: ${detail}`);
   }
 
   const data = await res.json();
@@ -62,10 +62,10 @@ export async function createPreference(opts: {
 
 /** Trae los detalles de un pago para conocer su estado y external_reference. */
 export async function getPayment(paymentId: string) {
-  if (!MP_TOKEN) throw new Error("MP_ACCESS_TOKEN no configurado");
+  if (!MP_TOKEN) throw new Error("MP_ACCESS_TOKEN not configured");
   const res = await fetch(`${MP_API}/v1/payments/${paymentId}`, {
     headers: { Authorization: `Bearer ${MP_TOKEN}` },
   });
-  if (!res.ok) throw new Error("No se pudo obtener el pago de Mercado Pago");
+  if (!res.ok) throw new Error("Could not fetch the payment from Mercado Pago");
   return res.json();
 }

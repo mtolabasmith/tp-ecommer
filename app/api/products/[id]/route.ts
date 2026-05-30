@@ -10,7 +10,7 @@ export async function GET(_request: NextRequest, { params }: Params) {
   const { id } = await params;
   const product = await getProduct(id);
   if (!product) {
-    return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
   return NextResponse.json(product);
 }
@@ -18,17 +18,17 @@ export async function GET(_request: NextRequest, { params }: Params) {
 // PUT /api/products/:id  -> actualizar (solo admin)
 export async function PUT(request: NextRequest, { params }: Params) {
   const admin = await requireAdmin();
-  if (!admin) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   if (!isAdminConfigured) {
     return NextResponse.json(
-      { error: "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor" },
+      { error: "Missing SUPABASE_SERVICE_ROLE_KEY on the server" },
       { status: 500 }
     );
   }
 
   const { id } = await params;
   const body = await request.json().catch(() => null);
-  if (!body) return NextResponse.json({ error: "Body inválido" }, { status: 400 });
+  if (!body) return NextResponse.json({ error: "Invalid body" }, { status: 400 });
 
   const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
   if (typeof body.name === "string") updates.name = body.name.trim();
@@ -47,17 +47,17 @@ export async function PUT(request: NextRequest, { params }: Params) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  if (!data) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
+  if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(data);
 }
 
 // DELETE /api/products/:id  -> eliminar (solo admin)
 export async function DELETE(_request: NextRequest, { params }: Params) {
   const admin = await requireAdmin();
-  if (!admin) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   if (!isAdminConfigured) {
     return NextResponse.json(
-      { error: "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor" },
+      { error: "Missing SUPABASE_SERVICE_ROLE_KEY on the server" },
       { status: 500 }
     );
   }

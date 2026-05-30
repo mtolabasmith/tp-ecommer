@@ -38,11 +38,11 @@ export default async function CategoryPage({
       </header>
 
       {products.length === 0 ? (
-        <p className="catalog-state">No hay piezas en esta sección.</p>
+        <p className="catalog-state">No pieces in this section.</p>
       ) : (
         <>
           <p className="catalog-count">
-            {products.length} {products.length === 1 ? "pieza" : "piezas"}
+            {products.length} {products.length === 1 ? "piece" : "pieces"}
           </p>
           <div className="catalog-grid">
             {products.map((p) => (

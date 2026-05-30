@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Legends — The Archive",
-  description: "Las camisetas de los íconos que definieron el fútbol.",
+  description: "The jerseys of the icons who defined football.",
 };
 
 export default function LegendsPage() {
@@ -16,7 +16,7 @@ export default function LegendsPage() {
       label="Legends"
       titleLead="The Icons"
       titleEm="Who Defined the Game"
-      desc="Las camisetas de los jugadores que escribieron la historia. De Maradona a Messi, de Pelé a Cristiano: cada pieza pertenece a quien cambió la forma de entender el juego."
+      desc="The jerseys of the players who wrote history. From Maradona to Messi, from Pelé to Cristiano — each piece belongs to someone who changed how the game is understood."
     />
   );
 }

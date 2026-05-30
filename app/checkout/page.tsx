@@ -37,16 +37,16 @@ export default function CheckoutPage() {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "No se pudo iniciar el pago");
+      if (!res.ok) throw new Error(data.error ?? "Could not start the payment");
 
       clear();
       if (data.url.startsWith("http")) {
-        window.location.href = data.url; // Mercado Pago externo
+        window.location.href = data.url; // external Mercado Pago
       } else {
-        router.push(data.url); // modo demo interno
+        router.push(data.url); // internal demo mode
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error en el checkout");
+      setError(err instanceof Error ? err.message : "Checkout error");
       setLoading(false);
     }
   }
@@ -59,20 +59,20 @@ export default function CheckoutPage() {
           Checkout
         </div>
         <h1 className="section-title">
-          Finalizar <em>compra</em>
+          Complete your <em>purchase</em>
         </h1>
       </header>
 
       {items.length === 0 ? (
         <div className="cart-page-empty">
-          <p>No tenés productos para comprar.</p>
+          <p>You have no products to buy.</p>
           <Link href="/products" className="btn-primary">
-            Ir al catálogo
+            Go to catalog
           </Link>
         </div>
       ) : (
         <div className="checkout-layout">
-          <section className="checkout-items" aria-label="Productos a comprar">
+          <section className="checkout-items" aria-label="Products to buy">
             <ul className="checkout-list" role="list">
               {items.map((item) => (
                 <li key={item.id} className="checkout-row">
@@ -85,9 +85,9 @@ export default function CheckoutPage() {
             </ul>
           </section>
 
-          <aside className="checkout-summary" aria-label="Resumen y pago">
+          <aside className="checkout-summary" aria-label="Summary and payment">
             <div className="cart-summary-row">
-              <span>Artículos</span>
+              <span>Items</span>
               <span>{count}</span>
             </div>
             <div className="cart-summary-row cart-summary-total">
@@ -96,24 +96,24 @@ export default function CheckoutPage() {
             </div>
 
             {!authChecked ? (
-              <p className="catalog-state">Verificando sesión…</p>
+              <p className="catalog-state">Checking session…</p>
             ) : userEmail ? (
               <>
-                <p className="checkout-user">Comprando como {userEmail}</p>
+                <p className="checkout-user">Buying as {userEmail}</p>
                 <button
                   type="button"
                   className="btn-primary checkout-pay"
                   onClick={handlePay}
                   disabled={loading}
                 >
-                  {loading ? "Redirigiendo…" : "Pagar con Mercado Pago"}
+                  {loading ? "Redirecting…" : "Pay with Mercado Pago"}
                 </button>
               </>
             ) : (
               <>
-                <p className="checkout-user">Necesitás iniciar sesión para pagar.</p>
+                <p className="checkout-user">You need to sign in to pay.</p>
                 <Link href="/login?redirect=/checkout" className="btn-primary checkout-pay">
-                  Iniciar sesión
+                  Sign in
                 </Link>
               </>
             )}

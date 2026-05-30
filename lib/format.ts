@@ -7,9 +7,9 @@ export function formatPrice(value: number): string {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  leyendas: "Leyendas",
-  finales: "Finales",
-  "drops-iconicos": "Drops icónicos",
+  leyendas: "Legends",
+  finales: "Finals",
+  "drops-iconicos": "Iconic Drops",
 };
 
 export function categoryLabel(category: string): string {

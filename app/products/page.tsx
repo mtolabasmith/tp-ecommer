@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import ProductCatalog from "./ProductCatalog";
 
 export const metadata: Metadata = {
-  title: "Catálogo — The Archive",
-  description: "Explorá todas las camisetas: leyendas, finales y drops icónicos.",
+  title: "Catalog — The Archive",
+  description: "Browse every jersey: legends, finals and iconic drops.",
 };
 
 export default function ProductsPage() {
@@ -13,14 +13,14 @@ export default function ProductsPage() {
       <header className="subpage-header">
         <div className="section-label">
           <span className="section-label-num">—</span>
-          Catálogo
+          Catalog
         </div>
         <h1 className="section-title">
-          Todas las <em>piezas</em>
+          All <em>pieces</em>
         </h1>
       </header>
 
-      <Suspense fallback={<p className="catalog-state">Cargando catálogo…</p>}>
+      <Suspense fallback={<p className="catalog-state">Loading catalog…</p>}>
         <ProductCatalog />
       </Suspense>
     </main>

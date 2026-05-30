@@ -7,7 +7,7 @@ import { formatPrice } from "@/lib/format";
 import LogoutButton from "@/app/components/LogoutButton";
 
 export const metadata: Metadata = {
-  title: "Mi cuenta — The Archive",
+  title: "My account — The Archive",
 };
 
 type OrderRow = {
@@ -26,15 +26,15 @@ export default async function AccountPage() {
         <header className="subpage-header">
           <div className="section-label">
             <span className="section-label-num">—</span>
-            Cuenta
+            Account
           </div>
           <h1 className="section-title">
-            Mi <em>cuenta</em>
+            My <em>account</em>
           </h1>
         </header>
-        <p className="catalog-state">Iniciá sesión para ver tu cuenta y tus órdenes.</p>
+        <p className="catalog-state">Sign in to see your account and your orders.</p>
         <Link href="/login?redirect=/account" className="btn-primary">
-          Iniciar sesión
+          Sign in
         </Link>
       </main>
     );
@@ -54,23 +54,23 @@ export default async function AccountPage() {
         <div>
           <div className="section-label">
             <span className="section-label-num">—</span>
-            Cuenta
+            Account
           </div>
           <h1 className="section-title">
-            Mi <em>cuenta</em>
+            My <em>account</em>
           </h1>
           <p className="admin-user">{user.email}</p>
         </div>
         <LogoutButton />
       </header>
 
-      <h2 className="cart-summary-title">Mis órdenes</h2>
+      <h2 className="cart-summary-title">My orders</h2>
 
       {orders.length === 0 ? (
         <div className="cart-page-empty">
-          <p>Todavía no tenés órdenes.</p>
+          <p>You don&apos;t have any orders yet.</p>
           <Link href="/products" className="btn-primary">
-            Ir al catálogo
+            Go to catalog
           </Link>
         </div>
       ) : (
@@ -78,17 +78,17 @@ export default async function AccountPage() {
           <table className="admin-table">
             <thead>
               <tr>
-                <th>Orden</th>
-                <th>Fecha</th>
+                <th>Order</th>
+                <th>Date</th>
                 <th>Total</th>
-                <th>Estado</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((o) => (
                 <tr key={o.id}>
                   <td className="admin-mono">{o.id.slice(0, 8)}…</td>
-                  <td>{new Date(o.created_at).toLocaleString("es-AR")}</td>
+                  <td>{new Date(o.created_at).toLocaleString("en-US")}</td>
                   <td>{formatPrice(o.total)}</td>
                   <td>
                     <span className={`order-status order-status--${o.status}`}>

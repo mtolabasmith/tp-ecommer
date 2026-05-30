@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link
         href={`/products/${product.id}`}
         className="product-card-media"
-        aria-label={`Ver ${product.name}`}
+        aria-label={`View ${product.name}`}
       >
         <div className="jersey-card-image">
           {product.image_url ? (
@@ -43,7 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
           className="btn-add-cart"
           onClick={() => addItem(product)}
         >
-          Agregar al carrito
+          Add to Cart
         </button>
       </div>
     </article>

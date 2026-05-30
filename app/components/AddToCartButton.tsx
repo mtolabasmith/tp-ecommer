@@ -12,12 +12,12 @@ export default function AddToCartButton({ product }: { product: Product }) {
   return (
     <div className="detail-actions">
       <div className="qty-select">
-        <span className="qty-label">Cantidad</span>
-        <div className="qty-controls" role="group" aria-label="Seleccionar cantidad">
+        <span className="qty-label">Quantity</span>
+        <div className="qty-controls" role="group" aria-label="Select quantity">
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            aria-label="Restar uno"
+            aria-label="Decrease quantity"
           >
             −
           </button>
@@ -25,7 +25,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
           <button
             type="button"
             onClick={() => setQty((q) => q + 1)}
-            aria-label="Sumar uno"
+            aria-label="Increase quantity"
           >
             +
           </button>
@@ -38,7 +38,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
         disabled={outOfStock}
         onClick={() => addItem(product, qty)}
       >
-        {outOfStock ? "Sin stock" : "Agregar al carrito"}
+        {outOfStock ? "Out of stock" : "Add to Cart"}
       </button>
     </div>
   );

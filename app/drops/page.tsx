@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Iconic Drops — The Archive",
-  description: "Piezas raras y ediciones especiales para el coleccionista.",
+  description: "Rare pieces and special editions for the collector.",
 };
 
 export default function DropsPage() {
@@ -16,7 +16,7 @@ export default function DropsPage() {
       label="Iconic Drops"
       titleLead="Rare Pieces"
       titleEm="For the Collector"
-      desc="Ediciones especiales, terceras equipaciones y colaboraciones de culto. Las camisetas más buscadas por quienes coleccionan el fútbol como patrimonio."
+      desc="Special editions, third kits and cult collaborations. The most sought-after jerseys for those who collect football as heritage."
     />
   );
 }

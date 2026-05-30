@@ -61,12 +61,12 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
     setMessage(null);
 
     if (!form.name.trim()) {
-      setMessage({ type: "err", text: "El nombre es obligatorio." });
+      setMessage({ type: "err", text: "Name is required." });
       return;
     }
     const price = Number(form.price);
     if (Number.isNaN(price) || price < 0) {
-      setMessage({ type: "err", text: "Precio inválido." });
+      setMessage({ type: "err", text: "Invalid price." });
       return;
     }
 
@@ -94,18 +94,18 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
           });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Error al guardar");
+      if (!res.ok) throw new Error(data.error ?? "Error saving");
 
       setMessage({
         type: "ok",
-        text: form.id ? "Producto actualizado." : "Producto creado.",
+        text: form.id ? "Product updated." : "Product created.",
       });
       resetForm();
       await loadProducts();
     } catch (err) {
       setMessage({
         type: "err",
-        text: err instanceof Error ? err.message : "Error al guardar",
+        text: err instanceof Error ? err.message : "Error saving",
       });
     } finally {
       setBusy(false);
@@ -127,18 +127,18 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("¿Eliminar este producto?")) return;
+    if (!confirm("Delete this product?")) return;
     setBusy(true);
     try {
       const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Error al eliminar");
-      setMessage({ type: "ok", text: "Producto eliminado." });
+      if (!res.ok) throw new Error(data.error ?? "Error deleting");
+      setMessage({ type: "ok", text: "Product deleted." });
       await loadProducts();
     } catch (err) {
       setMessage({
         type: "err",
-        text: err instanceof Error ? err.message : "Error al eliminar",
+        text: err instanceof Error ? err.message : "Error deleting",
       });
     } finally {
       setBusy(false);
@@ -157,15 +157,15 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
         <div>
           <div className="section-label">
             <span className="section-label-num">—</span>
-            Administración
+            Administration
           </div>
           <h1 className="section-title">
-            Panel <em>admin</em>
+            Admin <em>panel</em>
           </h1>
-          <p className="admin-user">Conectado como {adminEmail}</p>
+          <p className="admin-user">Signed in as {adminEmail}</p>
         </div>
         <button type="button" className="admin-logout" onClick={handleLogout}>
-          Cerrar sesión
+          Sign out
         </button>
       </header>
 
@@ -177,7 +177,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
           className={`auth-tab ${tab === "products" ? "is-active" : ""}`}
           onClick={() => setTab("products")}
         >
-          Productos ({products.length})
+          Products ({products.length})
         </button>
         <button
           type="button"
@@ -186,7 +186,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
           className={`auth-tab ${tab === "orders" ? "is-active" : ""}`}
           onClick={() => setTab("orders")}
         >
-          Órdenes ({orders.length})
+          Orders ({orders.length})
         </button>
       </div>
 
@@ -203,11 +203,11 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
         <div className="admin-products">
           <form className="admin-form" onSubmit={handleSubmit}>
             <h2 className="admin-form-title">
-              {form.id ? "Editar producto" : "Nuevo producto"}
+              {form.id ? "Edit product" : "New product"}
             </h2>
             <div className="admin-form-grid">
               <div className="auth-field">
-                <label htmlFor="p-name">Nombre</label>
+                <label htmlFor="p-name">Name</label>
                 <input
                   id="p-name"
                   value={form.name}
@@ -216,7 +216,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
                 />
               </div>
               <div className="auth-field">
-                <label htmlFor="p-category">Categoría</label>
+                <label htmlFor="p-category">Category</label>
                 <select
                   id="p-category"
                   value={form.category}
@@ -230,7 +230,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
                 </select>
               </div>
               <div className="auth-field">
-                <label htmlFor="p-price">Precio (USD)</label>
+                <label htmlFor="p-price">Price (USD)</label>
                 <input
                   id="p-price"
                   type="number"
@@ -252,7 +252,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
                 />
               </div>
               <div className="auth-field admin-field-full">
-                <label htmlFor="p-image">URL de imagen</label>
+                <label htmlFor="p-image">Image URL</label>
                 <input
                   id="p-image"
                   value={form.image_url}
@@ -261,7 +261,7 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
                 />
               </div>
               <div className="auth-field admin-field-full">
-                <label htmlFor="p-desc">Descripción</label>
+                <label htmlFor="p-desc">Description</label>
                 <textarea
                   id="p-desc"
                   rows={3}
@@ -272,11 +272,11 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
             </div>
             <div className="admin-form-actions">
               <button type="submit" className="btn-primary" disabled={busy}>
-                {form.id ? "Guardar cambios" : "Crear producto"}
+                {form.id ? "Save changes" : "Create product"}
               </button>
               {form.id && (
                 <button type="button" className="admin-cancel" onClick={resetForm}>
-                  Cancelar edición
+                  Cancel editing
                 </button>
               )}
             </div>
@@ -286,11 +286,11 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Categoría</th>
-                  <th>Precio</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
                   <th>Stock</th>
-                  <th>Acciones</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -302,14 +302,14 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
                     <td>{p.stock}</td>
                     <td className="admin-row-actions">
                       <button type="button" onClick={() => handleEdit(p)}>
-                        Editar
+                        Edit
                       </button>
                       <button
                         type="button"
                         className="admin-delete"
                         onClick={() => handleDelete(p.id)}
                       >
-                        Eliminar
+                        Delete
                       </button>
                     </td>
                   </tr>
@@ -323,23 +323,23 @@ export default function AdminClient({ adminEmail }: { adminEmail: string }) {
       {tab === "orders" && (
         <div className="admin-table-wrap">
           {orders.length === 0 ? (
-            <p className="catalog-state">No hay órdenes todavía.</p>
+            <p className="catalog-state">No orders yet.</p>
           ) : (
             <table className="admin-table">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Fecha</th>
+                  <th>Date</th>
                   <th>Total</th>
-                  <th>Estado</th>
-                  <th>Pago</th>
+                  <th>Status</th>
+                  <th>Payment</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((o) => (
                   <tr key={o.id}>
                     <td className="admin-mono">{o.id.slice(0, 8)}…</td>
-                    <td>{new Date(o.created_at).toLocaleString("es-AR")}</td>
+                    <td>{new Date(o.created_at).toLocaleString("en-US")}</td>
                     <td>{formatPrice(o.total)}</td>
                     <td>
                       <span className={`order-status order-status--${o.status}`}>

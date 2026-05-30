@@ -11,7 +11,7 @@ import CartDrawer from "./components/CartDrawer";
 export const metadata: Metadata = {
   title: "The Archive — Football Heritage Collection",
   description:
-    "Tienda de camisetas históricas de fútbol. Leyendas, finales eternas y drops icónicos.",
+    "Online store of historic football jerseys. Legends, eternal finals and iconic drops.",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body>
         <CartProvider>
           <Navbar />

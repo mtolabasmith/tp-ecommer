@@ -14,13 +14,13 @@ export async function POST(request: NextRequest) {
   const user = await getSessionUser();
   if (!user) {
     return NextResponse.json(
-      { error: "Tenés que iniciar sesión para comprar" },
+      { error: "You need to sign in to buy" },
       { status: 401 }
     );
   }
   if (!isAdminConfigured) {
     return NextResponse.json(
-      { error: "El servidor no tiene Supabase configurado (service role)" },
+      { error: "Server is missing Supabase configuration (service role)" },
       { status: 500 }
     );
   }
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   const items: IncomingItem[] = body?.items;
   if (!Array.isArray(items) || items.length === 0) {
-    return NextResponse.json({ error: "El carrito está vacío" }, { status: 400 });
+    return NextResponse.json({ error: "The cart is empty" }, { status: 400 });
   }
 
   // Recalcular precios desde el catálogo (no confiar en el cliente)
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     lineItems.push({ id: product.id, name: product.name, price: product.price, quantity });
   }
   if (lineItems.length === 0) {
-    return NextResponse.json({ error: "No hay productos válidos" }, { status: 400 });
+    return NextResponse.json({ error: "No valid products" }, { status: 400 });
   }
 
   const supabase = createAdminClient();
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
   if (error || !order) {
     return NextResponse.json(
-      { error: error?.message ?? "No se pudo crear la orden" },
+      { error: error?.message ?? "Could not create the order" },
       { status: 500 }
     );
   }
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ url });
     } catch (e) {
       return NextResponse.json(
-        { error: e instanceof Error ? e.message : "Error con Mercado Pago" },
+        { error: e instanceof Error ? e.message : "Mercado Pago error" },
         { status: 502 }
       );
     }

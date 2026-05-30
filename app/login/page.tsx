@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: "Acceso — The Archive",
+  title: "Account — The Archive",
 };
 
 export default function LoginPage() {
@@ -12,14 +12,14 @@ export default function LoginPage() {
       <header className="subpage-header">
         <div className="section-label">
           <span className="section-label-num">—</span>
-          Cuenta
+          Account
         </div>
         <h1 className="section-title">
-          Acceder al <em>Archivo</em>
+          Access the <em>Archive</em>
         </h1>
       </header>
 
-      <Suspense fallback={<p className="catalog-state">Cargando…</p>}>
+      <Suspense fallback={<p className="catalog-state">Loading…</p>}>
         <LoginForm />
       </Suspense>
     </main>

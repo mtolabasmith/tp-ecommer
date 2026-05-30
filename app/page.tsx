@@ -77,15 +77,16 @@ export default function HomePage() {
               <em>Weight of Time</em>
             </h1>
             <p className="hero-body">
-              Un archivo curado de las camisetas más icónicas de la historia del fútbol.
-              Cada pieza guarda una historia. Cada puntada lleva el peso de un momento.
+              A curated archive of the most iconic football jerseys in history.
+              Each piece holds a story. Each stitch carries the weight of a moment
+              that changed how we see the game forever.
             </p>
             <div className="hero-ctas">
               <Link href="/products" className="btn-primary">
-                Entrar al archivo
+                Enter the Archive
               </Link>
               <Link href="#legends" className="btn-ghost">
-                Explorar colección
+                Explore Collection
               </Link>
             </div>
           </div>
@@ -113,21 +114,21 @@ export default function HomePage() {
       <section className="intro">
         <div className="intro-inner">
           <p className="intro-quote">
-            &ldquo;Una camiseta de fútbol no es una prenda.
+            &ldquo;A football jersey is not a garment.
             <br />
-            Es un documento de lo que pasó.&rdquo;
+            It is a document of what happened.&rdquo;
           </p>
           <div className="intro-divider"></div>
           <p className="intro-body">
-            The Archive es una colección curada de camisetas de fútbol tratadas como
-            objetos históricos. Cada pieza pertenece a una historia más grande — de
-            jugadores que definieron épocas, de finales inolvidables, de números que se
-            volvieron mitología.
+            The Archive is a curated collection of football jerseys treated as historical
+            objects. Here, every piece belongs to a larger story — of players who defined
+            eras, of finals that will never be forgotten, of numbers that became mythology.
+            This is not a store. This is a heritage collection.
           </p>
         </div>
       </section>
 
-      {/* ============ 01 — LEGENDS (carrusel data-driven) ============ */}
+      {/* ============ 01 — LEGENDS ============ */}
       <section className="section legends" id="legends">
         <div className="section-header">
           <div>
@@ -142,7 +143,7 @@ export default function HomePage() {
           </div>
           <div className="section-right">
             <Link href="/legends" className="section-link">
-              Explorar leyendas
+              Explore Legends
             </Link>
           </div>
         </div>
@@ -180,7 +181,7 @@ export default function HomePage() {
                     onClick={() => addItem(jersey)}
                     className="btn-add-cart"
                   >
-                    Agregar al carrito
+                    Add to Cart
                   </button>
                 </div>
               </article>
@@ -192,7 +193,7 @@ export default function HomePage() {
               type="button"
               onClick={handlePrev}
               className="carousel-arrow carousel-arrow-left"
-              aria-label="Camiseta anterior"
+              aria-label="Previous jersey"
             >
               ←
             </button>
@@ -211,7 +212,7 @@ export default function HomePage() {
               type="button"
               onClick={handleNext}
               className="carousel-arrow carousel-arrow-right"
-              aria-label="Camiseta siguiente"
+              aria-label="Next jersey"
             >
               →
             </button>
@@ -219,7 +220,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ 02 — ETERNAL FINALS (editorial) ============ */}
+      {/* ============ 02 — ETERNAL FINALS ============ */}
       <section className="section finals" id="finals">
         <div className="section-header">
           <div>
@@ -234,7 +235,7 @@ export default function HomePage() {
           </div>
           <div className="section-right">
             <Link href="/finals" className="section-link">
-              Ver finales
+              Explore Finals
             </Link>
           </div>
         </div>
@@ -296,7 +297,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ 03 — IMMORTAL NUMBERS (editorial) ============ */}
+      {/* ============ 03 — IMMORTAL NUMBERS ============ */}
       <section className="section numbers" id="numbers">
         <div className="section-header">
           <div>
@@ -311,7 +312,7 @@ export default function HomePage() {
           </div>
           <div className="section-right">
             <Link href="/numbers" className="section-link">
-              Explorar números
+              Explore Numbers
             </Link>
           </div>
         </div>
@@ -321,8 +322,8 @@ export default function HomePage() {
             <div className="number-digit">10</div>
             <div className="number-title">The Creator&apos;s Number</div>
             <p className="number-desc">
-              El número que separó al genio del resto. Usado por quienes veían lo que otros
-              no podían.
+              The number that separated genius from the rest. Worn by those who saw what
+              others could not.
             </p>
             <div className="number-names">Pelé · Maradona · Zidane · Messi</div>
           </div>
@@ -331,20 +332,81 @@ export default function HomePage() {
             <div className="number-digit">7</div>
             <div className="number-title">The Number of Kings</div>
             <p className="number-desc">
-              Talento. Peligro. Inevitabilidad. El número que prometía algo extraordinario
-              cada vez.
+              Flair. Danger. Inevitability. The number that promised something extraordinary
+              every time.
             </p>
-            <div className="number-names">Best · Cantona · Figo · CR7</div>
+            <div className="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
           </div>
 
           <div className="number-card">
             <div className="number-digit">9</div>
             <div className="number-title">The Striker&apos;s Inheritance</div>
             <p className="number-desc">
-              Goles. Potencia. El arte puro y antiguo de definir. El número de los nacidos
-              para convertir.
+              Goals. Power. The pure and ancient art of finishing. The number that belongs to
+              those born to score.
             </p>
             <div className="number-names">R9 · Van Nistelrooy · Lewandowski</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ 04 — MADE HISTORY ============ */}
+      <section className="section history" id="history">
+        <div className="section-header">
+          <div>
+            <div className="section-label">
+              <span className="section-label-num">04</span>
+              Made History
+            </div>
+            <h2 className="section-title">
+              Jerseys Tied<br />
+              <em>to Turning Points</em>
+            </h2>
+          </div>
+          <div className="section-right">
+            <Link href="/history" className="section-link">
+              Explore Made History
+            </Link>
+          </div>
+        </div>
+
+        <div className="history-layout">
+          <div className="history-timeline">
+            <div className="history-item">
+              <div className="history-year">1970</div>
+              <div>
+                <div className="history-title">Pelé&apos;s Final World Cup Shirt</div>
+                <p className="history-desc">
+                  The last jersey worn by the greatest in his final World Cup. Brazil won 4–1.
+                  The world watched the game reach its highest point.
+                </p>
+                <span className="history-tag">World Cup · Mexico</span>
+              </div>
+            </div>
+
+            <div className="history-item">
+              <div className="history-year">1986</div>
+              <div>
+                <div className="history-title">The Hand of God</div>
+                <p className="history-desc">
+                  Maradona&apos;s Argentina shirt from the quarter-final against England.
+                  Two goals. One hand. One genius. One legend cemented forever.
+                </p>
+                <span className="history-tag">World Cup · Mexico</span>
+              </div>
+            </div>
+
+            <div className="history-item">
+              <div className="history-year">1994</div>
+              <div>
+                <div className="history-title">Baggio&apos;s Last Penalty</div>
+                <p className="history-desc">
+                  The jersey worn when Roberto Baggio stepped forward in the final. The missed
+                  penalty. The bowed head. The eternal image of football&apos;s grief.
+                </p>
+                <span className="history-tag">World Cup Final · USA</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -371,9 +433,10 @@ export default function HomePage() {
             </h2>
             <p className="spotlight-subtitle">Argentina · Maradona · Mexico 1986</p>
             <p className="spotlight-body">
-              Ninguna camiseta carga el peso de esta. En el verano de 1986, un hombre de
-              Villa Fiorito llevó casi en soledad a Argentina al título del mundo. La Mano
-              de Dios. El Gol del Siglo. El número 10 dejó de ser un número: es un mito.
+              No jersey carries the weight of this one. In the summer of 1986, a man from
+              Villa Fiorito almost single-handedly guided Argentina to the World Cup title.
+              The Hand of God. The Goal of the Century. The number 10 on the back of that
+              jersey is no longer just a number. It is a myth.
             </p>
 
             <div className="spotlight-stats">
@@ -396,18 +459,18 @@ export default function HomePage() {
             </div>
 
             <Link href="/legends" className="btn-primary">
-              Ver leyendas
+              View This Piece
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ============ 05 — ICONIC DROPS (data-driven) ============ */}
+      {/* ============ 05 — ICONIC DROPS ============ */}
       <section className="section drops" id="drops">
         <div className="section-header">
           <div>
             <div className="section-label">
-              <span className="section-label-num">04</span>
+              <span className="section-label-num">05</span>
               Iconic Drops
             </div>
             <h2 className="section-title">
@@ -417,7 +480,7 @@ export default function HomePage() {
           </div>
           <div className="section-right">
             <Link href="/drops" className="section-link">
-              Ver todos los drops
+              Explore Drops
             </Link>
           </div>
         </div>
@@ -447,7 +510,7 @@ export default function HomePage() {
                 </Link>
                 <div className="drop-detail">{formatPrice(drop.price)}</div>
                 <button type="button" onClick={() => addItem(drop)} className="btn-add-cart">
-                  Agregar al carrito
+                  Add to Cart
                 </button>
               </div>
             </article>

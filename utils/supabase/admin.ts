@@ -18,7 +18,7 @@ export const isAdminConfigured = Boolean(supabaseUrl && serviceRoleKey);
 export function createAdminClient() {
   if (!supabaseUrl || !serviceRoleKey) {
     throw new Error(
-      "Faltan NEXT_PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY en el entorno."
+      "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in the environment."
     );
   }
   return createSupabaseClient(supabaseUrl, serviceRoleKey, {

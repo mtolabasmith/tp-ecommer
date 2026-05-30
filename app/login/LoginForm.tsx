@@ -19,8 +19,8 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   function validate(): string | null {
-    if (!EMAIL_RE.test(email.trim())) return "Ingresá un email válido.";
-    if (password.length < 6) return "La contraseña debe tener al menos 6 caracteres.";
+    if (!EMAIL_RE.test(email.trim())) return "Please enter a valid email.";
+    if (password.length < 6) return "Password must be at least 6 characters.";
     return null;
   }
 
@@ -53,13 +53,13 @@ export default function LoginForm() {
         });
         if (error) throw error;
         setInfo(
-          "Cuenta creada. Si la confirmación por email está activada, revisá tu casilla; si no, ya podés iniciar sesión."
+          "Account created. If email confirmation is enabled, check your inbox; otherwise you can sign in now."
         );
         setMode("login");
         setPassword("");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Ocurrió un error.");
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -67,7 +67,7 @@ export default function LoginForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
-      <div className="auth-tabs" role="tablist" aria-label="Modo de acceso">
+      <div className="auth-tabs" role="tablist" aria-label="Access mode">
         <button
           type="button"
           role="tab"
@@ -79,7 +79,7 @@ export default function LoginForm() {
             setInfo("");
           }}
         >
-          Iniciar sesión
+          Sign in
         </button>
         <button
           type="button"
@@ -92,7 +92,7 @@ export default function LoginForm() {
             setInfo("");
           }}
         >
-          Crear cuenta
+          Create account
         </button>
       </div>
 
@@ -109,7 +109,7 @@ export default function LoginForm() {
       </div>
 
       <div className="auth-field">
-        <label htmlFor="password">Contraseña</label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           type="password"
@@ -132,11 +132,7 @@ export default function LoginForm() {
       )}
 
       <button type="submit" className="btn-primary auth-submit" disabled={loading}>
-        {loading
-          ? "Procesando…"
-          : mode === "login"
-          ? "Entrar"
-          : "Crear cuenta"}
+        {loading ? "Processing…" : mode === "login" ? "Sign in" : "Create account"}
       </button>
     </form>
   );

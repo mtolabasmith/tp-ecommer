@@ -7,35 +7,38 @@ export default function Navbar() {
   const { count, openCart } = useCart();
 
   return (
-    <nav className="navbar" aria-label="Navegación principal">
+    <nav className="navbar" aria-label="Main navigation">
       <Link href="/" className="nav-brand">
         The <span>Archive</span>
       </Link>
 
       <ul className="nav-links" role="list">
         <li>
-          <Link href="/products">Catálogo</Link>
+          <Link href="/#legends">Legends</Link>
         </li>
         <li>
-          <Link href="/products?category=leyendas">Leyendas</Link>
+          <Link href="/#finals">Eternal Finals</Link>
         </li>
         <li>
-          <Link href="/products?category=finales">Finales</Link>
+          <Link href="/#numbers">Immortal Numbers</Link>
         </li>
         <li>
-          <Link href="/products?category=drops-iconicos">Drops</Link>
+          <Link href="/#history">Made History</Link>
+        </li>
+        <li>
+          <Link href="/#drops">Iconic Drops</Link>
         </li>
       </ul>
 
       <div className="nav-utils">
-        <Link href="/account">Cuenta</Link>
+        <Link href="/account">Account</Link>
         <button
           type="button"
           className="nav-cart-btn"
           onClick={openCart}
-          aria-label={`Abrir carrito, ${count} ${count === 1 ? "artículo" : "artículos"}`}
+          aria-label={`Open cart, ${count} ${count === 1 ? "item" : "items"}`}
         >
-          Carrito ({count})
+          Cart ({count})
         </button>
       </div>
     </nav>
