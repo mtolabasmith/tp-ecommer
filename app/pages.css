@@ -294,7 +294,7 @@
 .cart-item-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .cart-qty-controls {
   display: inline-flex;
@@ -362,7 +362,7 @@
 .cart-page-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .cart-page-name {
   font-family: "Cormorant Garamond", serif;
@@ -844,7 +844,7 @@
 .spotlight-photo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 

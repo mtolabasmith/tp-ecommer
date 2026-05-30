@@ -10,7 +10,7 @@ export const fallbackProducts: Product[] = [
     "description": "La camiseta del PSG en la gran final del Mundial de Clubes 2025. Dembélé como referente del ataque parisino.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/dembele-psg-2025-mundialdeclubesfinal.jpg",
+    "image_url": "/camisetas/camisetad-finales/dembele-psg-2025-mundialdeclubesfinal.png",
     "category": "finales"
   },
   {
@@ -19,7 +19,7 @@ export const fallbackProducts: Product[] = [
     "description": "La noche más épica de Drogba. El gol en el 88 y la tanda de penales en Múnich que hizo historia.",
     "price": 179.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/drogba-chelsea-2012-finalchampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/drogba-chelsea-2012-finalchampions.png",
     "category": "finales"
   },
   {
@@ -28,7 +28,7 @@ export const fallbackProducts: Product[] = [
     "description": "El gol que le dio a España su primer Mundial. Iniesta en el momento más importante del fútbol español.",
     "price": 189.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/iniesta-españa-2010-finaldelmundo.jpg",
+    "image_url": "/camisetas/camisetad-finales/iniesta-españa-2010-finaldelmundo.png",
     "category": "finales"
   },
   {
@@ -37,7 +37,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último Maldini en una final de Champions. Liderazgo puro en Atenas frente al Liverpool.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/maldini-milan-06~07-finalchampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/maldini-milan-06~07-finalchampions.png",
     "category": "finales"
   },
   {
@@ -46,7 +46,7 @@ export const fallbackProducts: Product[] = [
     "description": "El hat-trick en la final que no alcanzó. Mbappé ante Argentina en el mejor partido de la historia reciente.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/mbappe-francia-22-finaldelmundo.jpg",
+    "image_url": "/camisetas/camisetad-finales/mbappe-francia-22-finaldelmundo.png",
     "category": "finales"
   },
   {
@@ -55,7 +55,7 @@ export const fallbackProducts: Product[] = [
     "description": "La última Copa América de Messi. Argentina campeón en el Hardrock Stadium, Miami.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/messi-argenina-2024-fianlcopaamerica.jpg",
+    "image_url": "/camisetas/camisetad-finales/messi-argenina-2024-fianlcopaamerica.png",
     "category": "finales"
   },
   {
@@ -64,7 +64,7 @@ export const fallbackProducts: Product[] = [
     "description": "La Copa que rompió la sequía. Messi campeón con Argentina en el Maracaná.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/messi-argentina-2021-finalddecopaacmerica.jpg",
+    "image_url": "/camisetas/camisetad-finales/messi-argentina-2021-finalddecopaacmerica.png",
     "category": "finales"
   },
   {
@@ -73,7 +73,7 @@ export const fallbackProducts: Product[] = [
     "description": "La camiseta más buscada de la historia. Messi campeón del mundo en Qatar. Irrepetible.",
     "price": 199.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/messi-argentina-2022-home-finaldelmundo.jpg",
+    "image_url": "/camisetas/camisetad-finales/messi-argentina-2022-home-finaldelmundo.png",
     "category": "finales"
   },
   {
@@ -82,7 +82,7 @@ export const fallbackProducts: Product[] = [
     "description": "La primera Champions de Messi. El Barça de Guardiola en Roma, 2-0 al United.",
     "price": 179.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/messi-barcelona-08~09-finalchampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/messi-barcelona-08~09-finalchampions.png",
     "category": "finales"
   },
   {
@@ -91,7 +91,7 @@ export const fallbackProducts: Product[] = [
     "description": "Wembley. El mejor Barça de la historia frente al United. Messi en su cúspide.",
     "price": 179.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/messi-barcelona-10~11-home-finaldechampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/messi-barcelona-10~11-home-finaldechampions.png",
     "category": "finales"
   },
   {
@@ -100,7 +100,7 @@ export const fallbackProducts: Product[] = [
     "description": "El PSG más ambicioso. Neymar liderando la campaña europea más ilusionante del equipo parisino.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/neymar-psg-18-19-finalchampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/neymar-psg-18-19-finalchampions.png",
     "category": "finales"
   },
   {
@@ -109,7 +109,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Boca de Bianchi en Tokio. Palermo como leyenda de un equipo que dominó el mundo.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/palermo-boca-2000-mundialdeclubesfinal.jpg",
+    "image_url": "/camisetas/camisetad-finales/palermo-boca-2000-mundialdeclubesfinal.png",
     "category": "finales"
   },
   {
@@ -118,7 +118,7 @@ export const fallbackProducts: Product[] = [
     "description": "La final más loca de la historia del fútbol sudamericano. River campeón en el Bernabéu.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/piti-river-2018-finaldelibertadores.jpg",
+    "image_url": "/camisetas/camisetad-finales/piti-river-2018-finaldelibertadores.png",
     "category": "finales"
   },
   {
@@ -127,7 +127,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Borussia de Klopp en su etapa más romántica. Reus como capitán y símbolo del club.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/reus-dormunt-14~15-home.jpg",
+    "image_url": "/camisetas/camisetad-finales/reus-dormunt-14~15-home.png",
     "category": "finales"
   },
   {
@@ -136,7 +136,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último gran Riquelme en Boca. Conductor absoluto de una final memorable.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/riquelme-boca-2007-finaldelibertadores.jpg",
+    "image_url": "/camisetas/camisetad-finales/riquelme-boca-2007-finaldelibertadores.png",
     "category": "finales"
   },
   {
@@ -145,7 +145,7 @@ export const fallbackProducts: Product[] = [
     "description": "La Holanda de Van Marwijk que llegó a la final. Robben y el mano a mano que no fue.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/robben-paisesbajos-2010-finaldelmuendo.jpg",
+    "image_url": "/camisetas/camisetad-finales/robben-paisesbajos-2010-finaldelmuendo.png",
     "category": "finales"
   },
   {
@@ -154,7 +154,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Brasil de Scolari en la antesala del tetracampeonato. Roberto Carlos en su mejor versión.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/robertocarlos-brazil-01~01-finalmundial.jpg",
+    "image_url": "/camisetas/camisetad-finales/robertocarlos-brazil-01~01-finalmundial.png",
     "category": "finales"
   },
   {
@@ -163,7 +163,7 @@ export const fallbackProducts: Product[] = [
     "description": "Boca campeón del mundo en Tokio. Riquelme y Tevez en un equipo irrepetible.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/roman-boca-2003-mundialdeclubesfinal.jpg",
+    "image_url": "/camisetas/camisetad-finales/roman-boca-2003-mundialdeclubesfinal.png",
     "category": "finales"
   },
   {
@@ -172,7 +172,7 @@ export const fallbackProducts: Product[] = [
     "description": "La última Champions de CR7 con el Madrid. Kiev, la Champions más dominada de la historia.",
     "price": 179.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/ronaldo-madrid-17~18-finaldechampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/ronaldo-madrid-17~18-finaldechampions.png",
     "category": "finales"
   },
   {
@@ -181,7 +181,7 @@ export const fallbackProducts: Product[] = [
     "description": "El mejor United de Ferguson. Ronaldo MVP en la final de Moscú frente al Chelsea.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-07~08-finalchampions.jpg",
+    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-07~08-finalchampions.png",
     "category": "finales"
   },
   {
@@ -190,7 +190,7 @@ export const fallbackProducts: Product[] = [
     "description": "Portugal campeón de Europa llorando desde el banco. La noche de Eder en Saint-Denis.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-15~16-finaleuro.jpg",
+    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-15~16-finaleuro.png",
     "category": "finales"
   },
   {
@@ -199,7 +199,7 @@ export const fallbackProducts: Product[] = [
     "description": "CR7 en otra final continental con Portugal. El veterano que sigue siendo protagonista.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-2025-finaleuro.jpg",
+    "image_url": "/camisetas/camisetad-finales/ronaldo-portugal-2025-finaleuro.png",
     "category": "finales"
   },
   {
@@ -208,7 +208,7 @@ export const fallbackProducts: Product[] = [
     "description": "Edición especial por el aniversario de la AFA. Combinación de historia y modernidad en una sola camiseta.",
     "price": 119.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/argentina-2024-aniversario.jpg",
+    "image_url": "/camisetas/drops-iconicos/argentina-2024-aniversario.png",
     "category": "drops-iconicos"
   },
   {
@@ -217,7 +217,7 @@ export const fallbackProducts: Product[] = [
     "description": "Una de las camisetas más icónicas de la historia del fútbol inglés. El amarillo y azul que nadie olvidó.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/arsenall-91~93-bruised banana.webp",
+    "image_url": "/camisetas/drops-iconicos/arsenall-91~93-bruised banana.png",
     "category": "drops-iconicos"
   },
   {
@@ -226,7 +226,7 @@ export const fallbackProducts: Product[] = [
     "description": "La tercera equipación del Bayern en su era más dominante. Diseño oscuro y elegante.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/bayern-14~15-third.jpg",
+    "image_url": "/camisetas/drops-iconicos/bayern-14~15-third.png",
     "category": "drops-iconicos"
   },
   {
@@ -235,7 +235,7 @@ export const fallbackProducts: Product[] = [
     "description": "Edición especial del Dortmund. El amarillo eterno con un toque diferente.",
     "price": 99.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/borussia-22~24-special.jpg",
+    "image_url": "/camisetas/drops-iconicos/borussia-22~24-special.png",
     "category": "drops-iconicos"
   },
   {
@@ -244,7 +244,7 @@ export const fallbackProducts: Product[] = [
     "description": "Camiseta conmemorativa del Borussia Dortmund. Homenaje a décadas de historia amarilla y negra.",
     "price": 99.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/borussia-23~24-anniversary.jpg",
+    "image_url": "/camisetas/drops-iconicos/borussia-23~24-anniversary.png",
     "category": "drops-iconicos"
   },
   {
@@ -253,7 +253,7 @@ export const fallbackProducts: Product[] = [
     "description": "La tercera del Inter del cambio de milenio. Un diseño que se adelantó a su época.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/inter-99~00-third.jpg",
+    "image_url": "/camisetas/drops-iconicos/inter-99~00-third.png",
     "category": "drops-iconicos"
   },
   {
@@ -262,7 +262,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Milan del siglo. Edición especial del centenario con uno de los diseños más recordados.",
     "price": 119.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/milan-99~00-century.webp",
+    "image_url": "/camisetas/drops-iconicos/milan-99~00-century.png",
     "category": "drops-iconicos"
   },
   {
@@ -271,7 +271,7 @@ export const fallbackProducts: Product[] = [
     "description": "La versión alternativa del hogar del PSG. Un diseño gráfico que rompió con lo convencional.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/psg-18~19-hommeV2-graficdesing.jpg",
+    "image_url": "/camisetas/drops-iconicos/psg-18~19-hommeV2-graficdesing.png",
     "category": "drops-iconicos"
   },
   {
@@ -280,7 +280,7 @@ export const fallbackProducts: Product[] = [
     "description": "La colaboración que cambió el mercado de camisetas. PSG y Jordan Brand en una pieza de culto.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/psg-2019-psgxjordan.jpeg",
+    "image_url": "/camisetas/drops-iconicos/psg-2019-psgxjordan.png",
     "category": "drops-iconicos"
   },
   {
@@ -289,7 +289,7 @@ export const fallbackProducts: Product[] = [
     "description": "La visita del Madrid de la Décima. Azul claro y elegancia madridista.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/realmadrid-14~15-away.jpg",
+    "image_url": "/camisetas/drops-iconicos/realmadrid-14~15-away.png",
     "category": "drops-iconicos"
   },
   {
@@ -298,7 +298,7 @@ export const fallbackProducts: Product[] = [
     "description": "La tercera del Madrid campeón de Champions. Una de las equipaciones alternativas más celebradas.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/realmadrid-14~15-third.jpg",
+    "image_url": "/camisetas/drops-iconicos/realmadrid-14~15-third.png",
     "category": "drops-iconicos"
   },
   {
@@ -307,7 +307,7 @@ export const fallbackProducts: Product[] = [
     "description": "La visita del Madrid que ganó la Champions sin perder en la fase de grupos.",
     "price": 109.99,
     "stock": 15,
-    "image_url": "/camisetas/drops-iconicos/realmadrid-16~17-away.jpg",
+    "image_url": "/camisetas/drops-iconicos/realmadrid-16~17-away.png",
     "category": "drops-iconicos"
   },
   {
@@ -316,7 +316,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Kaiser en la cima de su carrera internacional. Alemania campeona de Europa y del mundo.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/beckenbauer/becken-alemania-76-home.jpg",
+    "image_url": "/camisetas/leyendas/beckenbauer/becken-alemania-76-home.png",
     "category": "leyendas"
   },
   {
@@ -325,7 +325,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Bayern de los primeros títulos europeos. Beckenbauer como el líder que redefinió el fútbol total.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/beckenbauer/becken-bayern-73-home.jpg",
+    "image_url": "/camisetas/leyendas/beckenbauer/becken-bayern-73-home.png",
     "category": "leyendas"
   },
   {
@@ -334,7 +334,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Kaiser en el Bayern de su mejor era. Tres Copas de Europa consecutivas.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/beckenbauer/becken-bayern-76-home.jpg",
+    "image_url": "/camisetas/leyendas/beckenbauer/becken-bayern-76-home.png",
     "category": "leyendas"
   },
   {
@@ -343,7 +343,7 @@ export const fallbackProducts: Product[] = [
     "description": "El capitán de Italia en el Mundial de Corea-Japón. Maldini como símbolo de la defensa italiana.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/maldini/maldini-italia-02-home.jpg",
+    "image_url": "/camisetas/leyendas/maldini/maldini-italia-02-home.png",
     "category": "leyendas"
   },
   {
@@ -352,7 +352,7 @@ export const fallbackProducts: Product[] = [
     "description": "La última temporada de Maldini. Una despedida digna del jugador más elegante de la historia.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/maldini/maldini-milan-08~09-home.jpg",
+    "image_url": "/camisetas/leyendas/maldini/maldini-milan-08~09-home.png",
     "category": "leyendas"
   },
   {
@@ -361,7 +361,7 @@ export const fallbackProducts: Product[] = [
     "description": "La camiseta más sagrada del fútbol. Diego en México 86, el mejor Mundial jugado por un individuo.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/maradona/maradona-argentina-86-home.jpg",
+    "image_url": "/camisetas/leyendas/maradona/maradona-argentina-86-home.png",
     "category": "leyendas"
   },
   {
@@ -370,7 +370,7 @@ export const fallbackProducts: Product[] = [
     "description": "El regreso al amor de Diego. Maradona en Boca, su último baile en el fútbol argentino.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/maradona/maradona-boca-96~97-home.jpg",
+    "image_url": "/camisetas/leyendas/maradona/maradona-boca-96~97-home.png",
     "category": "leyendas"
   },
   {
@@ -379,7 +379,7 @@ export const fallbackProducts: Product[] = [
     "description": "El inicio de la leyenda en Italia. Diego llegando a Nápoles y cambiando la historia de una ciudad.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/maradona/maradona-napoli-84~85-home.jpg",
+    "image_url": "/camisetas/leyendas/maradona/maradona-napoli-84~85-home.png",
     "category": "leyendas"
   },
   {
@@ -388,7 +388,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Mbappé del hat-trick en la final de Qatar. La actuación individual más impresionante en una final de Mundial.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/mbappe/mbapee-francia-22-home.jpg",
+    "image_url": "/camisetas/leyendas/mbappe/mbapee-francia-22-home.png",
     "category": "leyendas"
   },
   {
@@ -397,7 +397,7 @@ export const fallbackProducts: Product[] = [
     "description": "El sueño cumplido. Mbappé de blanco en el Santiago Bernabéu.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/mbappe/mbappe-madrid-25-home.jpg",
+    "image_url": "/camisetas/leyendas/mbappe/mbappe-madrid-25-home.png",
     "category": "leyendas"
   },
   {
@@ -406,7 +406,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Mbappé parisino en su mejor temporada con el PSG. Velocidad y goles en la Ligue 1.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/mbappe/mbappe-psg-18~19-home.jpg",
+    "image_url": "/camisetas/leyendas/mbappe/mbappe-psg-18~19-home.png",
     "category": "leyendas"
   },
   {
@@ -415,7 +415,7 @@ export const fallbackProducts: Product[] = [
     "description": "La revelación al mundo. Mbappé adolescente destruyendo defensas en la Champions con el Mónaco.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/mbappe/monaco-monaco-16~17-home.jpg",
+    "image_url": "/camisetas/leyendas/mbappe/monaco-monaco-16~17-home.png",
     "category": "leyendas"
   },
   {
@@ -424,7 +424,7 @@ export const fallbackProducts: Product[] = [
     "description": "La camiseta del campeón del mundo. Messi completando su legado en Qatar.",
     "price": 179.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/messi/messi-argentina-2022-home.jpg",
+    "image_url": "/camisetas/leyendas/messi/messi-argentina-2022-home.png",
     "category": "leyendas"
   },
   {
@@ -433,7 +433,7 @@ export const fallbackProducts: Product[] = [
     "description": "La MSN en su versión más letal. Messi, Suárez y Neymar haciendo historia en el Camp Nou.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/messi/messi-barcelona-15~16-home.jpg",
+    "image_url": "/camisetas/leyendas/messi/messi-barcelona-15~16-home.png",
     "category": "leyendas"
   },
   {
@@ -442,7 +442,7 @@ export const fallbackProducts: Product[] = [
     "description": "La remontada ante el PSG y la Copa del Rey. Messi liderando al Barça en una temporada épica.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/messi/messi-barcelona-16~17-home-finalcopadelrey.jpg",
+    "image_url": "/camisetas/leyendas/messi/messi-barcelona-16~17-home-finalcopadelrey.png",
     "category": "leyendas"
   },
   {
@@ -451,7 +451,7 @@ export const fallbackProducts: Product[] = [
     "description": "La temporada del triplete con Messi y Suárez. Neymar en el mejor equipo del mundo.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/neymar/neymar-barcelona-14-15-away.jpg",
+    "image_url": "/camisetas/leyendas/neymar/neymar-barcelona-14-15-away.png",
     "category": "leyendas"
   },
   {
@@ -460,7 +460,7 @@ export const fallbackProducts: Product[] = [
     "description": "Neymar llevando la bandera de Brasil en la Copa América. El capitán en casa.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/neymar/neymar-brazil-2021-home.jpg",
+    "image_url": "/camisetas/leyendas/neymar/neymar-brazil-2021-home.png",
     "category": "leyendas"
   },
   {
@@ -469,7 +469,7 @@ export const fallbackProducts: Product[] = [
     "description": "La temporada más esperada de Neymar en París. Antes de las lesiones, el jugador más caro del mundo.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/neymar/neymar-psg-18-19-home.jpg",
+    "image_url": "/camisetas/leyendas/neymar/neymar-psg-18-19-home.png",
     "category": "leyendas"
   },
   {
@@ -478,7 +478,7 @@ export const fallbackProducts: Product[] = [
     "description": "El origen de todo. Neymar debutando en Santos, apenas un adolescente que ya era diferente.",
     "price": 119.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/neymar/neymar-santos-09~08-home-primeracami.jpg",
+    "image_url": "/camisetas/leyendas/neymar/neymar-santos-09~08-home-primeracami.png",
     "category": "leyendas"
   },
   {
@@ -487,7 +487,7 @@ export const fallbackProducts: Product[] = [
     "description": "El debut de Pelé en un Mundial a los 17 años. La camiseta del jugador más joven en ganar un Mundial.",
     "price": 169.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/pele/brazil-1958-58-home.jpg",
+    "image_url": "/camisetas/leyendas/pele/brazil-1958-58-home.png",
     "category": "leyendas"
   },
   {
@@ -496,7 +496,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último baile de O Rei en Nueva York. Pelé llevando el fútbol a Estados Unidos.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/pele/pele-cosmos-77-home.jpg",
+    "image_url": "/camisetas/leyendas/pele/pele-cosmos-77-home.png",
     "category": "leyendas"
   },
   {
@@ -505,7 +505,7 @@ export const fallbackProducts: Product[] = [
     "description": "Pelé en Santos, su casa. El rey del fútbol en el club donde construyó su leyenda.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/pele/pele-santos-71-home.jpg",
+    "image_url": "/camisetas/leyendas/pele/pele-santos-71-home.png",
     "category": "leyendas"
   },
   {
@@ -514,7 +514,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último gran año de Ronaldinho en el Barça. Magia pura en el Camp Nou.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-barcelona-06~07-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-barcelona-06~07-home.png",
     "category": "leyendas"
   },
   {
@@ -523,7 +523,7 @@ export const fallbackProducts: Product[] = [
     "description": "La sonrisa más famosa del fútbol vistiendo la canarinha. Ronaldinho eterno con Brasil.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-brazil-07~08-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-brazil-07~08-home.png",
     "category": "leyendas"
   },
   {
@@ -532,7 +532,7 @@ export const fallbackProducts: Product[] = [
     "description": "El regreso a Brasil con el Mengão. Ronaldinho haciendo feliz al Maracaná con su fútbol único.",
     "price": 119.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-flamengo-11~12-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-flamengo-11~12-home.png",
     "category": "leyendas"
   },
   {
@@ -541,7 +541,7 @@ export const fallbackProducts: Product[] = [
     "description": "Los inicios de R10 en Porto Alegre. La camiseta donde todo comenzó para el mejor del mundo.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-gremio-00~01-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldinho/ronaldihno-gremio-00~01-home.png",
     "category": "leyendas"
   },
   {
@@ -550,7 +550,7 @@ export const fallbackProducts: Product[] = [
     "description": "El Fenómeno llegando a Europa. Ronaldo devastando la Liga española con 47 goles en una temporada.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-barcelona-96~97-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-barcelona-96~97-home.png",
     "category": "leyendas"
   },
   {
@@ -559,7 +559,7 @@ export const fallbackProducts: Product[] = [
     "description": "La vuelta del Fenómeno tras las lesiones. Ronaldo en el Inter antes de su último Mundial.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-inter-01~02-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-inter-01~02-home.png",
     "category": "leyendas"
   },
   {
@@ -568,7 +568,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último Ronaldo en el Madrid. El Fenómeno cerrando su carrera en el Bernabéu.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-realmadrid-06~07-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo-nazario/ronaldonazario-realmadrid-06~07-home.png",
     "category": "leyendas"
   },
   {
@@ -577,7 +577,7 @@ export const fallbackProducts: Product[] = [
     "description": "El año de la undécima. CR7 en su etapa más dominante en el Madrid.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-16~17-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-16~17-home.png",
     "category": "leyendas"
   },
   {
@@ -586,7 +586,7 @@ export const fallbackProducts: Product[] = [
     "description": "La temporada de despedida de CR7 en el Madrid. La duodécima y el adiós al Bernabéu.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-17~18-home_ultimoaniodelbicho.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-17~18-home_ultimoaniodelbicho.png",
     "category": "leyendas"
   },
   {
@@ -595,7 +595,7 @@ export const fallbackProducts: Product[] = [
     "description": "CR7 de visita en el Bernabéu. Una camiseta que marcó el regreso al ruedo madridista.",
     "price": 129.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-22_home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-madrid-22_home.png",
     "category": "leyendas"
   },
   {
@@ -604,7 +604,7 @@ export const fallbackProducts: Product[] = [
     "description": "El mejor Ronaldo en Old Trafford. La Premier League y la Champions en una sola temporada.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-united-07~08-home.jpg",
+    "image_url": "/camisetas/leyendas/ronaldo/ronaldo-united-07~08-home.png",
     "category": "leyendas"
   },
   {
@@ -613,7 +613,7 @@ export const fallbackProducts: Product[] = [
     "description": "Campeón del mundo en casa. Zidane con dos cabezazos en la final contra Brasil.",
     "price": 159.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/zidane/zidane-francia-98-home.webp",
+    "image_url": "/camisetas/leyendas/zidane/zidane-francia-98-home.png",
     "category": "leyendas"
   },
   {
@@ -622,7 +622,7 @@ export const fallbackProducts: Product[] = [
     "description": "El último Zidane en Turín antes de su fichaje galáctico. La Serie A con la Vecchia Signora.",
     "price": 139.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/zidane/zidane-juventus-00~01-home.jpg",
+    "image_url": "/camisetas/leyendas/zidane/zidane-juventus-00~01-home.png",
     "category": "leyendas"
   },
   {
@@ -631,7 +631,7 @@ export const fallbackProducts: Product[] = [
     "description": "Zizou en el Bernabéu. La elegancia francesa vistiendo de blanco en su mejor etapa madridista.",
     "price": 149.99,
     "stock": 15,
-    "image_url": "/camisetas/leyendas/zidane/zidane-madrid-04~05-home.jpg",
+    "image_url": "/camisetas/leyendas/zidane/zidane-madrid-04~05-home.png",
     "category": "leyendas"
   }
 ];

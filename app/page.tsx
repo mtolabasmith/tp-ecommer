@@ -47,7 +47,7 @@ export default function HomePage() {
   );
   const spotlightImage =
     spotlightProduct?.image_url ??
-    "/camisetas/leyendas/maradona/maradona-argentina-86-home.jpg";
+    "/camisetas/leyendas/maradona/maradona-argentina-86-home.png";
 
   const visibleCount = 3;
   // En el home mostramos solo 10 leyendas como muestra; el catálogo completo está en /legends
