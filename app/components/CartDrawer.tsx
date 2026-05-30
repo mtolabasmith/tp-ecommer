@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "./CartProvider";
 import { formatPrice } from "@/lib/format";
 
@@ -42,8 +43,7 @@ export default function CartDrawer() {
                 <li key={item.id} className="cart-item cart-item--product">
                   <div className="cart-item-thumb" aria-hidden="true">
                     {item.image_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={item.image_url} alt="" loading="lazy" />
+                      <Image src={item.image_url} alt="" fill sizes="64px" />
                     ) : null}
                   </div>
                   <div className="cart-item-info">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/app/components/CartProvider";
 import { formatPrice, categoryLabel } from "@/lib/format";
 
@@ -33,8 +34,7 @@ export default function CartPage() {
               <li key={item.id} className="cart-page-item">
                 <Link href={`/products/${item.id}`} className="cart-page-thumb">
                   {item.image_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.image_url} alt={item.name} loading="lazy" />
+                    <Image src={item.image_url} alt={item.name} fill sizes="80px" />
                   ) : null}
                 </Link>
 

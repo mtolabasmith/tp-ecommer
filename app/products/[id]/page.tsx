@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getProduct } from "@/lib/products";
 import { formatPrice, categoryLabel } from "@/lib/format";
 import AddToCartButton from "@/app/components/AddToCartButton";
@@ -54,8 +55,14 @@ export default async function ProductDetailPage({ params }: Params) {
         <div className="detail-media">
           <div className="jersey-card-image">
             {product.image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={product.image_url} alt={product.name} className="jersey-photo" />
+              <Image
+                src={product.image_url}
+                alt={product.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="jersey-photo"
+                priority
+              />
             ) : (
               <span className="product-card-noimg" aria-hidden="true">
                 The Archive

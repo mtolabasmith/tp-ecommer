@@ -316,6 +316,7 @@
   grid-template-columns: 64px 1fr;
 }
 .cart-item-thumb {
+  position: relative;
   width: 64px;
   height: 64px;
   background: var(--bg-3);
@@ -384,6 +385,7 @@
   border-bottom: 1px solid var(--border);
 }
 .cart-page-thumb {
+  position: relative;
   width: 80px;
   height: 80px;
   background: var(--bg-3);

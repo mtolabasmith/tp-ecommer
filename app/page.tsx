@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "./components/CartProvider";
 import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/types";
@@ -166,12 +167,12 @@ export default function HomePage() {
                 <Link href={`/products/${jersey.id}`} className="product-card-media">
                   <div className="jersey-card-image">
                     {jersey.image_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={jersey.image_url}
                         alt={jersey.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="jersey-photo"
-                        loading="lazy"
                       />
                     ) : (
                       <JerseySvg className="jersey-svg-lg" />
@@ -253,12 +254,12 @@ export default function HomePage() {
             <Link href={`/products/${finals[0].id}`} className="jersey-card finals-feature">
               <div className="jersey-card-image">
                 {finals[0].image_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={finals[0].image_url}
                     alt={finals[0].name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
                     className="jersey-photo"
-                    loading="lazy"
                   />
                 ) : (
                   <JerseySvg className="jersey-svg-lg" />
@@ -280,12 +281,12 @@ export default function HomePage() {
               >
                 <div className="finals-sidebar-image">
                   {item.image_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={item.image_url}
                       alt={item.name}
+                      fill
+                      sizes="90px"
                       className="jersey-photo"
-                      loading="lazy"
                     />
                   ) : (
                     <JerseySvg className="jersey-svg-sm" />
@@ -420,10 +421,11 @@ export default function HomePage() {
         <div className="spotlight-inner">
           <div>
             <div className="spotlight-jersey-box">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={spotlightImage}
                 alt="Maradona — Argentina, World Cup 1986"
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
                 className="spotlight-photo"
               />
               <div className="spotlight-caption">
@@ -503,12 +505,12 @@ export default function HomePage() {
                 <div className="drop-card-image">
                   <span className="drop-badge">Drop</span>
                   {drop.image_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={drop.image_url}
                       alt={drop.name}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="jersey-photo"
-                      loading="lazy"
                     />
                   ) : (
                     <JerseySvg />
