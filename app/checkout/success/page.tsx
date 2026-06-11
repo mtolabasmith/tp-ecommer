@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import ClearCart from "@/app/components/ClearCart";
-import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
+import { getSessionUser } from "@/lib/auth";
+import { createClient } from "@/utils/supabase/server";
 import { formatPrice } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -9,38 +11,33 @@ export const metadata: Metadata = {
 };
 
 type SearchParams = {
-  searchParams: Promise<{ order?: string; demo?: string; status?: string }>;
+  searchParams: Promise<{ order?: string; status?: string }>;
 };
 
 type OrderRow = { id: string; total: number; status: string } | null;
 
 export default async function CheckoutSuccessPage({ searchParams }: SearchParams) {
-  const { order, demo, status } = await searchParams;
+  const { order, status } = await searchParams;
 
+  // Página de solo lectura: la orden se confirma en el servidor
+  // (POST /api/checkout en modo demo, o el webhook de Mercado Pago).
+  // Se consulta con el cliente del usuario, así RLS garantiza que cada
+  // uno solo puede ver sus propias órdenes.
   let orderData: OrderRow = null;
-  let displayStatus = status ?? "pending";
-
-  if (order && isAdminConfigured) {
-    const supabase = createAdminClient();
-    // Demo mode (no Mercado Pago): confirm the order here.
-    if (demo === "1") {
-      await supabase
-        .from("orders")
-        .update({ status: "paid", payment_id: "DEMO" })
-        .eq("id", order)
-        .eq("status", "pending");
-    }
+  const user = await getSessionUser();
+  if (order && user) {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const { data } = await supabase
       .from("orders")
       .select("id, total, status")
       .eq("id", order)
+      .eq("user_id", user.id)
       .maybeSingle();
     orderData = data as OrderRow;
-    if (orderData) displayStatus = orderData.status;
-  } else if (demo === "1") {
-    displayStatus = "paid";
   }
 
+  const displayStatus = orderData?.status ?? status ?? "pending";
   const failed = status === "failure" || displayStatus === "failed";
 
   return (
