@@ -690,6 +690,7 @@ a {
 
 .finals { background: var(--bg-2); }
 
+
 .finals-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -698,7 +699,7 @@ a {
 }
 
 .finals .section-right {
-  margin-top: 4rem;
+  margin-top: 0;
 }
 
 
@@ -788,76 +789,144 @@ a {
   background: radial-gradient(ellipse 55% 55% at 82% 22%, rgba(200, 168, 75, 0.05), transparent 70%), var(--bg);
 }
 
-.number-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.65rem, 2.9vw, 2.6rem);
-  font-weight: 300;
-  color: var(--text);
-  line-height: 1.1;
-  margin-top: 4rem;
+.numbers .section-right {
+margin-top: 0;
 }
 
-.numbers .section-right { 
-margin-top: 7rem;
+/* —— Immortal Numbers: formación 4-3-3 (solo delanteros) —— */
+.numbers-formation {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto 2rem;
+  position: relative;
 }
 
-.numbers-grid {
+.formation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 2rem;
+}
+
+.formation-row.forwards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 6rem;
+  align-items: end;
+  padding-bottom: 3rem;
 }
 
-.number-card {
+.formation-player {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 3.5rem 2rem 3rem;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.4s ease, background 0.4s ease;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.number-card:hover {
-  border-color: var(--gold-dim);
-  background: var(--bg-3);
+.formation-player:hover {
+  opacity: 0.7;
 }
 
-.number-digit {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(5rem, 8vw, 7.5rem);
-  font-weight: 300;
-  color: var(--text);
+.formation-player.striker {
+  padding-bottom: 3.5rem;
+}
+
+.formation-number {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 7rem;
+  font-weight: 400;
+  color: #f0ebe0;
   line-height: 1;
-  margin-bottom: 1.75rem;
-  transition: color 0.4s ease;
+  transition: color 0.2s;
 }
 
-.number-card:hover .number-digit { color: var(--gold); }
-
-.number-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  color: var(--text);
-  margin-bottom: 0.8rem;
+.formation-player:hover .formation-number {
+  color: #c9a84c;
 }
 
-.number-desc {
-  font-size: 0.82rem;
-  color: var(--text-3);
-  line-height: 1.85;
-  max-width: 220px;
-  margin-bottom: 1.5rem;
+.formation-name {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #8a7a5a;
+  text-transform: uppercase;
 }
 
-.number-names {
-  font-size: 0.62rem;
+.formation-pos {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #3a3028;
+  text-transform: uppercase;
+}
+
+.formation-row.midfield {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.formation-player.attacking-mid {
+  padding-bottom: 0;
+}
+
+/* —— Immortal Numbers: cancha 4-3-3 (página /numbers) —— */
+.pitch {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 2.5rem auto 0;
+  aspect-ratio: 3 / 4;
+}
+.pitch-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.pitch-formation {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2rem 1.5rem;
+}
+.pitch-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.pitch-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+.pitch-pos {
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--text-3);
+}
+.pitch-number {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+}
+.pitch-name {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--gold);
-  opacity: 0.55;
-  line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .pitch-number { font-size: 1.8rem; }
+  .pitch-formation { padding: 1.25rem 0.75rem; }
 }
 
 /* ============================================================
@@ -1266,7 +1335,6 @@ flex-direction: column;
   .legends-grid .jersey-card:first-child .jersey-card-image { aspect-ratio: 3 / 4; }
   .finals-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .finals-feature .jersey-card-image { aspect-ratio: 3 / 4; }
-  .numbers-grid { grid-template-columns: 1fr; }
   .history-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .history-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
   .spotlight-inner { grid-template-columns: 1fr; gap: 3rem; }
