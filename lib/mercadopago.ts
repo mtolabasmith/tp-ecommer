@@ -1,7 +1,9 @@
 // Integración con la API de Mercado Pago vía REST (sin SDK para no sumar dependencias).
-// Necesita MP_ACCESS_TOKEN (token de prueba o producción) en el entorno del servidor.
+// Token del servidor: acepta MP_ACCESS_TOKEN o MERCADOPAGO_ACCESS_TOKEN.
+// Para la demo usá el de PRUEBA (TEST-...) y no se cobra dinero real.
 
-const MP_TOKEN = process.env.MP_ACCESS_TOKEN;
+const MP_TOKEN =
+  process.env.MP_ACCESS_TOKEN || process.env.MERCADOPAGO_ACCESS_TOKEN;
 const MP_API = "https://api.mercadopago.com";
 
 export const isMpConfigured = Boolean(MP_TOKEN);
