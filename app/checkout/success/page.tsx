@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ClearCart from "@/app/components/ClearCart";
+import { getSessionUser } from "@/lib/auth";
 import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
 import { formatPrice } from "@/lib/format";
 
@@ -16,11 +17,12 @@ type OrderRow = { id: string; total: number; status: string } | null;
 
 export default async function CheckoutSuccessPage({ searchParams }: SearchParams) {
   const { order, demo, status } = await searchParams;
+  const user = await getSessionUser();
 
   let orderData: OrderRow = null;
   let displayStatus = status ?? "pending";
 
-  if (order && isAdminConfigured) {
+  if (order && isAdminConfigured && user) {
     const supabase = createAdminClient();
     // Demo mode (no Mercado Pago): confirm the order here.
     if (demo === "1") {
@@ -28,17 +30,17 @@ export default async function CheckoutSuccessPage({ searchParams }: SearchParams
         .from("orders")
         .update({ status: "paid", payment_id: "DEMO" })
         .eq("id", order)
+        .eq("user_id", user.id)
         .eq("status", "pending");
     }
     const { data } = await supabase
       .from("orders")
       .select("id, total, status")
       .eq("id", order)
+      .eq("user_id", user.id)
       .maybeSingle();
     orderData = data as OrderRow;
     if (orderData) displayStatus = orderData.status;
-  } else if (demo === "1") {
-    displayStatus = "paid";
   }
 
   const failed = status === "failure" || displayStatus === "failed";

@@ -35,12 +35,26 @@ export async function POST(request: NextRequest) {
         : payment.status === "rejected"
         ? "failed"
         : "pending";
+    const paymentMethod =
+      payment.payment_method_id ??
+      payment.payment_type_id ??
+      "mercado_pago";
+    const paidAt =
+      payment.status === "approved"
+        ? payment.date_approved ?? new Date().toISOString()
+        : null;
 
     if (orderId) {
       const supabase = createAdminClient();
       await supabase
         .from("orders")
-        .update({ status, payment_id: String(paymentId) })
+        .update({
+          status,
+          payment_id: String(paymentId),
+          metodo_pago: String(paymentMethod),
+          referencia_pago: String(paymentId),
+          pagado_en: paidAt,
+        })
         .eq("id", orderId);
     }
 

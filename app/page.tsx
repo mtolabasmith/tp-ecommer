@@ -322,35 +322,30 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="numbers-grid">
-          <div className="number-card">
-            <div className="number-digit">10</div>
-            <div className="number-title">The Creator&apos;s Number</div>
-            <p className="number-desc">
-              The number that separated genius from the rest. Worn by those who saw what
-              others could not.
-            </p>
-            <div className="number-names">Pelé · Maradona · Zidane · Messi</div>
+        <div className="numbers-formation">
+          <div className="formation-row forwards">
+            <div className="formation-player left-wing">
+              <div className="formation-pos">Left Wing</div>
+              <div className="formation-number">11</div>
+              <div className="formation-name">Ronaldinho</div>
+            </div>
+            <div className="formation-player striker">
+              <div className="formation-pos">Striker</div>
+              <div className="formation-number">9</div>
+              <div className="formation-name">R. Nazário</div>
+            </div>
+            <div className="formation-player right-wing">
+              <div className="formation-pos">Right Wing</div>
+              <div className="formation-number">7</div>
+              <div className="formation-name">Cristiano</div>
+            </div>
           </div>
-
-          <div className="number-card">
-            <div className="number-digit">7</div>
-            <div className="number-title">The Number of Kings</div>
-            <p className="number-desc">
-              Flair. Danger. Inevitability. The number that promised something extraordinary
-              every time.
-            </p>
-            <div className="number-names">Best · Cantona · Figo · Ronaldo CR7</div>
-          </div>
-
-          <div className="number-card">
-            <div className="number-digit">9</div>
-            <div className="number-title">The Striker&apos;s Inheritance</div>
-            <p className="number-desc">
-              Goals. Power. The pure and ancient art of finishing. The number that belongs to
-              those born to score.
-            </p>
-            <div className="number-names">R9 · Van Nistelrooy · Lewandowski</div>
+          <div className="formation-row midfield">
+            <div className="formation-player attacking-mid">
+              <div className="formation-pos">Attacking Mid</div>
+              <div className="formation-number">10</div>
+              <div className="formation-name">Messi</div>
+            </div>
           </div>
         </div>
       </section>

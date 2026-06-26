@@ -4,9 +4,6 @@ import { getProduct } from "@/lib/products";
 import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
 import { isMpConfigured, createPreference } from "@/lib/mercadopago";
 
-const UUID_RE =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
 type IncomingItem = { id: string; quantity: number };
 
 // POST /api/checkout  -> crea la orden y arranca el pago
@@ -47,28 +44,27 @@ export async function POST(request: NextRequest) {
 
   const supabase = createAdminClient();
 
-  // Crear la orden (persistencia real)
-  const { data: order, error } = await supabase
-    .from("orders")
-    .insert({ user_id: user.id, total, status: "pending" })
-    .select()
-    .single();
+  const rpcItems = lineItems.map((li) => ({
+    product_id: li.id,
+    quantity: li.quantity,
+  }));
 
-  if (error || !order) {
+  const { data: rpcResult, error } = await supabase.rpc("crear_orden_completa", {
+    p_user_id: user.id,
+    p_items: rpcItems,
+    p_total: total,
+  });
+
+  const result = Array.isArray(rpcResult) ? rpcResult[0] : rpcResult;
+
+  if (error || !result?.success || !result?.orden_id) {
     return NextResponse.json(
-      { error: error?.message ?? "Could not create the order" },
+      { error: error?.message ?? result?.error_msg ?? "Could not create the order" },
       { status: 500 }
     );
   }
 
-  // Items de la orden. product_id solo si es un uuid real de Supabase.
-  const rows = lineItems.map((li) => ({
-    order_id: order.id,
-    product_id: UUID_RE.test(li.id) ? li.id : null,
-    quantity: li.quantity,
-    price: li.price,
-  }));
-  await supabase.from("order_items").insert(rows);
+  const orderId = String(result.orden_id);
 
   const baseUrl = request.nextUrl.origin;
 
@@ -76,7 +72,7 @@ export async function POST(request: NextRequest) {
   if (isMpConfigured) {
     try {
       const url = await createPreference({
-        orderId: order.id,
+        orderId,
         baseUrl,
         items: lineItems.map((li) => ({
           title: li.name,
@@ -95,7 +91,7 @@ export async function POST(request: NextRequest) {
 
   // Sin Mercado Pago: modo demo (la página de éxito confirma la orden)
   return NextResponse.json({
-    url: `/checkout/success?order=${order.id}&demo=1`,
+    url: `/checkout/success?order=${orderId}&demo=1`,
     demo: true,
   });
 }
