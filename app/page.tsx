@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "./components/CartProvider";
 import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
@@ -27,8 +26,40 @@ function JerseySvg({ className }: { className?: string }) {
   );
 }
 
+const HISTORY_MOMENTS = [
+  {
+    year: "1958",
+    title: "The Youngest King",
+    description:
+      "Pelé arrived in Sweden at seventeen and left as the youngest World Cup winner in history. A debut that announced football's new king.",
+    meta: "World Cup · Sweden",
+    query: "Pelé",
+    productMatch: /pel[eé].*1958/i,
+    fallbackImage: "/camisetas/leyendas/pele/brazil-1958-58-home.png",
+  },
+  {
+    year: "1986",
+    title: "The Hand of God",
+    description:
+      "Maradona's Argentina shirt from the quarter-final against England. Two goals. One hand. One genius. One legend cemented forever.",
+    meta: "World Cup · Mexico",
+    query: "Maradona",
+    productMatch: /maradona.*1986/i,
+    fallbackImage: "/camisetas/leyendas/maradona/maradona-argentina-86-home.png",
+  },
+  {
+    year: "2010",
+    title: "The Goal That Changed Spain",
+    description:
+      "In the 116th minute, Iniesta found the corner and gave Spain its first World Cup. One strike turned a generation into champions.",
+    meta: "World Cup Final · South Africa",
+    query: "Iniesta",
+    productMatch: /iniesta.*2010/i,
+    fallbackImage: "/camisetas/camisetad-finales/iniesta-españa-2010-finaldelmundo.png",
+  },
+] as const;
+
 export default function HomePage() {
-  const { addItem } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "prev">("next");
@@ -43,6 +74,17 @@ export default function HomePage() {
   const legends = products.filter((p) => p.category === "leyendas");
   const finals = products.filter((p) => p.category === "finales");
   const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
+  const finalsPreview = finals.slice(0, 3);
+  const [selectedFinalId, setSelectedFinalId] = useState<string | null>(null);
+  const selectedFinal =
+    finalsPreview.find((product) => product.id === selectedFinalId) ?? finalsPreview[0];
+  const [selectedHistoryYear, setSelectedHistoryYear] = useState("1958");
+  const historyMoments = HISTORY_MOMENTS.map((moment) => ({
+    ...moment,
+    product: products.find((product) => moment.productMatch.test(product.name)),
+  }));
+  const selectedHistory =
+    historyMoments.find((moment) => moment.year === selectedHistoryYear) ?? historyMoments[0];
   const spotlightProduct = products.find(
     (p) => /maradona/i.test(p.name) && p.name.includes("1986")
   );
@@ -106,7 +148,14 @@ export default function HomePage() {
                 <span className="hero-ghost-num" aria-hidden="true">
                   10
                 </span>
-                <JerseySvg className="jersey-svg-lg" />
+                <Image
+                  src="/camisetas/leyendas/maradona/maradona-argentina-86-home.png"
+                  alt="Diego Maradona Argentina 1986 jersey"
+                  width={800}
+                  height={800}
+                  className="hero-jersey-image"
+                  priority
+                />
               </div>
             </div>
             <div className="hero-jersey-meta">
@@ -122,18 +171,21 @@ export default function HomePage() {
       {/* ============ INTRO ============ */}
       <section className="intro">
         <div className="intro-inner">
-          <p className="intro-quote">
-            &ldquo;A football jersey is not a garment.
-            <br />
-            It is a document of what happened.&rdquo;
-          </p>
-          <div className="intro-divider"></div>
-          <p className="intro-body">
-            The Archive is a curated collection of football jerseys treated as historical
-            objects. Here, every piece belongs to a larger story — of players who defined
-            eras, of finals that will never be forgotten, of numbers that became mythology.
-            This is not a store. This is a heritage collection.
-          </p>
+          <div className="intro-statement">
+            <blockquote className="intro-quote">
+              &ldquo;A football jersey is not a garment.
+              <br />
+              <em>It is a document of what happened.</em>&rdquo;
+            </blockquote>
+          </div>
+
+          <div className="intro-context">
+            <p className="intro-body">
+              The Archive is a curated collection of football jerseys treated as historical
+              objects. Every piece belongs to a larger story: players who defined eras,
+              finals that cannot be forgotten, and numbers that became mythology.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -185,13 +237,9 @@ export default function HomePage() {
                     <div className="jersey-card-player">{jersey.name}</div>
                   </Link>
                   <div className="jersey-card-era">{formatPrice(jersey.price)}</div>
-                  <button
-                    type="button"
-                    onClick={() => addItem(jersey)}
-                    className="btn-add-cart"
-                  >
-                    Add to Cart
-                  </button>
+                  <Link href={`/products/${jersey.id}`} className="btn-add-cart">
+                    Choose Size
+                  </Link>
                 </div>
               </article>
             ))}
@@ -249,57 +297,90 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="finals-layout">
-          {finals[0] && (
-            <Link href={`/products/${finals[0].id}`} className="jersey-card finals-feature">
-              <div className="jersey-card-image">
-                {finals[0].image_url ? (
+        {selectedFinal && (
+          <div className="finals-layout">
+            <article className="finals-feature">
+              <Link
+                href={`/products/${selectedFinal.id}`}
+                className="finals-feature-visual"
+                aria-label={`View ${selectedFinal.name}`}
+              >
+                <span className="finals-feature-label">Featured Final</span>
+                <span className="finals-feature-year" aria-hidden="true">
+                  {selectedFinal.name.match(/(?:19|20)\d{2}|\d{2}\/\d{2}/)?.[0] ?? "Final"}
+                </span>
+                {selectedFinal.image_url ? (
                   <Image
-                    src={finals[0].image_url}
-                    alt={finals[0].name}
+                    key={selectedFinal.id}
+                    src={selectedFinal.image_url}
+                    alt={selectedFinal.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    className="jersey-photo"
+                    sizes="(max-width: 768px) 100vw, 48vw"
+                    className="finals-feature-image"
                   />
                 ) : (
                   <JerseySvg className="jersey-svg-lg" />
                 )}
-              </div>
-              <div className="jersey-card-info">
-                <div className="jersey-card-player">{finals[0].name}</div>
-                <div className="jersey-card-era">{formatPrice(finals[0].price)}</div>
-              </div>
-            </Link>
-          )}
-
-          <div className="finals-sidebar">
-            {finals.slice(1, 4).map((item) => (
-              <Link
-                href={`/products/${item.id}`}
-                className="finals-sidebar-card"
-                key={item.id}
-              >
-                <div className="finals-sidebar-image">
-                  {item.image_url ? (
-                    <Image
-                      src={item.image_url}
-                      alt={item.name}
-                      fill
-                      sizes="90px"
-                      className="jersey-photo"
-                    />
-                  ) : (
-                    <JerseySvg className="jersey-svg-sm" />
-                  )}
-                </div>
-                <div className="finals-sidebar-info">
-                  <div className="sidebar-player">{item.name}</div>
-                  <div className="sidebar-detail">{formatPrice(item.price)}</div>
-                </div>
               </Link>
-            ))}
+
+              <div className="finals-feature-copy" key={`${selectedFinal.id}-copy`}>
+                <div className="finals-feature-meta">
+                  <span>{selectedFinal.name.split("·").slice(1).join(" · ").trim()}</span>
+                  <span>{formatPrice(selectedFinal.price)}</span>
+                </div>
+                <h3>{selectedFinal.name.split("·")[0].trim()}</h3>
+                <p>{selectedFinal.description}</p>
+                <Link href={`/products/${selectedFinal.id}`} className="finals-view-link">
+                  View Piece
+                </Link>
+              </div>
+            </article>
+
+            <div className="finals-index" aria-label="Featured finals">
+              {finalsPreview.map((item, index) => {
+                const isActive = item.id === selectedFinal.id;
+                const nameParts = item.name.split("·").map((part) => part.trim());
+
+                return (
+                  <Link
+                    href={`/products/${item.id}`}
+                    className={`finals-index-item${isActive ? " is-active" : ""}`}
+                    key={item.id}
+                    onMouseEnter={() => setSelectedFinalId(item.id)}
+                    onFocus={() => setSelectedFinalId(item.id)}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    <span className="finals-index-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="finals-index-image">
+                      {item.image_url ? (
+                        <Image
+                          src={item.image_url}
+                          alt=""
+                          fill
+                          sizes="110px"
+                          className="jersey-photo"
+                        />
+                      ) : (
+                        <JerseySvg className="jersey-svg-sm" />
+                      )}
+                    </div>
+                    <div className="finals-index-copy">
+                      <span>{nameParts.slice(2).join(" · ") || "Historic Final"}</span>
+                      <h3>{nameParts[0]}</h3>
+                      <div>
+                        <span>{nameParts[1]}</span>
+                        <span>{formatPrice(item.price)}</span>
+                      </div>
+                    </div>
+                    <span className="finals-index-arrow" aria-hidden="true">↗</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* ============ 03 — IMMORTAL NUMBERS ============ */}
@@ -324,28 +405,40 @@ export default function HomePage() {
 
         <div className="numbers-formation">
           <div className="formation-row forwards">
-            <div className="formation-player left-wing">
+            <Link
+              href="/products?q=Ronaldinho"
+              className="formation-player left-wing"
+            >
               <div className="formation-pos">Left Wing</div>
               <div className="formation-number">11</div>
               <div className="formation-name">Ronaldinho</div>
-            </div>
-            <div className="formation-player striker">
+            </Link>
+            <Link
+              href="/products?q=Ronaldo%20Naz%C3%A1rio"
+              className="formation-player striker"
+            >
               <div className="formation-pos">Striker</div>
               <div className="formation-number">9</div>
               <div className="formation-name">R. Nazário</div>
-            </div>
-            <div className="formation-player right-wing">
+            </Link>
+            <Link
+              href="/products?q=Cristiano%20Ronaldo"
+              className="formation-player right-wing"
+            >
               <div className="formation-pos">Right Wing</div>
               <div className="formation-number">7</div>
               <div className="formation-name">Cristiano</div>
-            </div>
+            </Link>
           </div>
           <div className="formation-row midfield">
-            <div className="formation-player attacking-mid">
+            <Link
+              href="/products?q=Messi"
+              className="formation-player attacking-mid"
+            >
               <div className="formation-pos">Attacking Mid</div>
               <div className="formation-number">10</div>
               <div className="formation-name">Messi</div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -372,42 +465,77 @@ export default function HomePage() {
 
         <div className="history-layout">
           <div className="history-timeline">
-            <div className="history-item">
-              <div className="history-year">1970</div>
-              <div>
-                <div className="history-title">Pelé&apos;s Final World Cup Shirt</div>
-                <p className="history-desc">
-                  The last jersey worn by the greatest in his final World Cup. Brazil won 4–1.
-                  The world watched the game reach its highest point.
-                </p>
-                <span className="history-tag">World Cup · Mexico</span>
-              </div>
-            </div>
+            {historyMoments.map((moment, index) => {
+              const isActive = moment.year === selectedHistory.year;
+              const href = moment.product
+                ? `/products/${moment.product.id}`
+                : `/products?q=${encodeURIComponent(moment.query)}`;
+              const image = moment.product?.image_url ?? moment.fallbackImage;
 
-            <div className="history-item">
-              <div className="history-year">1986</div>
-              <div>
-                <div className="history-title">The Hand of God</div>
-                <p className="history-desc">
-                  Maradona&apos;s Argentina shirt from the quarter-final against England.
-                  Two goals. One hand. One genius. One legend cemented forever.
-                </p>
-                <span className="history-tag">World Cup · Mexico</span>
-              </div>
-            </div>
-
-            <div className="history-item">
-              <div className="history-year">1994</div>
-              <div>
-                <div className="history-title">Baggio&apos;s Last Penalty</div>
-                <p className="history-desc">
-                  The jersey worn when Roberto Baggio stepped forward in the final. The missed
-                  penalty. The bowed head. The eternal image of football&apos;s grief.
-                </p>
-                <span className="history-tag">World Cup Final · USA</span>
-              </div>
-            </div>
+              return (
+                <Link
+                  href={href}
+                  className={`history-item${isActive ? " is-active" : ""}`}
+                  key={moment.year}
+                  onMouseEnter={() => setSelectedHistoryYear(moment.year)}
+                  onFocus={() => setSelectedHistoryYear(moment.year)}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  <span className="history-marker" aria-hidden="true" />
+                  <div className="history-year">{moment.year}</div>
+                  <div className="history-content">
+                    <span className="history-index">
+                      Archive {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="history-title">{moment.title}</h3>
+                    <p className="history-desc">{moment.description}</p>
+                    <span className="history-meta">{moment.meta}</span>
+                    <div className="history-mobile-piece">
+                      <Image
+                        src={image}
+                        alt={`${moment.title} jersey`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 1px"
+                        className="history-piece-image"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
+
+          <aside className="history-evidence" aria-live="polite">
+            <Link
+              href={
+                selectedHistory.product
+                  ? `/products/${selectedHistory.product.id}`
+                  : `/products?q=${encodeURIComponent(selectedHistory.query)}`
+              }
+              className="history-evidence-frame"
+              aria-label={`View ${selectedHistory.title}`}
+            >
+              <span className="history-evidence-label">Archive Evidence</span>
+              <span className="history-evidence-year" aria-hidden="true">
+                {selectedHistory.year}
+              </span>
+              <Image
+                key={selectedHistory.year}
+                src={selectedHistory.product?.image_url ?? selectedHistory.fallbackImage}
+                alt={`${selectedHistory.title} jersey`}
+                fill
+                sizes="(max-width: 768px) 1px, 42vw"
+                className="history-piece-image"
+              />
+            </Link>
+            <div className="history-evidence-caption" key={`${selectedHistory.year}-caption`}>
+              <div>
+                <span>{selectedHistory.meta}</span>
+                <strong>{selectedHistory.title}</strong>
+              </div>
+              <span>{selectedHistory.year}</span>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -517,9 +645,9 @@ export default function HomePage() {
                   <div className="drop-player">{drop.name}</div>
                 </Link>
                 <div className="drop-detail">{formatPrice(drop.price)}</div>
-                <button type="button" onClick={() => addItem(drop)} className="btn-add-cart">
-                  Add to Cart
-                </button>
+                <Link href={`/products/${drop.id}`} className="btn-add-cart">
+                  Choose Size
+                </Link>
               </div>
             </article>
           ))}

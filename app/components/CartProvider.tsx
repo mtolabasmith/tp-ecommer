@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { CartItem, Product } from "@/lib/types";
+import type { CartItem, Product, ProductSize } from "@/lib/types";
 
 type CartContextValue = {
   items: CartItem[];
@@ -17,16 +17,16 @@ type CartContextValue = {
   total: number;
   isOpen: boolean;
   toast: string | null;
-  addItem: (product: Product, quantity?: number) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  addItem: (product: Product, size: ProductSize, quantity?: number) => void;
+  removeItem: (id: string, size: ProductSize) => void;
+  updateQuantity: (id: string, size: ProductSize, quantity: number) => void;
   clear: () => void;
   openCart: () => void;
   closeCart: () => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "archive-cart-v1";
+const STORAGE_KEY = "archive-cart-v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -65,28 +65,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const addItem = useCallback((product: Product, quantity = 1) => {
+  const addItem = useCallback((product: Product, size: ProductSize, quantity = 1) => {
     setItems((prev) => {
-      const existing = prev.find((i) => i.id === product.id);
+      const existing = prev.find((i) => i.id === product.id && i.size === size);
       if (existing) {
         return prev.map((i) =>
-          i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i
+          i.id === product.id && i.size === size
+            ? { ...i, quantity: i.quantity + quantity }
+            : i
         );
       }
-      return [...prev, { ...product, quantity }];
+      return [...prev, { ...product, size, quantity }];
     });
-    setToast(product.name);
+    setToast(`${product.name} · Size ${size}`);
   }, []);
 
-  const removeItem = useCallback((id: string) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+  const removeItem = useCallback((id: string, size: ProductSize) => {
+    setItems((prev) => prev.filter((i) => i.id !== id || i.size !== size));
   }, []);
 
-  const updateQuantity = useCallback((id: string, quantity: number) => {
+  const updateQuantity = useCallback((id: string, size: ProductSize, quantity: number) => {
     setItems((prev) =>
       quantity <= 0
-        ? prev.filter((i) => i.id !== id)
-        : prev.map((i) => (i.id === id ? { ...i, quantity } : i))
+        ? prev.filter((i) => i.id !== id || i.size !== size)
+        : prev.map((i) =>
+            i.id === id && i.size === size ? { ...i, quantity } : i
+          )
     );
   }, []);
 

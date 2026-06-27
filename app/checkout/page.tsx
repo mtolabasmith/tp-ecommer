@@ -33,7 +33,11 @@ export default function CheckoutPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: items.map((i) => ({ id: i.id, quantity: i.quantity })),
+          items: items.map((i) => ({
+            id: i.id,
+            quantity: i.quantity,
+            size: i.size,
+          })),
         }),
       });
       const data = await res.json();
@@ -75,9 +79,12 @@ export default function CheckoutPage() {
           <section className="checkout-items" aria-label="Products to buy">
             <ul className="checkout-list" role="list">
               {items.map((item) => (
-                <li key={item.id} className="checkout-row">
+                <li key={`${item.id}-${item.size}`} className="checkout-row">
                   <span className="checkout-row-name">
-                    {item.name} <span className="checkout-row-qty">× {item.quantity}</span>
+                    {item.name}
+                    <span className="checkout-row-meta">
+                      Size {item.size} · × {item.quantity}
+                    </span>
                   </span>
                   <span>{formatPrice(item.price * item.quantity)}</span>
                 </li>

@@ -3,8 +3,9 @@ import { getSessionUser } from "@/lib/auth";
 import { getProduct } from "@/lib/products";
 import { createAdminClient, isAdminConfigured } from "@/utils/supabase/admin";
 import { isMpConfigured, createPreference } from "@/lib/mercadopago";
+import { isProductSize, type ProductSize } from "@/lib/types";
 
-type IncomingItem = { id: string; quantity: number };
+type IncomingItem = { id: string; quantity: number; size: unknown };
 
 // POST /api/checkout  -> crea la orden y arranca el pago
 export async function POST(request: NextRequest) {
@@ -29,14 +30,29 @@ export async function POST(request: NextRequest) {
   }
 
   // Recalcular precios desde el catálogo (no confiar en el cliente)
-  const lineItems: { name: string; price: number; quantity: number; id: string }[] = [];
+  const lineItems: {
+    name: string;
+    price: number;
+    quantity: number;
+    id: string;
+    size: ProductSize;
+  }[] = [];
   let total = 0;
   for (const it of items) {
+    if (!isProductSize(it.size)) {
+      return NextResponse.json({ error: "Invalid or missing size" }, { status: 400 });
+    }
     const product = await getProduct(String(it.id));
     if (!product) continue;
     const quantity = Math.max(1, Number(it.quantity) || 1);
     total += product.price * quantity;
-    lineItems.push({ id: product.id, name: product.name, price: product.price, quantity });
+    lineItems.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity,
+      size: it.size,
+    });
   }
   if (lineItems.length === 0) {
     return NextResponse.json({ error: "No valid products" }, { status: 400 });
@@ -47,6 +63,7 @@ export async function POST(request: NextRequest) {
   const rpcItems = lineItems.map((li) => ({
     product_id: li.id,
     quantity: li.quantity,
+    size: li.size,
   }));
 
   const { data: rpcResult, error } = await supabase.rpc("crear_orden_completa", {
@@ -75,7 +92,7 @@ export async function POST(request: NextRequest) {
         orderId,
         baseUrl,
         items: lineItems.map((li) => ({
-          title: li.name,
+          title: `${li.name} · Size ${li.size}`,
           quantity: li.quantity,
           unit_price: li.price,
         })),

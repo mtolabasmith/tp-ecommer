@@ -19,17 +19,48 @@ const SORTS = [
   { value: "name", label: "Name A–Z" },
 ];
 
+function normalizeSearch(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
+function matchesSearch(product: Product, search: string) {
+  const query = normalizeSearch(search);
+  if (!query) return true;
+
+  const name = normalizeSearch(product.name);
+
+  if (query === "cristiano" || query === "cristiano ronaldo") {
+    return name.startsWith("ronaldo ·");
+  }
+
+  if (query === "r. nazario" || query === "ronaldo nazario") {
+    return name.includes("ronaldo nazario");
+  }
+
+  return name.includes(query);
+}
+
 export default function ProductCatalog() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const category = searchParams.get("category") ?? "";
+  const urlSearch = searchParams.get("q") ?? "";
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loadedCategory, setLoadedCategory] = useState<string | null>(null);
   const [errorCategory, setErrorCategory] = useState<string | null>(null);
-  const [search, setSearch] = useState("");
+  const [searchState, setSearchState] = useState({
+    source: urlSearch,
+    value: urlSearch,
+  });
   const [sort, setSort] = useState("featured");
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
+
+  const search = searchState.source === urlSearch ? searchState.value : urlSearch;
 
   useEffect(() => {
     let active = true;
@@ -67,14 +98,15 @@ export default function ProductCatalog() {
   const effectiveMax = maxPrice ?? priceCeil;
 
   function selectCategory(value: string) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     if (value) params.set("category", value);
+    else params.delete("category");
     const qs = params.toString();
     router.push(`/products${qs ? `?${qs}` : ""}`);
   }
 
   let visible = products
-    .filter((p) => p.name.toLowerCase().includes(search.trim().toLowerCase()))
+    .filter((p) => matchesSearch(p, search))
     .filter((p) => p.price <= effectiveMax);
   if (sort === "price-asc") visible = [...visible].sort((a, b) => a.price - b.price);
   else if (sort === "price-desc") visible = [...visible].sort((a, b) => b.price - a.price);
@@ -107,7 +139,9 @@ export default function ProductCatalog() {
             type="search"
             placeholder="Search by name…"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              setSearchState({ source: urlSearch, value: e.target.value })
+            }
           />
         </div>
       </div>
