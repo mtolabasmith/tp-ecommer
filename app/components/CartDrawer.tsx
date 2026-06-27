@@ -40,7 +40,7 @@ export default function CartDrawer() {
           ) : (
             <ul className="cart-items" role="list">
               {items.map((item) => (
-                <li key={item.id} className="cart-item cart-item--product">
+                <li key={`${item.id}-${item.size}`} className="cart-item cart-item--product">
                   <div className="cart-item-thumb" aria-hidden="true">
                     {item.image_url ? (
                       <Image src={item.image_url} alt="" fill sizes="64px" />
@@ -48,11 +48,12 @@ export default function CartDrawer() {
                   </div>
                   <div className="cart-item-info">
                     <div className="cart-item-player">{item.name}</div>
+                    <div className="cart-item-size">Size {item.size}</div>
                     <div className="cart-item-era">{formatPrice(item.price)}</div>
                     <div className="cart-qty-controls">
                       <button
                         type="button"
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
                         aria-label={`Decrease quantity of ${item.name}`}
                       >
                         −
@@ -60,14 +61,14 @@ export default function CartDrawer() {
                       <span aria-live="polite">{item.quantity}</span>
                       <button
                         type="button"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
                         aria-label={`Increase quantity of ${item.name}`}
                       >
                         +
                       </button>
                     </div>
                     <button
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeItem(item.id, item.size)}
                       className="cart-item-remove"
                       aria-label={`Remove ${item.name} from cart`}
                     >

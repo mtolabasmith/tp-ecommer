@@ -2,13 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "./CartProvider";
 import { formatPrice, categoryLabel } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
-
   return (
     <article className="jersey-card product-card">
       <Link
@@ -39,13 +36,9 @@ export default function ProductCard({ product }: { product: Product }) {
         </Link>
         <div className="jersey-card-detail">{categoryLabel(product.category)}</div>
         <div className="product-price">{formatPrice(product.price)}</div>
-        <button
-          type="button"
-          className="btn-add-cart"
-          onClick={() => addItem(product)}
-        >
-          Add to Cart
-        </button>
+        <Link href={`/products/${product.id}`} className="btn-add-cart">
+          Choose Size
+        </Link>
       </div>
     </article>
   );

@@ -10,6 +10,16 @@ export type Product = {
   category: string;
 };
 
-export type CartItem = Product & { quantity: number };
+export const PRODUCT_SIZES = ["S", "M", "L", "XL"] as const;
+export type ProductSize = (typeof PRODUCT_SIZES)[number];
+
+export function isProductSize(value: unknown): value is ProductSize {
+  return PRODUCT_SIZES.includes(value as ProductSize);
+}
+
+export type CartItem = Product & {
+  quantity: number;
+  size: ProductSize;
+};
 
 export type OrderStatus = "pending" | "paid" | "failed";

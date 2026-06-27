@@ -79,11 +79,6 @@ export default async function ProductDetailPage({ params }: Params) {
           <h1 className="detail-title">{product.name}</h1>
           <div className="detail-price">{formatPrice(product.price)}</div>
           <p className="detail-desc">{product.description}</p>
-          <div className="detail-stock">
-            {product.stock > 0
-              ? `${product.stock} in stock`
-              : "Out of stock"}
-          </div>
 
           <AddToCartButton product={product} />
         </div>

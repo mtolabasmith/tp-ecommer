@@ -31,7 +31,7 @@ export default function CartPage() {
         <div className="cart-page-layout">
           <ul className="cart-page-list" role="list">
             {items.map((item) => (
-              <li key={item.id} className="cart-page-item">
+              <li key={`${item.id}-${item.size}`} className="cart-page-item">
                 <Link href={`/products/${item.id}`} className="cart-page-thumb">
                   {item.image_url ? (
                     <Image src={item.image_url} alt={item.name} fill sizes="80px" />
@@ -43,6 +43,7 @@ export default function CartPage() {
                     {item.name}
                   </Link>
                   <div className="cart-page-cat">{categoryLabel(item.category)}</div>
+                  <div className="cart-page-size">Size {item.size}</div>
                   <div className="cart-page-unit">{formatPrice(item.price)} each</div>
                 </div>
 
@@ -50,7 +51,7 @@ export default function CartPage() {
                   <div className="qty-controls" role="group" aria-label={`Quantity of ${item.name}`}>
                     <button
                       type="button"
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
                       aria-label="Decrease quantity"
                     >
                       −
@@ -58,7 +59,7 @@ export default function CartPage() {
                     <span aria-live="polite">{item.quantity}</span>
                     <button
                       type="button"
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
                       aria-label="Increase quantity"
                     >
                       +
@@ -71,7 +72,7 @@ export default function CartPage() {
                 <button
                   type="button"
                   className="cart-item-remove"
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeItem(item.id, item.size)}
                   aria-label={`Remove ${item.name}`}
                 >
                   Remove
