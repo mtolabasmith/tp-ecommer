@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
 
@@ -15,7 +15,21 @@ const SECTION_LINKS = [
 export default function Navbar() {
   const { count, openCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const close = () => setMenuOpen(false);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/auth/is-admin")
+      .then((r) => (r.ok ? r.json() : { admin: false }))
+      .then((d) => {
+        if (active) setIsAdmin(Boolean(d.admin));
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <nav className="navbar" aria-label="Main navigation">
@@ -34,6 +48,11 @@ export default function Navbar() {
       <div className="nav-utils">
         <Link href="/about">About</Link>
         <Link href="/account">Account</Link>
+        {isAdmin && (
+          <Link href="/admin" className="nav-admin">
+            Admin
+          </Link>
+        )}
         <button
           type="button"
           className="nav-cart-btn"
@@ -73,6 +92,11 @@ export default function Navbar() {
         <Link href="/account" onClick={close}>
           Account
         </Link>
+        {isAdmin && (
+          <Link href="/admin" onClick={close}>
+            Admin
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -35,6 +35,7 @@ declare
   v_product_id uuid;
   v_quantity integer;
   v_size text;
+  v_product_name text;
 begin
   insert into public.orders (user_id, total, status)
   values (p_user_id, p_total, 'pending')
@@ -46,22 +47,23 @@ begin
     v_quantity := (v_item->>'quantity')::integer;
     v_size := nullif(upper(trim(v_item->>'size')), '');
 
-    -- valida el talle solo si vino (el front ya obliga a elegirlo)
-    if v_size is not null and v_size not in ('S', 'M', 'L', 'XL') then
-      raise exception 'Talle inválido para producto: %', v_product_id;
-    end if;
-
-    select stock into v_stock
+    -- traemos stock y nombre del producto (y bloqueamos la fila)
+    select stock, name into v_stock, v_product_name
     from public.products
     where id = v_product_id
     for update;
 
     if v_stock is null then
-      raise exception 'Producto no encontrado: %', v_product_id;
+      raise exception 'Product not found';
+    end if;
+
+    -- valida el talle solo si vino (el front ya obliga a elegirlo)
+    if v_size is not null and v_size not in ('S', 'M', 'L', 'XL') then
+      raise exception 'Invalid size for %', v_product_name;
     end if;
 
     if v_stock < v_quantity then
-      raise exception 'Stock insuficiente para producto: %', v_product_id;
+      raise exception 'Not enough stock for %', v_product_name;
     end if;
 
     insert into public.order_items (order_id, product_id, quantity, price, size)
