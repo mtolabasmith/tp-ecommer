@@ -62,6 +62,24 @@ a {
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-16px); }
+}
+
+@keyframes hero-glow {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.95; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-jersey-image,
+  .hero-jersey-box::before,
+  .drop-cover::before {
+    animation: none;
+  }
+}
+
 /* ============================================================
    NAVBAR
 ============================================================ */
@@ -345,18 +363,6 @@ a {
   max-width: 340px;
 }
 
-.hero-frame-wrap::before {
-  content: '';
-  position: absolute;
-  top: -18px;
-  right: -18px;
-  width: 100%;
-  height: 100%;
-  border: 1px solid var(--border-2);
-  pointer-events: none;
-  z-index: 0;
-}
-
 .hero-jersey-box {
   position: relative;
   width: 100%;
@@ -374,8 +380,8 @@ a {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(200, 168, 75, 0.08) 0%, transparent 68%);
-  animation: glow-pulse 4s ease-in-out infinite;
+  background: radial-gradient(ellipse at 50% 32%, rgba(200, 168, 75, 0.22) 0%, transparent 60%);
+  animation: hero-glow 5s ease-in-out infinite;
 }
 
 .hero-ghost-num {
@@ -384,9 +390,9 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(8rem, 20vw, 15rem);
-  font-weight: 300;
-  color: rgba(200, 168, 75, 0.09);
+  font-size: clamp(10rem, 24vw, 19rem);
+  font-weight: 400;
+  color: rgba(200, 168, 75, 0.28);
   line-height: 1;
   user-select: none;
   pointer-events: none;
@@ -396,10 +402,11 @@ a {
 .hero-jersey-image {
   position: relative;
   z-index: 2;
-  width: 88%;
+  width: 92%;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.3));
+  animation: hero-float 6s ease-in-out infinite;
 }
 
 .hero-jersey-meta {
@@ -1566,10 +1573,109 @@ margin-top: 0;
 }
 
 .drop-card {
+  position: relative;
+  perspective: 1100px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
+}
+
+/* Night Market: carta tapada que se revela al click */
+.drop-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200, 168, 75, 0.16) 0%, transparent 58%),
+    linear-gradient(160deg, #1b1813 0%, #100e0a 100%);
+  border: 1px solid var(--gold-dim);
+  transform-origin: center left;
+  transition: transform 0.6s cubic-bezier(0.4, 0.1, 0.2, 1), opacity 0.5s ease;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.drop-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 42%, rgba(200, 168, 75, 0.12) 0%, transparent 55%);
+  animation: hero-glow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.drop-cover:hover {
+  border-color: var(--gold);
+}
+
+.drop-card.is-revealed .drop-cover {
+  transform: rotateY(-110deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drop-cover-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 0.3rem 0.6rem;
+}
+
+.drop-cover-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 28px rgba(200, 168, 75, 0.45);
+  position: relative;
+}
+
+.drop-cover-hint {
+  position: relative;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.drop-rarity {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 8;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid currentColor;
+  background: rgba(13, 12, 10, 0.85);
+  pointer-events: none;
+}
+
+.drop-rarity--grail { color: #c8a84b; }
+.drop-rarity--epic { color: #b08fe0; }
+.drop-rarity--rare { color: #6f9fd8; }
+.drop-rarity--classic { color: #9aa0a6; }
+
+.drop-player--locked {
+  color: var(--text-3);
+  font-style: italic;
 }
 
 .drop-card-image {
@@ -1611,7 +1717,7 @@ margin-top: 0;
   user-select: none;
 }
 
-.drop-card-info { padding: 1.1rem 0 0; }
+.drop-card-info { padding: 1.1rem 0 0; min-height: 6.5rem; }
 
 .drop-player {
   font-family: 'Cormorant Garamond', serif;
