@@ -59,21 +59,46 @@ const HISTORY_MOMENTS = [
   },
 ] as const;
 
+function rarityFor(price: number): { key: string; label: string } {
+  if (price >= 125) return { key: "grail", label: "Grail" };
+  if (price >= 115) return { key: "epic", label: "Epic" };
+  if (price >= 105) return { key: "rare", label: "Rare" };
+  return { key: "classic", label: "Classic" };
+}
+
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [drops, setDrops] = useState<Product[]>([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "prev">("next");
+  const [revealedDrops, setRevealedDrops] = useState<Set<string>>(new Set());
+
+  function revealDrop(id: string) {
+    setRevealedDrops((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }
 
   useEffect(() => {
     fetch("/api/products")
       .then((r) => (r.ok ? r.json() : []))
-      .then((data: Product[]) => setProducts(data))
+      .then((data: Product[]) => {
+        setProducts(data);
+        // Surtido random de drops (estilo Night Market), barajado al cargar
+        const pool = data.filter((p) => p.category === "drops-iconicos");
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        setDrops(pool.slice(0, 4));
+      })
       .catch(() => setProducts([]));
   }, []);
 
   const legends = products.filter((p) => p.category === "leyendas");
   const finals = products.filter((p) => p.category === "finales");
-  const drops = products.filter((p) => p.category === "drops-iconicos").slice(0, 4);
   const finalsPreview = finals.slice(0, 3);
   const [selectedFinalId, setSelectedFinalId] = useState<string | null>(null);
   const selectedFinal =
@@ -622,35 +647,72 @@ export default function HomePage() {
         </div>
 
         <div className="drops-grid">
-          {drops.map((drop) => (
-            <article className="drop-card" key={drop.id}>
-              <Link href={`/products/${drop.id}`} className="product-card-media">
-                <div className="drop-card-image">
-                  <span className="drop-badge">Drop</span>
-                  {drop.image_url ? (
-                    <Image
-                      src={drop.image_url}
-                      alt={drop.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                      className="jersey-photo"
-                    />
+          {drops.map((drop) => {
+            const isRevealed = revealedDrops.has(drop.id);
+            const rarity = rarityFor(drop.price);
+            return (
+              <article
+                className={`drop-card ${isRevealed ? "is-revealed" : ""}`}
+                key={drop.id}
+              >
+                <span className={`drop-rarity drop-rarity--${rarity.key}`}>
+                  {rarity.label}
+                </span>
+
+                <button
+                  type="button"
+                  className="drop-cover"
+                  aria-hidden={isRevealed}
+                  tabIndex={isRevealed ? -1 : 0}
+                  aria-label={`Reveal ${rarity.label.toLowerCase()} drop`}
+                  onClick={() => revealDrop(drop.id)}
+                >
+                  <span className="drop-cover-mark" aria-hidden="true">
+                    ?
+                  </span>
+                  <span className="drop-cover-hint">Tap to reveal</span>
+                </button>
+
+                <Link href={`/products/${drop.id}`} className="product-card-media">
+                  <div className="drop-card-image">
+                    <span className="drop-badge">Drop</span>
+                    {drop.image_url ? (
+                      <Image
+                        src={drop.image_url}
+                        alt={drop.name}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="jersey-photo"
+                      />
+                    ) : (
+                      <JerseySvg />
+                    )}
+                  </div>
+                </Link>
+
+                <div className="drop-card-info">
+                  {isRevealed ? (
+                    <>
+                      <Link href={`/products/${drop.id}`} className="product-card-title">
+                        <div className="drop-player">{drop.name}</div>
+                      </Link>
+                      <div className="drop-detail">{formatPrice(drop.price)}</div>
+                      <Link href={`/products/${drop.id}`} className="btn-add-cart">
+                        Choose Size
+                      </Link>
+                    </>
                   ) : (
-                    <JerseySvg />
+                    <>
+                      <div className="drop-player drop-player--locked">
+                        {rarity.label} Piece
+                      </div>
+                      <div className="drop-detail">Hidden until revealed</div>
+                    </>
                   )}
                 </div>
-              </Link>
-              <div className="drop-card-info">
-                <Link href={`/products/${drop.id}`} className="product-card-title">
-                  <div className="drop-player">{drop.name}</div>
-                </Link>
-                <div className="drop-detail">{formatPrice(drop.price)}</div>
-                <Link href={`/products/${drop.id}`} className="btn-add-cart">
-                  Choose Size
-                </Link>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </section>
     </>
