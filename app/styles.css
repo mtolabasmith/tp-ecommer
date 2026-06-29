@@ -143,7 +143,62 @@ a {
   color: var(--text);
 }
 
-.nav-utils a.nav-admin {
+.nav-account {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-account-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color 0.3s ease;
+}
+
+.nav-account-trigger:hover,
+.nav-account-trigger[aria-expanded="true"] {
+  color: var(--text);
+}
+
+.nav-caret {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+}
+
+.nav-account-menu {
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  right: 0;
+  min-width: 170px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 210;
+}
+
+.nav-account-menu a {
+  padding: 0.75rem 1.1rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-account-menu a:hover {
+  background: var(--bg-4);
+  color: var(--text);
+}
+
+.nav-account-menu a.nav-admin {
   color: var(--gold);
 }
 
