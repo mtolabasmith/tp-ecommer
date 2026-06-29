@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
 
@@ -16,6 +16,8 @@ export default function Navbar() {
   const { count, openCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const accountRef = useRef<HTMLDivElement>(null);
   const close = () => setMenuOpen(false);
 
   useEffect(() => {
@@ -30,6 +32,17 @@ export default function Navbar() {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (!accountOpen) return;
+    function onDown(e: MouseEvent) {
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) {
+        setAccountOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [accountOpen]);
 
   return (
     <nav className="navbar" aria-label="Main navigation">
@@ -47,11 +60,35 @@ export default function Navbar() {
 
       <div className="nav-utils">
         <Link href="/about">About</Link>
-        <Link href="/account">Account</Link>
-        {isAdmin && (
-          <Link href="/admin" className="nav-admin">
-            Admin
-          </Link>
+        {isAdmin ? (
+          <div className="nav-account" ref={accountRef}>
+            <button
+              type="button"
+              className="nav-account-trigger"
+              aria-haspopup="true"
+              aria-expanded={accountOpen}
+              onClick={() => setAccountOpen((o) => !o)}
+            >
+              Account <span className="nav-caret" aria-hidden="true">▾</span>
+            </button>
+            {accountOpen && (
+              <div className="nav-account-menu" role="menu">
+                <Link href="/account" role="menuitem" onClick={() => setAccountOpen(false)}>
+                  My account
+                </Link>
+                <Link
+                  href="/admin"
+                  role="menuitem"
+                  className="nav-admin"
+                  onClick={() => setAccountOpen(false)}
+                >
+                  Admin panel
+                </Link>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link href="/account">Account</Link>
         )}
         <button
           type="button"
